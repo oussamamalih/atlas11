@@ -2,7 +2,7 @@
     <!-- Shield / Badge Icon -->
     <g transform="translate(4, 4)">
         <!-- Shield Background -->
-        <path d="M20 0L38 6.5V21.5C38 31.8 29.8 38.6 20 40C10.2 38.6 2 31.8 2 21.5V6.5L20 0Z" fill="#0B1F33"/>
+        <path d="M20 0L38 6.5V21.5C38 31.8 29.8 38.6 20 40C10.2 38.6 2 31.8 2 21.5V6.5L20 0Z" fill="#17344D"/>
         <!-- Accent Inner Ring / Border -->
         <path d="M20 3L35 8.4V21.2C35 29.8 28.2 35.8 20 37.1C11.8 35.8 5 29.8 5 21.2V8.4L20 3Z" stroke="#16A34A" stroke-width="1.75" stroke-linejoin="round"/>
         <!-- Pitch Markings: Center Circle & Vertical Line -->

@@ -59,7 +59,7 @@
             @endif
 
             <!-- Welcome Header Card -->
-            <div class="bg-white rounded-xl border border-gray-200/80 shadow-sm p-6">
+            <div class="atlas-welcome-panel bg-white rounded-xl border border-gray-200/80 shadow-sm p-6">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
                         <h3 class="text-xl font-bold text-[#0B1F33]">

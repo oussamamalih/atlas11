@@ -11,12 +11,12 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="h-full font-sans antialiased" style="background-color: #F1F5F9; color: #111827;">
+    <body class="atlas-auth-shell h-full font-sans antialiased" style="background-color: #F1F5F9; color: #111827;">
         <!-- Top Accent Bar -->
         <div class="fixed top-0 left-0 right-0 h-1 z-50" style="background: linear-gradient(to right, #0B1F33, #16A34A, #A3E635);"></div>
 
@@ -33,7 +33,7 @@
             </div>
 
             <!-- Auth Card -->
-            <div class="w-full sm:max-w-md bg-white rounded-2xl shadow-sm border border-slate-200 px-8 py-8">
+            <div class="atlas-auth-card w-full sm:max-w-md bg-white rounded-2xl shadow-sm border border-slate-200 px-8 py-8">
                 {{ $slot }}
             </div>
 
