@@ -1,22 +1,22 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-extrabold text-2xl text-[#0B1F33] tracking-tight">
             {{ __('Create Scout Profile') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <div class="mb-6">
-                    <h3 class="text-lg font-medium text-gray-900">{{ __('Professional Scout Information') }}</h3>
-                    <p class="mt-1 text-sm text-gray-600">
+    <div class="py-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-xl border border-gray-200/80 shadow-sm p-6 sm:p-8">
+                <div class="mb-6 pb-4 border-b border-gray-100">
+                    <h3 class="text-lg font-bold text-[#0B1F33]">{{ __('Professional Scout Information') }}</h3>
+                    <p class="mt-1 text-xs text-[#64748B]">
                         {{ __('Provide your scouting background, affiliated club/agency, and recruitment focus.') }}
                     </p>
                 </div>
 
                 @if (session('status'))
-                    <div class="mb-4 font-medium text-sm text-green-600 bg-green-50 p-4 rounded-md border border-green-200">
+                    <div class="mb-4 font-medium text-sm text-[#15803D] bg-emerald-50 p-4 rounded-xl border border-emerald-200">
                         {{ session('status') }}
                     </div>
                 @endif
@@ -71,12 +71,12 @@
                     <!-- Bio / Scouting Activity -->
                     <div>
                         <x-input-label for="bio" :value="__('Scouting Activity & Philosophy')" />
-                        <textarea id="bio" name="bio" rows="4" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" placeholder="Describe your recruitment targets (age groups, regions), achievements, past placements, or scouting focus...">{{ old('bio') }}</textarea>
+                        <textarea id="bio" name="bio" rows="4" class="mt-1 block w-full border-gray-300 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] rounded-lg shadow-sm text-sm" placeholder="Describe your recruitment targets (age groups, regions), achievements, past placements, or scouting focus...">{{ old('bio') }}</textarea>
                         <x-input-error :messages="$errors->get('bio')" class="mt-2" />
                     </div>
 
-                    <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-200">
-                        <a href="{{ route('dashboard') }}" class="text-sm text-gray-600 hover:text-gray-900">
+                    <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">
+                        <a href="{{ route('dashboard') }}" class="text-xs font-semibold text-gray-500 hover:text-gray-800">
                             {{ __('Cancel') }}
                         </a>
                         <x-primary-button>

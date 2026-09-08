@@ -1,22 +1,22 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-extrabold text-2xl text-[#0B1F33] tracking-tight">
             {{ __('Create Football Profile') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <div class="mb-6">
-                    <h3 class="text-lg font-medium text-gray-900">{{ __('Player Profile Information') }}</h3>
-                    <p class="mt-1 text-sm text-gray-600">
+    <div class="py-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-xl border border-gray-200/80 shadow-sm p-6 sm:p-8">
+                <div class="mb-6 pb-4 border-b border-gray-100">
+                    <h3 class="text-lg font-bold text-[#0B1F33]">{{ __('Player Profile Information') }}</h3>
+                    <p class="mt-1 text-xs text-[#64748B]">
                         {{ __('Provide your football background and physical attributes so scouts and clubs can discover your talent.') }}
                     </p>
                 </div>
 
                 @if (session('status'))
-                    <div class="mb-4 font-medium text-sm text-green-600 bg-green-50 p-4 rounded-md border border-green-200">
+                    <div class="mb-4 font-medium text-sm text-[#15803D] bg-emerald-50 p-4 rounded-xl border border-emerald-200">
                         {{ session('status') }}
                     </div>
                 @endif
@@ -28,7 +28,7 @@
                         <!-- Position -->
                         <div>
                             <x-input-label for="position" :value="__('Position *')" />
-                            <select id="position" name="position" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
+                            <select id="position" name="position" class="mt-1 block w-full border-gray-300 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] rounded-lg shadow-sm text-sm" required>
                                 <option value="">{{ __('Select your primary position') }}</option>
                                 @foreach ($positions as $position)
                                     <option value="{{ $position }}" {{ old('position') === $position ? 'selected' : '' }}>
@@ -56,7 +56,7 @@
                         <!-- Preferred Foot -->
                         <div>
                             <x-input-label for="preferred_foot" :value="__('Preferred Foot')" />
-                            <select id="preferred_foot" name="preferred_foot" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                            <select id="preferred_foot" name="preferred_foot" class="mt-1 block w-full border-gray-300 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] rounded-lg shadow-sm text-sm">
                                 <option value="">{{ __('Select preferred foot') }}</option>
                                 @foreach ($preferredFeet as $foot)
                                     <option value="{{ $foot }}" {{ old('preferred_foot') === $foot ? 'selected' : '' }}>
@@ -70,52 +70,52 @@
                         <!-- Height -->
                         <div>
                             <x-input-label for="height" :value="__('Height (cm)')" />
-                            <x-text-input id="height" name="height" type="number" min="120" max="250" class="mt-1 block w-full" :value="old('height')" placeholder="e.g. 182" />
+                            <x-text-input id="height" name="height" type="number" min="100" max="230" class="mt-1 block w-full" :value="old('height')" placeholder="e.g. 180" />
                             <x-input-error :messages="$errors->get('height')" class="mt-2" />
                         </div>
 
                         <!-- Weight -->
                         <div>
                             <x-input-label for="weight" :value="__('Weight (kg)')" />
-                            <x-text-input id="weight" name="weight" type="number" min="30" max="200" class="mt-1 block w-full" :value="old('weight')" placeholder="e.g. 75" />
+                            <x-text-input id="weight" name="weight" type="number" min="30" max="150" class="mt-1 block w-full" :value="old('weight')" placeholder="e.g. 75" />
                             <x-input-error :messages="$errors->get('weight')" class="mt-2" />
                         </div>
 
-                        <!-- Current Club / Academy -->
+                        <!-- Current Club -->
                         <div>
                             <x-input-label for="current_club" :value="__('Current Club / Academy')" />
-                            <x-text-input id="current_club" name="current_club" type="text" class="mt-1 block w-full" :value="old('current_club')" placeholder="e.g. FUS Rabat Youth, Free Agent" />
+                            <x-text-input id="current_club" name="current_club" type="text" class="mt-1 block w-full" :value="old('current_club')" placeholder="e.g. Raja CA Youth, FUS Academy" />
                             <x-input-error :messages="$errors->get('current_club')" class="mt-2" />
                         </div>
 
-                        <!-- Contact Phone -->
+                        <!-- Phone -->
                         <div>
                             <x-input-label for="phone" :value="__('Phone Number')" />
-                            <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone')" placeholder="e.g. +212 600 000 000" />
+                            <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone')" placeholder="e.g. +212600000000" />
                             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                         </div>
                     </div>
 
                     <!-- Football Experience -->
                     <div>
-                        <x-input-label for="football_experience" :value="__('Football Experience / Career History')" />
-                        <textarea id="football_experience" name="football_experience" rows="4" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" placeholder="List past academies, youth tournaments, training camps, or leagues you played in...">{{ old('football_experience') }}</textarea>
+                        <x-input-label for="football_experience" :value="__('Football Experience & Career Pathway')" />
+                        <textarea id="football_experience" name="football_experience" rows="4" class="mt-1 block w-full border-gray-300 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] rounded-lg shadow-sm text-sm" placeholder="List past clubs, academies, tournament achievements, or league divisions...">{{ old('football_experience') }}</textarea>
                         <x-input-error :messages="$errors->get('football_experience')" class="mt-2" />
                     </div>
 
                     <!-- Bio -->
                     <div>
-                        <x-input-label for="bio" :value="__('Bio / About Me')" />
-                        <textarea id="bio" name="bio" rows="4" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" placeholder="Tell scouts about your playing style, strengths, dedication, and ambitions...">{{ old('bio') }}</textarea>
+                        <x-input-label for="bio" :value="__('Player Bio / Playing Style Description')" />
+                        <textarea id="bio" name="bio" rows="4" class="mt-1 block w-full border-gray-300 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] rounded-lg shadow-sm text-sm" placeholder="Describe your football strengths, key traits, preferred tactical roles, or career goals...">{{ old('bio') }}</textarea>
                         <x-input-error :messages="$errors->get('bio')" class="mt-2" />
                     </div>
 
-                    <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-200">
-                        <a href="{{ route('dashboard') }}" class="text-sm text-gray-600 hover:text-gray-900">
+                    <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">
+                        <a href="{{ route('dashboard') }}" class="text-xs font-semibold text-gray-500 hover:text-gray-800">
                             {{ __('Cancel') }}
                         </a>
                         <x-primary-button>
-                            {{ __('Create Profile') }}
+                            {{ __('Save Football Profile') }}
                         </x-primary-button>
                     </div>
                 </form>
