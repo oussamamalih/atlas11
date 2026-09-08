@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PlayerProfileController;
 use App\Http\Controllers\PlayerSearchController;
@@ -59,6 +61,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
     Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
     Route::delete('/notifications/{id}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+
+    // Administration
+    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+        Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+        Route::get('/users/{user}', [AdminUserController::class, 'show'])->name('users.show');
+        Route::get('/users/{user}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
+        Route::put('/users/{user}', [AdminUserController::class, 'update'])->name('users.update');
+        Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
+    });
 });
 
 require __DIR__.'/auth.php';

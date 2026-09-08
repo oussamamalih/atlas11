@@ -33,6 +33,13 @@
                         <x-nav-link :href="route('scout.profile.index')" :active="request()->routeIs('scout.profile.*')">
                             {{ __('My Scout Profile') }}
                         </x-nav-link>
+                    @elseif (Auth::user()->isAdmin())
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                            {{ __('Admin Dashboard') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                            {{ __('Manage Users') }}
+                        </x-nav-link>
                     @endif
 
                     <x-nav-link :href="route('notifications.index')" :active="request()->routeIs('notifications.*')">
@@ -127,6 +134,13 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('scout.profile.index')" :active="request()->routeIs('scout.profile.*')">
                     {{ __('My Scout Profile') }}
+                </x-responsive-nav-link>
+            @elseif (Auth::user()->isAdmin())
+                <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                    {{ __('Admin Dashboard') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                    {{ __('Manage Users') }}
                 </x-responsive-nav-link>
             @endif
 
