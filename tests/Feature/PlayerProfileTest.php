@@ -199,4 +199,59 @@ class PlayerProfileTest extends TestCase
         $response = $this->actingAs($playerWithProfile)->get(route('player.profile.index'));
         $response->assertRedirect(route('player.profile.show', $profile));
     }
+
+    public function test_guest_cannot_view_player_profile(): void
+    {
+        $player = User::factory()->player()->create();
+        $profile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+
+        $response = $this->get(route('player.profile.show', $profile));
+
+        $response->assertRedirect('/login');
+    }
+
+    public function test_scout_cannot_view_edit_player_profile_page(): void
+    {
+        $scout = User::factory()->scout()->create();
+
+        $response = $this->actingAs($scout)->get(route('player.profile.edit'));
+
+        $response->assertStatus(403);
+    }
+
+    public function test_admin_cannot_update_player_profile_directly(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        $response = $this->actingAs($admin)->put('/player/profile', [
+            'position' => 'Midfielder',
+            'location' => 'Rabat',
+            'date_of_birth' => '2000-01-01',
+        ]);
+
+        $response->assertStatus(403);
+    }
+
+    public function test_player_without_profile_accessing_edit_is_redirected_to_create(): void
+    {
+        $player = User::factory()->player()->create();
+
+        $response = $this->actingAs($player)->get(route('player.profile.edit'));
+
+        $response->assertRedirect(route('player.profile.create'));
+    }
+
+    public function test_player_profile_update_validates_required_fields(): void
+    {
+        $player = User::factory()->player()->create();
+        PlayerProfile::factory()->create(['user_id' => $player->id]);
+
+        $response = $this->actingAs($player)->put('/player/profile', [
+            'position' => '',
+            'location' => '',
+            'date_of_birth' => '',
+        ]);
+
+        $response->assertSessionHasErrors(['position', 'location', 'date_of_birth']);
+    }
 }

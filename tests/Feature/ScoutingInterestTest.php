@@ -209,4 +209,97 @@ class ScoutingInterestTest extends TestCase
         $response2->assertStatus(200);
         $response2->assertSee('Scouting Interest Expressed');
     }
+
+    public function test_guest_cannot_access_scouting_interest_routes(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+        $interest = ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+        ]);
+
+        $this->get(route('scouting.interests.index'))->assertRedirect('/login');
+        $this->get(route('scouting.interests.show', $interest))->assertRedirect('/login');
+        $this->patch(route('scouting.interests.update', $interest), ['status' => 'viewed'])->assertRedirect('/login');
+    }
+
+    public function test_admin_cannot_express_interest_in_players(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+
+        $response = $this->actingAs($admin)->post(route('scouting.interests.store', $playerProfile), [
+            'message' => 'Admin trying to scout',
+        ]);
+
+        $response->assertStatus(403);
+    }
+
+    public function test_unrelated_user_cannot_update_scouting_interest_status(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+        $interest = ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+            'status' => ScoutingInterest::STATUS_PENDING,
+        ]);
+
+        $unrelatedUser = User::factory()->player()->create();
+
+        $response = $this->actingAs($unrelatedUser)->patch(route('scouting.interests.update', $interest), [
+            'status' => ScoutingInterest::STATUS_CLOSED,
+        ]);
+
+        $response->assertStatus(403);
+        $this->assertEquals(ScoutingInterest::STATUS_PENDING, $interest->fresh()->status);
+    }
+
+    public function test_scouting_interest_update_validates_status(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+        $interest = ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+            'status' => ScoutingInterest::STATUS_PENDING,
+        ]);
+
+        $response = $this->actingAs($scout)->patch(route('scouting.interests.update', $interest), [
+            'status' => 'invalid-status',
+        ]);
+
+        $response->assertSessionHasErrors('status');
+    }
+
+    public function test_admin_can_view_and_update_scouting_interest(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $scout = User::factory()->scout()->create(['name' => 'Scout Leader']);
+        $player = User::factory()->player()->create(['name' => 'Future Star']);
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+        $interest = ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+            'status' => ScoutingInterest::STATUS_PENDING,
+        ]);
+
+        // Admin can view
+        $responseView = $this->actingAs($admin)->get(route('scouting.interests.show', $interest));
+        $responseView->assertStatus(200);
+        $responseView->assertSee('Scout Leader');
+        $responseView->assertSee('Future Star');
+
+        // Admin can update status
+        $responseUpdate = $this->actingAs($admin)->patch(route('scouting.interests.update', $interest), [
+            'status' => ScoutingInterest::STATUS_CLOSED,
+        ]);
+        $responseUpdate->assertSessionHas('status');
+        $this->assertEquals(ScoutingInterest::STATUS_CLOSED, $interest->fresh()->status);
+    }
 }

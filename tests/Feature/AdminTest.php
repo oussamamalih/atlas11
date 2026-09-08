@@ -318,4 +318,50 @@ class AdminTest extends TestCase
         $response->assertDontSee('Admin Dashboard');
         $response->assertDontSee('Manage Users');
     }
+
+    public function test_guests_cannot_access_user_show_or_edit(): void
+    {
+        $user = User::factory()->player()->create();
+
+        $this->get(route('admin.users.show', $user))->assertRedirect('/login');
+        $this->get(route('admin.users.edit', $user))->assertRedirect('/login');
+    }
+
+    public function test_non_admins_cannot_access_user_show_or_edit(): void
+    {
+        $player = User::factory()->player()->create();
+        $scout = User::factory()->scout()->create();
+        $targetUser = User::factory()->player()->create();
+
+        // Player attempts
+        $this->actingAs($player)->get(route('admin.users.show', $targetUser))->assertStatus(403);
+        $this->actingAs($player)->get(route('admin.users.edit', $targetUser))->assertStatus(403);
+
+        // Scout attempts
+        $this->actingAs($scout)->get(route('admin.users.show', $targetUser))->assertStatus(403);
+        $this->actingAs($scout)->get(route('admin.users.edit', $targetUser))->assertStatus(403);
+    }
+
+    public function test_admin_user_update_validates_unique_email_and_role(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $user1 = User::factory()->player()->create(['email' => 'user1@example.com']);
+        $user2 = User::factory()->player()->create(['email' => 'user2@example.com']);
+
+        // Attempting to update user2 with user1's email
+        $responseDuplicate = $this->actingAs($admin)->put(route('admin.users.update', $user2), [
+            'name' => 'User Two',
+            'email' => 'user1@example.com',
+            'role' => User::ROLE_PLAYER,
+        ]);
+        $responseDuplicate->assertSessionHasErrors('email');
+
+        // Attempting to update with invalid role
+        $responseInvalidRole = $this->actingAs($admin)->put(route('admin.users.update', $user2), [
+            'name' => 'User Two',
+            'email' => 'user2@example.com',
+            'role' => 'invalid_role',
+        ]);
+        $responseInvalidRole->assertSessionHasErrors('role');
+    }
 }

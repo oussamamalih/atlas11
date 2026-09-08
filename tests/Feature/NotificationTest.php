@@ -260,4 +260,41 @@ class NotificationTest extends TestCase
         $response->assertSee('Notifications');
         $response->assertSee('1');
     }
+
+    public function test_guests_cannot_mark_all_read_or_delete_notifications(): void
+    {
+        $this->post(route('notifications.markAllAsRead'))->assertRedirect('/login');
+        $this->delete(route('notifications.destroy', 'dummy-id'))->assertRedirect('/login');
+    }
+
+    public function test_marking_all_as_read_does_not_affect_other_users(): void
+    {
+        $player1 = User::factory()->player()->create();
+        $player2 = User::factory()->player()->create();
+        $scout = User::factory()->scout()->create();
+        $profile1 = PlayerProfile::factory()->create(['user_id' => $player1->id]);
+        $profile2 = PlayerProfile::factory()->create(['user_id' => $player2->id]);
+
+        $interest1 = ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $profile1->id,
+        ]);
+        $interest2 = ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $profile2->id,
+        ]);
+
+        $player1->notify(new ScoutingInterestReceived($interest1));
+        $player2->notify(new ScoutingInterestReceived($interest2));
+
+        $this->assertEquals(1, $player1->unreadNotifications()->count());
+        $this->assertEquals(1, $player2->unreadNotifications()->count());
+
+        // Player 1 marks all as read
+        $this->actingAs($player1)->post(route('notifications.markAllAsRead'));
+
+        // Player 1 has 0 unread, Player 2 still has 1 unread
+        $this->assertEquals(0, $player1->fresh()->unreadNotifications()->count());
+        $this->assertEquals(1, $player2->fresh()->unreadNotifications()->count());
+    }
 }

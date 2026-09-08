@@ -191,4 +191,57 @@ class ScoutProfileTest extends TestCase
         $response = $this->actingAs($scoutWithProfile)->get(route('scout.profile.index'));
         $response->assertRedirect(route('scout.profile.show', $profile));
     }
+
+    public function test_guest_cannot_view_scout_profile(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $profile = ScoutProfile::factory()->create(['user_id' => $scout->id]);
+
+        $response = $this->get(route('scout.profile.show', $profile));
+
+        $response->assertRedirect('/login');
+    }
+
+    public function test_player_cannot_view_edit_scout_profile_page(): void
+    {
+        $player = User::factory()->player()->create();
+
+        $response = $this->actingAs($player)->get(route('scout.profile.edit'));
+
+        $response->assertStatus(403);
+    }
+
+    public function test_admin_cannot_update_scout_profile_directly(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        $response = $this->actingAs($admin)->put('/scout/profile', [
+            'organization' => 'Admin Org',
+            'location' => 'Rabat',
+        ]);
+
+        $response->assertStatus(403);
+    }
+
+    public function test_scout_without_profile_accessing_edit_is_redirected_to_create(): void
+    {
+        $scout = User::factory()->scout()->create();
+
+        $response = $this->actingAs($scout)->get(route('scout.profile.edit'));
+
+        $response->assertRedirect(route('scout.profile.create'));
+    }
+
+    public function test_scout_profile_update_validates_required_fields(): void
+    {
+        $scout = User::factory()->scout()->create();
+        ScoutProfile::factory()->create(['user_id' => $scout->id]);
+
+        $response = $this->actingAs($scout)->put('/scout/profile', [
+            'organization' => '',
+            'location' => '',
+        ]);
+
+        $response->assertSessionHasErrors(['organization', 'location']);
+    }
 }

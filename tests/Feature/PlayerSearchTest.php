@@ -164,4 +164,14 @@ class PlayerSearchTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('No players found');
     }
+
+    public function test_admins_can_access_player_search(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        $response = $this->actingAs($admin)->get('/scout/search');
+
+        $response->assertStatus(200);
+        $response->assertSee('Talent Discovery & Search');
+    }
 }
