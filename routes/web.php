@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\PlayerProfileController;
+use App\Http\Controllers\PlayerSearchController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScoutProfileController;
+use App\Http\Controllers\ScoutingInterestController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,6 +19,39 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Player Profile Routes
+    Route::prefix('player/profile')->name('player.profile.')->group(function () {
+        Route::get('/', [PlayerProfileController::class, 'index'])->name('index');
+        Route::get('/create', [PlayerProfileController::class, 'create'])->name('create');
+        Route::post('/', [PlayerProfileController::class, 'store'])->name('store');
+        Route::get('/edit', [PlayerProfileController::class, 'edit'])->name('edit');
+        Route::put('/', [PlayerProfileController::class, 'update'])->name('update');
+        Route::patch('/', [PlayerProfileController::class, 'update']);
+    });
+
+    Route::get('/players/{playerProfile}', [PlayerProfileController::class, 'show'])->name('player.profile.show');
+
+    // Scout Profile Routes
+    Route::prefix('scout/profile')->name('scout.profile.')->group(function () {
+        Route::get('/', [ScoutProfileController::class, 'index'])->name('index');
+        Route::get('/create', [ScoutProfileController::class, 'create'])->name('create');
+        Route::post('/', [ScoutProfileController::class, 'store'])->name('store');
+        Route::get('/edit', [ScoutProfileController::class, 'edit'])->name('edit');
+        Route::put('/', [ScoutProfileController::class, 'update'])->name('update');
+        Route::patch('/', [ScoutProfileController::class, 'update']);
+    });
+
+    Route::get('/scouts/{scoutProfile}', [ScoutProfileController::class, 'show'])->name('scout.profile.show');
+
+    // Player Search (Scouts)
+    Route::get('/scout/search', [PlayerSearchController::class, 'index'])->name('scout.search');
+
+    // Scouting Interests
+    Route::get('/scouting/interests', [ScoutingInterestController::class, 'index'])->name('scouting.interests.index');
+    Route::post('/players/{playerProfile}/express-interest', [ScoutingInterestController::class, 'store'])->name('scouting.interests.store');
+    Route::get('/scouting/interests/{scoutingInterest}', [ScoutingInterestController::class, 'show'])->name('scouting.interests.show');
+    Route::patch('/scouting/interests/{scoutingInterest}', [ScoutingInterestController::class, 'update'])->name('scouting.interests.update');
 });
 
 require __DIR__.'/auth.php';

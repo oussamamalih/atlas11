@@ -15,6 +15,25 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    @if (Auth::user()->isPlayer())
+                        <x-nav-link :href="route('player.profile.index')" :active="request()->routeIs('player.profile.*')">
+                            {{ __('My Football Profile') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('scouting.interests.index')" :active="request()->routeIs('scouting.interests.*')">
+                            {{ __('Interests') }}
+                        </x-nav-link>
+                    @elseif (Auth::user()->isScout())
+                        <x-nav-link :href="route('scout.search')" :active="request()->routeIs('scout.search')">
+                            {{ __('Search Players') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('scouting.interests.index')" :active="request()->routeIs('scouting.interests.*')">
+                            {{ __('My Interests') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('scout.profile.index')" :active="request()->routeIs('scout.profile.*')">
+                            {{ __('My Scout Profile') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -70,6 +89,25 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            @if (Auth::user()->isPlayer())
+                <x-responsive-nav-link :href="route('player.profile.index')" :active="request()->routeIs('player.profile.*')">
+                    {{ __('My Football Profile') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('scouting.interests.index')" :active="request()->routeIs('scouting.interests.*')">
+                    {{ __('Interests') }}
+                </x-responsive-nav-link>
+            @elseif (Auth::user()->isScout())
+                <x-responsive-nav-link :href="route('scout.search')" :active="request()->routeIs('scout.search')">
+                    {{ __('Search Players') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('scouting.interests.index')" :active="request()->routeIs('scouting.interests.*')">
+                    {{ __('My Interests') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('scout.profile.index')" :active="request()->routeIs('scout.profile.*')">
+                    {{ __('My Scout Profile') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

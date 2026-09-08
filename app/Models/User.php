@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -55,6 +56,30 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->role === self::ROLE_ADMIN;
+    }
+
+    /**
+     * Get the player profile associated with the user.
+     */
+    public function playerProfile(): HasOne
+    {
+        return $this->hasOne(PlayerProfile::class);
+    }
+
+    /**
+     * Get the scout profile associated with the user.
+     */
+     public function scoutProfile(): HasOne
+     {
+         return $this->hasOne(ScoutProfile::class);
+     }
+
+    /**
+     * Get the scouting interests sent by the user (as a scout).
+     */
+    public function sentScoutingInterests(): HasMany
+    {
+        return $this->hasMany(ScoutingInterest::class, 'scout_id');
     }
 
     protected function casts(): array

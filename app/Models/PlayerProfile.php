@@ -7,6 +7,7 @@ use Database\Factories\PlayerProfileFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PlayerProfile extends Model
 {
@@ -65,6 +66,14 @@ class PlayerProfile extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the scouting interests expressed in this player profile.
+     */
+    public function scoutingInterests(): HasMany
+    {
+        return $this->hasMany(ScoutingInterest::class, 'player_profile_id');
     }
 
     /**
