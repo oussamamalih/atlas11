@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PlayerProfile;
 use App\Models\ScoutingInterest;
+use App\Notifications\ScoutingInterestReceived;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -74,12 +75,17 @@ class ScoutingInterestController extends Controller
             return redirect()->back()->with('error', 'You have already expressed interest in this player.');
         }
 
-        ScoutingInterest::create([
+        $interest = ScoutingInterest::create([
             'scout_id' => $request->user()->id,
             'player_profile_id' => $playerProfile->id,
             'message' => $validated['message'] ?? null,
             'status' => ScoutingInterest::STATUS_PENDING,
         ]);
+
+        // Notify the player
+        if ($playerProfile->user) {
+            $playerProfile->user->notify(new ScoutingInterestReceived($interest));
+        }
 
         return redirect()->back()->with('status', 'Interest successfully expressed in '.$playerProfile->user->name.'!');
     }

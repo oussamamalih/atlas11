@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PlayerProfileController;
 use App\Http\Controllers\PlayerSearchController;
 use App\Http\Controllers\ProfileController;
@@ -52,6 +53,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/players/{playerProfile}/express-interest', [ScoutingInterestController::class, 'store'])->name('scouting.interests.store');
     Route::get('/scouting/interests/{scoutingInterest}', [ScoutingInterestController::class, 'show'])->name('scouting.interests.show');
     Route::patch('/scouting/interests/{scoutingInterest}', [ScoutingInterestController::class, 'update'])->name('scouting.interests.update');
+
+    // Notifications
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::patch('/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+    Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
+    Route::delete('/notifications/{id}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
 });
 
 require __DIR__.'/auth.php';
