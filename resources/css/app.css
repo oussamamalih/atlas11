@@ -163,3 +163,150 @@ a { transition: color .15s ease, background-color .15s ease, border-color .15s e
     .atlas-nav .atlas-nav-link { padding-inline: 1rem !important; }
     .text-3xl { font-size: 2rem !important; }
 }
+
+/* --------------------------------------------------------------------------
+   ATLAS11 — Hero Section (Full Viewport Height & Editorial Sports Styling)
+   -------------------------------------------------------------------------- */
+.atlas-hero-section {
+    position: relative !important;
+    width: 100% !important;
+    min-height: calc(100vh - 80px) !important;
+    min-height: 650px !important;
+    height: calc(100vh - 80px) !important;
+    background-color: #060d17 !important;
+    display: flex !important;
+    align-items: center !important;
+    overflow: hidden !important;
+}
+
+.atlas-hero-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: right center !important;
+    z-index: 1 !important;
+}
+
+.atlas-hero-overlay-desktop {
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(90deg, #060d17 0%, rgba(6,13,23,0.96) 28%, rgba(6,13,23,0.82) 46%, rgba(6,13,23,0.25) 64%, rgba(6,13,23,0.0) 78%, transparent 100%) !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+}
+
+.atlas-hero-overlay-mobile {
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(180deg, rgba(6,13,23,0.88) 0%, rgba(6,13,23,0.76) 45%, rgba(6,13,23,0.45) 75%, #060d17 100%) !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+}
+
+.atlas-hero-bottom-fade {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    height: 70px !important;
+    background: linear-gradient(to top, #060d17 0%, transparent 100%) !important;
+    z-index: 3 !important;
+    pointer-events: none !important;
+}
+
+.atlas-hero-inner {
+    position: relative !important;
+    z-index: 10 !important;
+    width: 100% !important;
+    min-height: calc(100vh - 80px) !important;
+    min-height: 650px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.atlas-hero-heading {
+    color: #ffffff !important;
+    letter-spacing: -0.04em !important;
+}
+
+.atlas-hero-emerald {
+    color: #34d399 !important;
+}
+
+.atlas-hero-desc {
+    color: #cbd5e1 !important;
+}
+
+.atlas-btn-player {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #10b981 !important;
+    color: #060d17 !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    border-radius: 4px !important;
+    transition: background-color 0.15s ease, transform 0.1s ease !important;
+}
+
+.atlas-btn-player:hover {
+    background-color: #34d399 !important;
+    color: #060d17 !important;
+}
+
+.atlas-btn-scout {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    border-radius: 4px !important;
+    transition: border-color 0.15s ease, background-color 0.15s ease !important;
+}
+
+.atlas-btn-scout:hover {
+    border-color: rgba(255, 255, 255, 0.6) !important;
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+}
+
+.atlas-stat-val {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+}
+
+@media (max-width: 1023px) {
+    .atlas-hero-section {
+        height: auto !important;
+        min-height: calc(100vh - 80px) !important;
+        padding-top: 3.5rem !important;
+        padding-bottom: 3.5rem !important;
+    }
+    .atlas-hero-inner {
+        min-height: auto !important;
+    }
+    .atlas-hero-bg {
+        background-position: 72% center !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .atlas-hero-section {
+        min-height: calc(100vh - 80px) !important;
+        padding-top: 2.5rem !important;
+        padding-bottom: 2.5rem !important;
+    }
+    .atlas-hero-bg {
+        background-position: 75% 20% !important;
+    }
+}
+
