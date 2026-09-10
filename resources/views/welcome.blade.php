@@ -15,18 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased text-[#111827] bg-[#F8FAFC]">
-        <!-- Top Announcement Bar -->
-        <div class="bg-[#0B1F33] text-white text-xs py-2 px-4 border-b border-[#05111D]">
-            <div class="max-w-7xl mx-auto flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                    <span class="inline-block w-2 h-2 rounded-full bg-[#A3E635] animate-pulse"></span>
-                    <span class="font-medium text-slate-300">Morocco's Official Football Talent Scouting & Trial Platform</span>
-                </div>
-                <div class="hidden sm:flex items-center space-x-4 text-slate-400">
-                    <span>Casablanca &bull; Rabat &bull; Tangier &bull; Marrakech &bull; Fes &bull; Agadir</span>
-                </div>
-            </div>
-        </div>
+   
 
         <!-- Navigation Header -->
         <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-gray-200/80">
@@ -58,7 +47,7 @@
                             </a>
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}" class="inline-flex items-center px-4 py-2 bg-[#16A34A] hover:bg-[#15803D] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-sm transition">
-                                    {{ __('Join Atlas11') }}
+                                    {{ __('Sign up') }}
                                 </a>
                             @endif
                         @endauth
@@ -68,124 +57,98 @@
         </header>
 
         <!-- Hero Section -->
-        <section class="relative pt-16 pb-20 lg:pt-24 lg:pb-28 overflow-hidden bg-gradient-to-b from-white via-[#F8FAFC] to-[#F8FAFC]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    <!-- Hero Content -->
-                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                        <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-[#16A34A] border border-emerald-200">
-                            <span class="w-2 h-2 rounded-full bg-[#16A34A] me-2"></span>
-                            {{ __('Morocco Talent Scouting Network') }}
+        <section id="atlas-hero" class="atlas-hero-section relative w-full overflow-hidden bg-[#060d17] flex items-center" style="min-height: calc(100vh - 80px) !important; min-height: 650px !important;">
+
+            <!-- Hero Image Layer -->
+            <div class="atlas-hero-bg absolute inset-0 bg-cover bg-no-repeat"
+                 style="background-image: url('{{ asset('images/hero-player.png') }}'); background-position: right center; background-repeat: no-repeat; background-size: cover;">
+            </div>
+
+            <!-- Desktop Directional Overlay: Solid dark on left for text legibility, transparent over player on right -->
+            <div class="atlas-hero-overlay-desktop absolute inset-0 pointer-events-none hidden lg:block"
+                 style="background: linear-gradient(90deg, #060d17 0%, rgba(6,13,23,0.96) 28%, rgba(6,13,23,0.82) 46%, rgba(6,13,23,0.25) 64%, rgba(6,13,23,0.0) 78%, transparent 100%);">
+            </div>
+
+            <!-- Mobile/Tablet Overlay -->
+            <div class="atlas-hero-overlay-mobile absolute inset-0 pointer-events-none lg:hidden"
+                 style="background: linear-gradient(180deg, rgba(6,13,23,0.88) 0%, rgba(6,13,23,0.76) 45%, rgba(6,13,23,0.45) 75%, #060d17 100%);">
+            </div>
+
+            <!-- Subtle Bottom Edge Transition -->
+            <div class="atlas-hero-bottom-fade absolute inset-x-0 bottom-0 pointer-events-none"
+                 style="height: 70px; background: linear-gradient(to top, #060d17 0%, transparent 100%);">
+            </div>
+
+            <!-- Content Container -->
+            <div class="atlas-hero-inner relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center" style="min-height: calc(100vh - 80px) !important; min-height: 650px !important;">
+
+                <div class="max-w-2xl text-left py-12 lg:py-0">
+
+                    <!-- Small Eyebrow -->
+                    <div class="inline-flex items-center gap-2.5 mb-5">
+                        <span class="h-px w-6 bg-emerald-400"></span>
+                        <span class="text-xs font-bold uppercase tracking-[0.25em] text-emerald-400 font-mono">
+                            FOOTBALL SCOUTING PLATFORM
+                        </span>
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="atlas-hero-heading text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-6" style="color: #ffffff !important; letter-spacing: -0.04em !important;">
+                        Discover the<br>
+                        <span class="atlas-hero-emerald text-emerald-400" style="color: #34d399 !important;">next generation.</span>
+                    </h1>
+
+                    <!-- Description -->
+                    <p class="atlas-hero-desc text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-xl mb-9" style="color: #cbd5e1 !important;">
+                        Discover, analyse and track football talent with Atlas11.
+                    </p>
+
+                    <!-- Action CTAs -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12">
+                        <a href="{{ route('register') }}"
+                           class="atlas-btn-player inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#060d17] bg-emerald-400 hover:bg-emerald-300 transition duration-150 rounded"
+                           style="background-color: #10b981 !important; color: #060d17 !important;">
+                            Create Player Profile
+                            <svg class="w-4 h-4 ml-2.5 -mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                            </svg>
+                        </a>
+
+                        <a href="{{ route('register') }}?role=scout"
+                           class="atlas-btn-scout inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-white border border-white/25 hover:border-white/60 bg-white/5 hover:bg-white/10 transition duration-150 rounded"
+                           style="color: #ffffff !important;">
+                            I'm a Scout
+                        </a>
+                    </div>
+
+                    <!-- Subtle Stats Row -->
+                    <div class="pt-8 border-t border-white/10 flex flex-wrap items-center gap-6 sm:gap-10">
+                        <div class="flex items-baseline gap-2.5">
+                            <span class="atlas-stat-val text-2xl sm:text-3xl font-black tracking-tight" style="color: #ffffff !important;">16+</span>
+                            <span class="text-xs font-semibold text-slate-500">—</span>
+                            <span class="text-[11px] sm:text-xs uppercase tracking-widest text-slate-300 font-medium">Regions</span>
                         </div>
 
-                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#0B1F33] leading-tight">
-                            Discover Morocco's <br class="hidden sm:inline" />
-                            <span class="text-[#16A34A]">Football Talent</span>
-                        </h1>
+                        <div class="hidden sm:block h-5 w-px bg-white/15"></div>
 
-                        <p class="text-base sm:text-lg text-[#64748B] max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                            Atlas11 bridges the gap between ambitious Moroccan footballers and certified scouts, clubs, and youth academies. Build your scouting dossier, track prospects across all 16 regions, and facilitate official trial inquiries.
-                        </p>
-
-                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                            <a href="{{ route('register') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 bg-[#16A34A] hover:bg-[#15803D] text-white text-sm font-bold uppercase tracking-wider rounded-xl shadow-md transition">
-                                <svg class="w-4 h-4 me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                                {{ __('Create Player Profile') }}
-                            </a>
-                            <a href="{{ route('register') }}?role=scout" class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 bg-white border border-gray-300 hover:border-gray-400 text-[#0B1F33] text-sm font-bold uppercase tracking-wider rounded-xl shadow-sm hover:bg-gray-50 transition">
-                                <svg class="w-4 h-4 me-2 text-[#16A34A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg>
-                                {{ __('Register as Scout') }}
-                            </a>
+                        <div class="flex items-baseline gap-2.5">
+                            <span class="atlas-stat-val text-2xl sm:text-3xl font-black tracking-tight" style="color: #ffffff !important;">100%</span>
+                            <span class="text-xs font-semibold text-slate-500">—</span>
+                            <span class="text-[11px] sm:text-xs uppercase tracking-widest text-slate-300 font-medium">Verified Profiles</span>
                         </div>
 
-                        <!-- Trust Metrics Bar -->
-                        <div class="pt-6 border-t border-gray-200 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
-                            <div>
-                                <p class="text-2xl font-extrabold text-[#0B1F33]">16+</p>
-                                <p class="text-xs text-[#64748B] font-medium uppercase tracking-wider mt-0.5">Regions Covered</p>
-                            </div>
-                            <div>
-                                <p class="text-2xl font-extrabold text-[#16A34A]">100%</p>
-                                <p class="text-xs text-[#64748B] font-medium uppercase tracking-wider mt-0.5">Verified Profiles</p>
-                            </div>
-                            <div>
-                                <p class="text-2xl font-extrabold text-[#0B1F33]">Direct</p>
-                                <p class="text-xs text-[#64748B] font-medium uppercase tracking-wider mt-0.5">Trial Inquiries</p>
-                            </div>
+                        <div class="hidden sm:block h-5 w-px bg-white/15"></div>
+
+                        <div class="flex items-baseline gap-2.5">
+                            <span class="atlas-stat-val text-2xl sm:text-3xl font-black tracking-tight" style="color: #ffffff !important;">Direct</span>
+                            <span class="text-xs font-semibold text-slate-500">—</span>
+                            <span class="text-[11px] sm:text-xs uppercase tracking-widest text-slate-300 font-medium">Connections</span>
                         </div>
                     </div>
 
-                    <!-- Hero Visual / Showcase Dossier Card -->
-                    <div class="lg:col-span-5">
-                        <div class="bg-white rounded-2xl border border-gray-200 shadow-xl p-6 relative">
-                            <!-- Card Header -->
-                            <div class="flex items-center justify-between pb-4 border-b border-gray-100">
-                                <div class="flex items-center space-x-2">
-                                    <span class="w-3 h-3 rounded-full bg-[#16A34A]"></span>
-                                    <span class="text-xs font-bold text-[#0B1F33] uppercase tracking-wider">Scouting Dossier Preview</span>
-                                </div>
-                                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-[#A3E635]/30 text-[#0B1F33] border border-[#A3E635]">
-                                    VERIFIED PROSPECT
-                                </span>
-                            </div>
-
-                            <!-- Player Hero Card Details -->
-                            <div class="mt-5 flex items-start space-x-4">
-                                <div class="w-16 h-16 rounded-xl bg-[#0B1F33] text-white flex items-center justify-center text-2xl font-black shrink-0 border-2 border-[#16A34A]">
-                                    A11
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <h3 class="text-lg font-bold text-[#0B1F33] truncate">Yassine El Idrissi</h3>
-                                    <p class="text-xs font-semibold text-[#16A34A]">Attacking Midfielder (CAM / RW)</p>
-                                    <p class="text-xs text-[#64748B] flex items-center mt-1">
-                                        <svg class="w-3.5 h-3.5 me-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                        </svg>
-                                        Casablanca, Grand Casablanca
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- Key Metrics Grid -->
-                            <div class="mt-5 grid grid-cols-4 gap-2 bg-[#F8FAFC] p-3 rounded-xl border border-gray-100 text-center">
-                                <div>
-                                    <p class="text-[10px] uppercase font-bold text-gray-400">Age</p>
-                                    <p class="text-xs font-extrabold text-[#0B1F33] mt-0.5">18 yrs</p>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] uppercase font-bold text-gray-400">Foot</p>
-                                    <p class="text-xs font-extrabold text-[#0B1F33] mt-0.5">Left</p>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] uppercase font-bold text-gray-400">Height</p>
-                                    <p class="text-xs font-extrabold text-[#0B1F33] mt-0.5">178 cm</p>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] uppercase font-bold text-gray-400">Weight</p>
-                                    <p class="text-xs font-extrabold text-[#0B1F33] mt-0.5">71 kg</p>
-                                </div>
-                            </div>
-
-                            <!-- Scout Notes snippet -->
-                            <div class="mt-4 p-3 bg-emerald-50/70 rounded-xl border border-emerald-100 text-xs text-slate-700 leading-relaxed">
-                                <span class="font-bold text-[#16A34A] block mb-1">Technical Assessment:</span>
-                                Exceptional close control in high-tempo phases. Visionary distribution between lines with sharp final-third decision-making.
-                            </div>
-
-                            <div class="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
-                                <span class="text-xs font-medium text-[#64748B]">Club: Raja Youth Academy</span>
-                                <span class="inline-flex items-center px-3 py-1.5 bg-[#16A34A] text-white text-xs font-bold rounded-lg">
-                                    Express Interest &rarr;
-                                </span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
+
         </section>
 
         <!-- Platform Pillars Section -->
