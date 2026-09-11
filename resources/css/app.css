@@ -2,58 +2,89 @@
 @tailwind components;
 @tailwind utilities;
 
-/* --------------------------------------------------------------------------
-   ATLAS11 — Scouting Desk visual system
-   A restrained sports/editorial UI: strong type, thin rules, quiet surfaces.
-   -------------------------------------------------------------------------- */
+/* ================================================================
+   ATLAS11 — FOOTBALL SCOUTING PLATFORM
+   Dark emerald design system with athletic typography
+   ================================================================ */
+
 :root {
-    --atlas-ink: #102235;
-    --atlas-ink-2: #1b3147;
-    --atlas-green: #16824b;
-    --atlas-lime: #b8df57;
-    --atlas-paper: #f5f6f2;
-    --atlas-white: #ffffff;
-    --atlas-line: #dfe4e1;
-    --atlas-muted: #6c7882;
-    --atlas-soft: #edf1ee;
+    --atlas-dark: #0a1f14;
+    --atlas-surface: #0d2919;
+    --atlas-surface-light: #133323;
+    --atlas-surface-lighter: #1a4030;
+    --atlas-green: #10b981;
+    --atlas-green-dark: #059669;
+    --atlas-lime: #a3e635;
+    --atlas-text: #ffffff;
+    --atlas-text-muted: #8fa89c;
+    --atlas-border: #1a4030;
+    --atlas-border-light: #1f4d38;
 }
 
-html { background: var(--atlas-paper); }
+html { background: var(--atlas-dark); }
 body {
-    font-family: 'DM Sans', 'Plus Jakarta Sans', system-ui, sans-serif !important;
-    background: var(--atlas-paper) !important;
-    color: var(--atlas-ink) !important;
-    letter-spacing: -0.012em;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    background: var(--atlas-dark) !important;
+    color: var(--atlas-text) !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-::selection { background: rgba(184, 223, 87, .55); color: var(--atlas-ink); }
+::selection { background: rgba(16, 185, 129, .4); color: #fff; }
 
-/* App chrome */
-.atlas-header {
-    background: rgba(255,255,255,.92) !important;
-    border-bottom: 1px solid var(--atlas-line) !important;
-    box-shadow: none !important;
+/* ================================================================
+   DECORATIVE: Subtle noise texture overlay
+   ================================================================ */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
 }
-.atlas-header > div { max-width: 1440px !important; }
-.atlas-footer { background: transparent !important; border-top: 1px solid var(--atlas-line) !important; }
-.atlas-footer .atlas-mark { color: var(--atlas-ink) !important; }
 
-/* Navigation */
+body > * { position: relative; z-index: 1; }
+
+/* ================================================================
+   TYPOGRAPHY — Display / Football Headings
+   ================================================================ */
+.atlas-display {
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    color: #fff !important;
+}
+
+/* ================================================================
+   NAVIGATION
+   ================================================================ */
 .atlas-nav {
-    background: var(--atlas-ink) !important;
-    border: 0 !important;
-    box-shadow: 0 1px 0 rgba(0,0,0,.15) !important;
+    background: rgba(10, 31, 20, 0.95) !important;
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border-bottom: 1px solid var(--atlas-border) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3) !important;
 }
 .atlas-nav-inner { max-width: 1440px !important; }
+
 .atlas-nav .atlas-nav-link {
     position: relative;
     border: 0 !important;
-    color: #aebbc4 !important;
-    font-size: .72rem !important;
-    font-weight: 700 !important;
-    letter-spacing: .06em !important;
+    color: var(--atlas-text-muted) !important;
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.1em !important;
     text-transform: uppercase;
-    padding-inline: .8rem !important;
+    padding-inline: 0.9rem !important;
+    transition: color 0.2s ease !important;
 }
 .atlas-nav .atlas-nav-link:hover { color: #fff !important; }
 .atlas-nav .atlas-nav-link[aria-current="page"],
@@ -64,116 +95,237 @@ body {
 .atlas-nav .atlas-nav-link.active::after {
     content: '';
     position: absolute;
-    left: .8rem;
-    right: .8rem;
-    bottom: -1px;
+    left: 0.9rem;
+    right: 0.9rem;
+    bottom: -2px;
     height: 2px;
-    background: var(--atlas-lime);
+    background: var(--atlas-green);
 }
 
-/* Page width / rhythm */
-main > * { max-width: 1440px; }
-main .max-w-7xl { max-width: 1320px !important; }
-
-/* Cards become quiet panels instead of floating SaaS tiles */
-.bg-white.rounded-xl,
-.bg-white.rounded-2xl,
-.bg-white.rounded-3xl {
-    border-radius: 10px !important;
-    border-color: var(--atlas-line) !important;
-    box-shadow: 0 1px 2px rgba(16,34,53,.025) !important;
+/* ================================================================
+   CARDS & SURFACES
+   ================================================================ */
+.atlas-card {
+    background: var(--atlas-surface) !important;
+    border: 1px solid var(--atlas-border) !important;
+    border-radius: 4px !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.bg-white.rounded-xl:hover,
-.bg-white.rounded-2xl:hover { box-shadow: 0 5px 18px rgba(16,34,53,.05) !important; }
-
-/* Stop every small information tile from looking like a separate card */
-.bg-\[\#F8FAFC\] {
-    background: var(--atlas-soft) !important;
-    border-color: var(--atlas-line) !important;
-    border-radius: 6px !important;
+.atlas-card:hover {
+    border-color: var(--atlas-border-light) !important;
 }
 
-/* Type hierarchy */
-h1, h2, h3, h4 { color: var(--atlas-ink) !important; letter-spacing: -.035em; }
-.text-2xl { font-size: 1.75rem !important; }
-.text-xl { font-size: 1.35rem !important; }
-.text-3xl { font-size: 2.25rem !important; }
+.atlas-card-lg {
+    background: var(--atlas-surface) !important;
+    border: 1px solid var(--atlas-border) !important;
+    border-radius: 4px !important;
+}
 
-/* Convert the old bright green into a more mature institutional green */
-.text-\[\#16A34A\], .text-\[\#15803D\], .text-pitch-600 { color: var(--atlas-green) !important; }
-.bg-\[\#16A34A\], .bg-\[\#15803D\], .bg-pitch-600 { background-color: var(--atlas-green) !important; }
-.border-\[\#16A34A\], .border-pitch-600 { border-color: var(--atlas-green) !important; }
-.text-\[\#0B1F33\], .text-navy-900 { color: var(--atlas-ink) !important; }
-.bg-\[\#0B1F33\], .bg-navy-900 { background-color: var(--atlas-ink) !important; }
+/* Override generic white cards from Tailwind classes */
+.bg-white {
+    background-color: var(--atlas-surface) !important;
+    border-color: var(--atlas-border) !important;
+}
 
-/* Buttons */
+/* ================================================================
+   STAT CARDS — Sports statistics feel
+   ================================================================ */
+.atlas-stat {
+    background: var(--atlas-surface) !important;
+    border: 1px solid var(--atlas-border) !important;
+    border-left: 3px solid var(--atlas-green) !important;
+    border-radius: 4px !important;
+    padding: 1.25rem 1.5rem;
+}
+
+/* ================================================================
+   BUTTONS — Strong rectangular sports buttons
+   ================================================================ */
+.atlas-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.5rem;
+    background-color: var(--atlas-green);
+    color: #0a1f14;
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.atlas-btn-primary:hover {
+    background-color: #34d399;
+    color: #0a1f14;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+
+.atlas-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.5rem;
+    background-color: transparent;
+    color: var(--atlas-text);
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: 3px;
+    border: 1px solid var(--atlas-border-light);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.atlas-btn-secondary:hover {
+    border-color: var(--atlas-green);
+    color: var(--atlas-green);
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+.atlas-btn-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.5rem;
+    background-color: transparent;
+    color: #ef4444;
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: 3px;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.atlas-btn-danger:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+}
+
+/* Override Laravel Breeze button classes */
 a.bg-\[\#16A34A\], button.bg-\[\#16A34A\],
 input[type="submit"].bg-\[\#16A34A\] {
-    border-radius: 6px !important;
+    background-color: var(--atlas-green) !important;
+    color: #0a1f14 !important;
+    border-radius: 3px !important;
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    font-size: 0.9rem !important;
     box-shadow: none !important;
-    letter-spacing: .055em;
+    border: none !important;
+    transition: all 0.15s ease !important;
 }
-a.bg-\[\#0B1F33\], button.bg-\[\#0B1F33\] { border-radius: 6px !important; box-shadow: none !important; }
+a.bg-\[\#16A34A\]:hover, button.bg-\[\#16A34A\]:hover,
+input[type="submit"].bg-\[\#16A34A\]:hover {
+    background-color: #34d399 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25) !important;
+}
 
-/* Forms */
-input, select, textarea {
-    border-radius: 6px !important;
-    border-color: #cfd7d3 !important;
+a.bg-\[\#0B1F33\], button.bg-\[\#0B1F33\] {
+    background-color: var(--atlas-surface-lighter) !important;
+    border: 1px solid var(--atlas-border-light) !important;
+    color: #fff !important;
+    border-radius: 3px !important;
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    font-size: 0.9rem !important;
     box-shadow: none !important;
-    background: #fff !important;
-    color: var(--atlas-ink) !important;
+}
+a.bg-\[\#0B1F33\]:hover, button.bg-\[\#0B1F33\]:hover {
+    background-color: var(--atlas-surface-light) !important;
+    border-color: var(--atlas-green) !important;
+}
+
+/* ================================================================
+   FORMS
+   ================================================================ */
+input, select, textarea {
+    background-color: var(--atlas-surface-light) !important;
+    border-color: var(--atlas-border) !important;
+    color: var(--atlas-text) !important;
+    border-radius: 3px !important;
+    box-shadow: none !important;
 }
 input:focus, select:focus, textarea:focus {
     border-color: var(--atlas-green) !important;
-    box-shadow: 0 0 0 3px rgba(22,130,75,.10) !important;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15) !important;
+    background-color: var(--atlas-surface-lighter) !important;
+    color: #fff !important;
 }
-label { letter-spacing: .02em; }
+input::placeholder, textarea::placeholder {
+    color: var(--atlas-text-muted) !important;
+    opacity: 0.7;
+}
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%238fa89c'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0.75rem center !important;
+    background-size: 1.25rem !important;
+    padding-right: 2.5rem !important;
+}
 
-/* Status chips: smaller, flatter, more product-like */
-.rounded-full { border-radius: 999px !important; }
+label {
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--atlas-text-muted) !important;
+}
 
-/* Tables */
+/* ================================================================
+   TABLES
+   ================================================================ */
 table { border-collapse: separate; border-spacing: 0; }
 thead th {
-    font-size: .67rem !important;
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
+    font-size: 0.75rem !important;
     text-transform: uppercase;
-    letter-spacing: .09em;
-    color: var(--atlas-muted) !important;
-    background: var(--atlas-soft);
+    letter-spacing: 0.1em;
+    color: var(--atlas-text-muted) !important;
+    background: var(--atlas-surface-light) !important;
+    border-bottom: 1px solid var(--atlas-border) !important;
 }
-tbody tr { transition: background .15s ease; }
-tbody tr:hover { background: #f7f9f7; }
-
-/* Links */
-a { transition: color .15s ease, background-color .15s ease, border-color .15s ease; }
-
-/* Welcome / dashboard rhythm */
-.py-8 { padding-top: 2.25rem !important; padding-bottom: 2.75rem !important; }
-.space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.35rem !important; }
-
-/* Reduce decorative shadows left by the original UI */
-.shadow, .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl { box-shadow: 0 1px 2px rgba(16,34,53,.035) !important; }
-
-/* Auth */
-.atlas-auth-shell { background: var(--atlas-paper) !important; }
-.atlas-auth-card { border-radius: 10px !important; box-shadow: 0 10px 35px rgba(16,34,53,.07) !important; border-color: var(--atlas-line) !important; }
-
-/* Responsive */
-@media (max-width: 767px) {
-    .atlas-nav .atlas-nav-link { padding-inline: 1rem !important; }
-    .text-3xl { font-size: 2rem !important; }
+tbody tr {
+    transition: background .15s ease;
+    border-bottom: 1px solid var(--atlas-border) !important;
+}
+tbody tr:hover { background-color: var(--atlas-surface-light) !important; }
+tbody td {
+    border-bottom-color: var(--atlas-border) !important;
+    color: var(--atlas-text) !important;
 }
 
-/* --------------------------------------------------------------------------
-   ATLAS11 — Hero Section (Full Viewport Height & Editorial Sports Styling)
-   -------------------------------------------------------------------------- */
+/* ================================================================
+   BADGES & CHIPS
+   ================================================================ */
+.rounded-full { border-radius: 999px !important; }
+
+/* ================================================================
+   HERO SECTION
+   ================================================================ */
 .atlas-hero-section {
     position: relative !important;
     width: 100% !important;
     min-height: calc(100vh - 80px) !important;
     min-height: 650px !important;
-    height: calc(100vh - 80px) !important;
-    background-color: #060d17 !important;
+    background-color: var(--atlas-dark) !important;
     display: flex !important;
     align-items: center !important;
     overflow: hidden !important;
@@ -193,7 +345,7 @@ a { transition: color .15s ease, background-color .15s ease, border-color .15s e
 .atlas-hero-overlay-desktop {
     position: absolute !important;
     inset: 0 !important;
-    background: linear-gradient(90deg, #060d17 0%, rgba(6,13,23,0.96) 28%, rgba(6,13,23,0.82) 46%, rgba(6,13,23,0.25) 64%, rgba(6,13,23,0.0) 78%, transparent 100%) !important;
+    background: linear-gradient(90deg, #0a1f14 0%, rgba(10,31,20,0.96) 28%, rgba(10,31,20,0.82) 46%, rgba(10,31,20,0.25) 64%, rgba(10,31,20,0.0) 78%, transparent 100%) !important;
     z-index: 2 !important;
     pointer-events: none !important;
 }
@@ -201,7 +353,7 @@ a { transition: color .15s ease, background-color .15s ease, border-color .15s e
 .atlas-hero-overlay-mobile {
     position: absolute !important;
     inset: 0 !important;
-    background: linear-gradient(180deg, rgba(6,13,23,0.88) 0%, rgba(6,13,23,0.76) 45%, rgba(6,13,23,0.45) 75%, #060d17 100%) !important;
+    background: linear-gradient(180deg, rgba(10,31,20,0.88) 0%, rgba(10,31,20,0.76) 45%, rgba(10,31,20,0.45) 75%, #0a1f14 100%) !important;
     z-index: 2 !important;
     pointer-events: none !important;
 }
@@ -212,7 +364,7 @@ a { transition: color .15s ease, background-color .15s ease, border-color .15s e
     right: 0 !important;
     bottom: 0 !important;
     height: 70px !important;
-    background: linear-gradient(to top, #060d17 0%, transparent 100%) !important;
+    background: linear-gradient(to top, #0a1f14 0%, transparent 100%) !important;
     z-index: 3 !important;
     pointer-events: none !important;
 }
@@ -229,59 +381,105 @@ a { transition: color .15s ease, background-color .15s ease, border-color .15s e
 
 .atlas-hero-heading {
     color: #ffffff !important;
-    letter-spacing: -0.04em !important;
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif !important;
+    letter-spacing: -0.02em !important;
+    line-height: 0.95 !important;
+    text-transform: uppercase !important;
 }
 
 .atlas-hero-emerald {
-    color: #34d399 !important;
+    color: var(--atlas-green) !important;
 }
 
 .atlas-hero-desc {
-    color: #cbd5e1 !important;
+    color: var(--atlas-text-muted) !important;
 }
 
 .atlas-btn-player {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    background-color: #10b981 !important;
-    color: #060d17 !important;
-    font-weight: 700 !important;
+    background-color: var(--atlas-green) !important;
+    color: #0a1f14 !important;
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
-    border-radius: 4px !important;
+    letter-spacing: 0.08em !important;
+    border-radius: 3px !important;
     transition: background-color 0.15s ease, transform 0.1s ease !important;
 }
-
 .atlas-btn-player:hover {
     background-color: #34d399 !important;
-    color: #060d17 !important;
+    color: #0a1f14 !important;
 }
 
 .atlas-btn-scout {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
     color: #ffffff !important;
-    font-weight: 700 !important;
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
-    border-radius: 4px !important;
+    letter-spacing: 0.08em !important;
+    border-radius: 3px !important;
     transition: border-color 0.15s ease, background-color 0.15s ease !important;
 }
-
 .atlas-btn-scout:hover {
-    border-color: rgba(255, 255, 255, 0.6) !important;
-    background-color: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
     color: #ffffff !important;
 }
 
 .atlas-stat-val {
     color: #ffffff !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.02em !important;
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
+}
+
+/* ================================================================
+   AUTH SHELL
+   ================================================================ */
+.atlas-auth-shell {
+    background: var(--atlas-dark) !important;
+}
+.atlas-auth-card {
+    background: var(--atlas-surface) !important;
+    border: 1px solid var(--atlas-border) !important;
+    border-radius: 4px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ================================================================
+   SECTION BACKGROUNDS
+   ================================================================ */
+.bg-\[\#F8FAFC\] {
+    background: var(--atlas-surface-light) !important;
+    border-color: var(--atlas-border) !important;
+    border-radius: 4px !important;
+}
+
+/* ================================================================
+   SCROLLBAR
+   ================================================================ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--atlas-dark); }
+::-webkit-scrollbar-thumb { background: var(--atlas-surface-lighter); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--atlas-green); }
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 767px) {
+    .atlas-nav .atlas-nav-link {
+        padding-inline: 0.8rem !important;
+        font-size: 0.8rem !important;
+    }
 }
 
 @media (max-width: 1023px) {
@@ -310,3 +508,158 @@ a { transition: color .15s ease, background-color .15s ease, border-color .15s e
     }
 }
 
+/* ================================================================
+   DECORATIVE — Plus signs, diagonal lines, geometric
+   ================================================================ */
+.atlas-plus-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 8v24M8 20h24' stroke='%2310b981' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+.atlas-diagonal-line {
+    position: absolute;
+    width: 200%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.08), transparent);
+    transform: rotate(-12deg);
+    pointer-events: none;
+}
+
+/* ================================================================
+   OVERSIZED BACKGROUND TYPOGRAPHY
+   ================================================================ */
+.atlas-bg-text {
+    position: absolute;
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: rgba(16, 185, 129, 0.04);
+    font-size: clamp(4rem, 10vw, 10rem);
+    line-height: 0.9;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+}
+
+/* ================================================================
+   PAGE HEADER SLOT
+   ================================================================ */
+.atlas-header {
+    background: var(--atlas-surface) !important;
+    border-bottom: 1px solid var(--atlas-border) !important;
+    box-shadow: none !important;
+}
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+.atlas-footer {
+    background: var(--atlas-surface) !important;
+    border-top: 1px solid var(--atlas-border) !important;
+}
+
+/* ================================================================
+   PAGINATION
+   ================================================================ */
+nav[role="navigation"] a,
+nav[role="navigation"] span {
+    background-color: var(--atlas-surface-light) !important;
+    border-color: var(--atlas-border) !important;
+    color: var(--atlas-text-muted) !important;
+    border-radius: 3px !important;
+}
+nav[role="navigation"] a:hover {
+    background-color: var(--atlas-surface-lighter) !important;
+    border-color: var(--atlas-green) !important;
+    color: #fff !important;
+}
+nav[role="navigation"] span[aria-current="page"] {
+    background-color: var(--atlas-green) !important;
+    color: #0a1f14 !important;
+    border-color: var(--atlas-green) !important;
+}
+
+/* ================================================================
+   UTILITY: High contrast text on green
+   ================================================================ */
+.text-atlas-green { color: var(--atlas-green) !important; }
+.bg-atlas-green { background-color: var(--atlas-green) !important; }
+.border-atlas-green { border-color: var(--atlas-green) !important; }
+
+/* Override the old navy/pitch color classes */
+.text-\[\#0B1F33\], .text-navy-900 { color: #fff !important; }
+.bg-\[\#0B1F33\], .bg-navy-900 { background-color: var(--atlas-surface-lighter) !important; }
+.text-\[\#16A34A\], .text-pitch-600 { color: var(--atlas-green) !important; }
+.bg-\[\#16A34A\], .bg-pitch-600 { background-color: var(--atlas-green) !important; }
+.border-\[\#16A34A\], .border-pitch-600 { border-color: var(--atlas-green) !important; }
+
+/* Status text overrides for dark theme */
+.text-\[\#64748B\] { color: var(--atlas-text-muted) !important; }
+.text-gray-500, .text-gray-400, .text-gray-300 { color: var(--atlas-text-muted) !important; }
+.text-slate-500, .text-slate-400, .text-slate-300 { color: var(--atlas-text-muted) !important; }
+.text-gray-900, .text-gray-800, .text-gray-700, .text-gray-600 { color: var(--atlas-text) !important; }
+.text-slate-700, .text-slate-600 { color: var(--atlas-text-muted) !important; }
+.text-gray-100, .text-slate-100, .text-slate-200 { color: var(--atlas-text-muted) !important; }
+
+/* Border overrides */
+.border-gray-200, .border-gray-100, .border-slate-200, .border-slate-100 {
+    border-color: var(--atlas-border) !important;
+}
+
+/* Status badges - keep functional colors */
+.text-amber-600, .text-amber-800, .bg-amber-50, .border-amber-200 {
+    color: #f59e0b !important;
+    background-color: rgba(245, 158, 11, 0.1) !important;
+    border-color: rgba(245, 158, 11, 0.2) !important;
+}
+.bg-emerald-50, .text-emerald-800, .border-emerald-200 {
+    background-color: rgba(16, 185, 129, 0.1) !important;
+    color: var(--atlas-green) !important;
+    border-color: rgba(16, 185, 129, 0.2) !important;
+}
+.bg-red-50, .text-red-700, .text-red-600, .border-red-200 {
+    background-color: rgba(239, 68, 68, 0.1) !important;
+    color: #ef4444 !important;
+    border-color: rgba(239, 68, 68, 0.2) !important;
+}
+
+/* Alert/flash message overrides */
+.font-medium.text-sm.text-\[\#15803D\] {
+    color: var(--atlas-green) !important;
+    background-color: rgba(16, 185, 129, 0.1) !important;
+    border-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+/* Shadow overrides - subtle on dark */
+.shadow, .shadow-sm { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important; }
+.shadow-md { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important; }
+.shadow-lg { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important; }
+
+/* Checkbox overrides */
+input[type="checkbox"] {
+    background-color: var(--atlas-surface-light) !important;
+    border-color: var(--atlas-border) !important;
+}
+input[type="checkbox"]:checked {
+    background-color: var(--atlas-green) !important;
+    border-color: var(--atlas-green) !important;
+}
+
+/* Link transitions */
+a { transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease; }
+
+/* Page rhythm */
+.space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.35rem !important; }
+.space-y-5 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.25rem !important; }
+.space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem !important; }
+
+/* Dropdown overrides for dark theme */
+[x-show] .bg-white, [x-ref="panel"] {
+    background-color: var(--atlas-surface) !important;
+    border-color: var(--atlas-border) !important;
+}

@@ -5,6 +5,7 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -80,6 +81,23 @@ class User extends Authenticatable
     public function sentScoutingInterests(): HasMany
     {
         return $this->hasMany(ScoutingInterest::class, 'scout_id');
+    }
+
+    /**
+     * Get the favorites saved by the user (as a scout).
+     */
+    public function favorites(): HasMany
+    {
+        return $this->hasMany(Favorite::class, 'scout_id');
+    }
+
+    /**
+     * Get the player profiles favorited by the user (as a scout).
+     */
+    public function favoritePlayers(): BelongsToMany
+    {
+        return $this->belongsToMany(PlayerProfile::class, 'favorites', 'scout_id', 'player_profile_id')
+            ->withTimestamps();
     }
 
     protected function casts(): array

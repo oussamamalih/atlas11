@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="mb-6 text-center">
-        <h2 class="text-xl font-bold text-navy-900">Confirm Security Clearance</h2>
-        <p class="mt-2 text-sm text-slate-500 leading-relaxed">
+        <h2 class="text-3xl font-display uppercase tracking-wider text-white">{{ __('Confirm Security Clearance') }}</h2>
+        <p class="mt-2 text-sm text-[#8fa89c] leading-relaxed">
             {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
         </p>
     </div>
@@ -11,7 +11,7 @@
 
         <!-- Password -->
         <div>
-            <x-input-label for="password" :value="__('Password')" class="text-xs font-semibold uppercase tracking-wider text-slate-600" />
+            <x-input-label for="password" :value="__('Password')" class="uppercase tracking-wider font-display" />
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"

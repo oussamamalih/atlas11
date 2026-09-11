@@ -2,14 +2,14 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <div>
-                <h2 class="font-extrabold text-2xl text-[#0B1F33] tracking-tight">
+                <h2 class="font-display text-3xl sm:text-4xl uppercase tracking-wide">
                     {{ __('Edit Football Profile') }}
                 </h2>
-                <p class="text-xs text-[#64748B] mt-0.5">
+                <p class="text-xs text-[#8fa89c] mt-1 tracking-wide">
                     {{ __('Update your attributes, playing experience, and contact details') }}
                 </p>
             </div>
-            <a href="{{ route('player.profile.show', $profile) }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-xs font-semibold text-[#0B1F33] uppercase tracking-wider rounded-lg shadow-sm hover:bg-gray-50 transition">
+            <a href="{{ route('player.profile.show', $profile) }}" class="inline-flex items-center px-4 py-2 bg-[#133323] border border-[#1a4030] hover:border-[#10b981] text-white text-xs font-display font-semibold uppercase tracking-[0.08em] rounded transition">
                 &larr; {{ __('View Profile') }}
             </a>
         </div>
@@ -17,21 +17,24 @@
 
     <div class="py-8">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-xl border border-gray-200/80 shadow-sm p-6 sm:p-8">
-                <div class="mb-6 pb-4 border-b border-gray-100">
-                    <h3 class="text-lg font-bold text-[#0B1F33]">{{ __('Update Profile Information') }}</h3>
-                    <p class="mt-1 text-xs text-[#64748B]">
+            <div class="atlas-card relative overflow-hidden p-6 sm:p-8">
+                <div class="atlas-plus-pattern"></div>
+                <div class="atlas-bg-text top-0 right-4 hidden lg:block">Update</div>
+
+                <div class="relative mb-6 pb-4 border-b border-[#1a4030]">
+                    <h3 class="font-display text-xl uppercase tracking-wide">{{ __('Update Profile Information') }}</h3>
+                    <p class="mt-1 text-xs text-[#8fa89c]">
                         {{ __('Keep your profile accurate to increase your chances of being noticed by scouts.') }}
                     </p>
                 </div>
 
                 @if (session('status'))
-                    <div class="mb-4 font-medium text-sm text-[#15803D] bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+                    <div class="relative mb-4 font-medium text-sm text-[#10b981] bg-[#0d2919] border border-[#1a4030] border-l-4 border-l-[#10b981] p-4 rounded">
                         {{ session('status') }}
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('player.profile.update') }}" class="space-y-6">
+                <form method="POST" action="{{ route('player.profile.update') }}" class="relative space-y-6">
                     @csrf
                     @method('PUT')
 
@@ -39,7 +42,7 @@
                         <!-- Position -->
                         <div>
                             <x-input-label for="position" :value="__('Position *')" />
-                            <select id="position" name="position" class="mt-1 block w-full border-gray-300 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] rounded-lg shadow-sm text-sm" required>
+                            <select id="position" name="position" class="mt-1 block w-full bg-[#133323] border border-[#1a4030] text-white focus:border-[#10b981] focus:ring-1 focus:ring-[#10b981] rounded text-sm" required>
                                 <option value="">{{ __('Select your primary position') }}</option>
                                 @foreach ($positions as $position)
                                     <option value="{{ $position }}" {{ old('position', $profile->position) === $position ? 'selected' : '' }}>
@@ -67,7 +70,7 @@
                         <!-- Preferred Foot -->
                         <div>
                             <x-input-label for="preferred_foot" :value="__('Preferred Foot')" />
-                            <select id="preferred_foot" name="preferred_foot" class="mt-1 block w-full border-gray-300 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] rounded-lg shadow-sm text-sm">
+                            <select id="preferred_foot" name="preferred_foot" class="mt-1 block w-full bg-[#133323] border border-[#1a4030] text-white focus:border-[#10b981] focus:ring-1 focus:ring-[#10b981] rounded text-sm">
                                 <option value="">{{ __('Select preferred foot') }}</option>
                                 @foreach ($preferredFeet as $foot)
                                     <option value="{{ $foot }}" {{ old('preferred_foot', $profile->preferred_foot) === $foot ? 'selected' : '' }}>
@@ -110,19 +113,19 @@
                     <!-- Football Experience -->
                     <div>
                         <x-input-label for="football_experience" :value="__('Football Experience & Career Pathway')" />
-                        <textarea id="football_experience" name="football_experience" rows="4" class="mt-1 block w-full border-gray-300 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] rounded-lg shadow-sm text-sm" placeholder="List past clubs, academies, tournament achievements, or league divisions...">{{ old('football_experience', $profile->football_experience) }}</textarea>
+                        <textarea id="football_experience" name="football_experience" rows="4" class="mt-1 block w-full bg-[#133323] border border-[#1a4030] text-white focus:border-[#10b981] focus:ring-1 focus:ring-[#10b981] rounded text-sm placeholder:text-[#8fa89c]/60" placeholder="List past clubs, academies, tournament achievements, or league divisions...">{{ old('football_experience', $profile->football_experience) }}</textarea>
                         <x-input-error :messages="$errors->get('football_experience')" class="mt-2" />
                     </div>
 
                     <!-- Bio -->
                     <div>
                         <x-input-label for="bio" :value="__('Player Bio / Playing Style Description')" />
-                        <textarea id="bio" name="bio" rows="4" class="mt-1 block w-full border-gray-300 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] rounded-lg shadow-sm text-sm" placeholder="Describe your football strengths, key traits, preferred tactical roles, or career goals...">{{ old('bio', $profile->bio) }}</textarea>
+                        <textarea id="bio" name="bio" rows="4" class="mt-1 block w-full bg-[#133323] border border-[#1a4030] text-white focus:border-[#10b981] focus:ring-1 focus:ring-[#10b981] rounded text-sm placeholder:text-[#8fa89c]/60" placeholder="Describe your football strengths, key traits, preferred tactical roles, or career goals...">{{ old('bio', $profile->bio) }}</textarea>
                         <x-input-error :messages="$errors->get('bio')" class="mt-2" />
                     </div>
 
-                    <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">
-                        <a href="{{ route('player.profile.show', $profile) }}" class="text-xs font-semibold text-gray-500 hover:text-gray-800">
+                    <div class="flex items-center justify-end gap-3 pt-4 border-t border-[#1a4030]">
+                        <a href="{{ route('player.profile.show', $profile) }}" class="text-xs font-display font-semibold text-[#8fa89c] hover:text-white uppercase tracking-[0.08em]">
                             {{ __('Cancel') }}
                         </a>
                         <x-primary-button>

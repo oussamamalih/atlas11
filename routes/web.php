@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PlayerProfileController;
 use App\Http\Controllers\PlayerSearchController;
@@ -50,6 +51,11 @@ Route::middleware('auth')->group(function () {
 
     // Player Search (Scouts)
     Route::get('/scout/search', [PlayerSearchController::class, 'index'])->name('scout.search');
+
+    // Favorites / Bookmarks (Scouts)
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+    Route::post('/players/{playerProfile}/favorite', [FavoriteController::class, 'store'])->name('favorites.store');
+    Route::delete('/players/{playerProfile}/favorite', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
 
     // Scouting Interests
     Route::get('/scouting/interests', [ScoutingInterestController::class, 'index'])->name('scouting.interests.index');

@@ -744,7 +744,61 @@ class DatabaseSeeder extends Seeder
         }
 
         // -------------------------------------------------------------
-        // 6. Manage Notification Read / Unread Statuses for Demo User
+        // 6. Seed Favorites / Bookmarks
+        // -------------------------------------------------------------
+        // The lead scout bookmarks several players for demo purposes
+        $favoritesData = [
+            $playerProfiles->firstWhere('user.email', 'omar.hamdaoui@atlas11.com'),
+            $playerProfiles->firstWhere('user.email', 'soufiane.zekri@atlas11.com'),
+            $playerProfiles->firstWhere('user.email', 'karim.benchekroun@atlas11.com'),
+            $playerProfiles->firstWhere('user.email', 'ilyas.chouiar@atlas11.com'),
+            $playerProfiles->firstWhere('user.email', 'adam.aznou@atlas11.com'),
+        ];
+
+        foreach ($favoritesData as $playerProfile) {
+            if (! $playerProfile) {
+                continue;
+            }
+
+            DB::table('favorites')->insert([
+                'scout_id' => $leadScoutUser->id,
+                'player_profile_id' => $playerProfile->id,
+                'created_at' => now()->subDays(rand(1, 10)),
+                'updated_at' => now()->subDays(rand(1, 10)),
+            ]);
+        }
+
+        // Additional scouts bookmark a few players for realistic data
+        $secondaryScout1 = $scoutUsers->get(1);
+        if ($secondaryScout1) {
+            foreach (['taha.mourid@atlas11.com', 'hamza.igamane@atlas11.com'] as $email) {
+                $profile = $playerProfiles->firstWhere('user.email', $email);
+                if ($profile) {
+                    DB::table('favorites')->insert([
+                        'scout_id' => $secondaryScout1->id,
+                        'player_profile_id' => $profile->id,
+                        'created_at' => now()->subDays(rand(1, 8)),
+                        'updated_at' => now()->subDays(rand(1, 8)),
+                    ]);
+                }
+            }
+        }
+
+        $secondaryScout2 = $scoutUsers->get(2);
+        if ($secondaryScout2) {
+            $profile = $playerProfiles->firstWhere('user.email', 'mehdi.benabid@atlas11.com');
+            if ($profile) {
+                DB::table('favorites')->insert([
+                    'scout_id' => $secondaryScout2->id,
+                    'player_profile_id' => $profile->id,
+                    'created_at' => now()->subDays(rand(1, 6)),
+                    'updated_at' => now()->subDays(rand(1, 6)),
+                ]);
+            }
+        }
+
+        // -------------------------------------------------------------
+        // 7. Manage Notification Read / Unread Statuses for Demo User
         // -------------------------------------------------------------
         // Leave 1 notification unread and mark the others as read for realistic demo dashboard counters
         $demoNotifications = $featuredPlayerUser->notifications()->get();

@@ -53,6 +53,7 @@ class DashboardController extends Controller
             $data['totalInterestsCount'] = $user->sentScoutingInterests()->count();
             $data['pendingInterestsCount'] = $user->sentScoutingInterests()->where('status', ScoutingInterest::STATUS_PENDING)->count();
             $data['contactedInterestsCount'] = $user->sentScoutingInterests()->where('status', ScoutingInterest::STATUS_CONTACTED)->count();
+            $data['favoritesCount'] = $user->favorites()->count();
             $data['unreadNotificationsCount'] = $user->unreadNotifications()->count();
         } elseif ($user->isAdmin()) {
             $data['adminStats'] = [

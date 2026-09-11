@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="mb-6 text-center">
-        <h2 class="text-xl font-extrabold text-[#0B1F33] tracking-tight">{{ __('Create Your Account') }}</h2>
-        <p class="text-xs text-[#64748B] mt-1">{{ __('Join Morocco\'s football talent scouting platform') }}</p>
+        <h2 class="text-3xl font-display uppercase tracking-wider text-white">{{ __('Create Your Account') }}</h2>
+        <p class="text-sm text-[#8fa89c] mt-2">{{ __('Join Morocco\'s football talent scouting platform') }}</p>
     </div>
 
     <form method="POST" action="{{ route('register') }}" class="space-y-4">
@@ -9,22 +9,22 @@
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Name')" class="uppercase tracking-wider font-display" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="Full name" />
             <x-input-error :messages="$errors->get('name')" class="mt-1" />
         </div>
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label for="email" :value="__('Email')" class="uppercase tracking-wider font-display" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="name@example.com" />
             <x-input-error :messages="$errors->get('email')" class="mt-1" />
         </div>
 
         <!-- Role -->
         <div>
-            <x-input-label for="role" :value="__('Account Type')" />
-            <select id="role" name="role" class="block mt-1 w-full border-gray-300 focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] rounded-lg shadow-sm text-sm" required>
+            <x-input-label for="role" :value="__('Account Type')" class="uppercase tracking-wider font-display" />
+            <select id="role" name="role" class="block mt-1 w-full border-[#1a4030] focus:border-[#10b981] focus:ring-1 focus:ring-[#10b981] rounded shadow-sm text-sm" required>
                 <option value="player" {{ old('role', request('role', 'player')) === 'player' ? 'selected' : '' }}>{{ __('player') }} — {{ __('Football Player') }}</option>
                 <option value="scout" {{ old('role', request('role')) === 'scout' ? 'selected' : '' }}>{{ __('scout') }} — {{ __('Club Scout / Recruiter') }}</option>
             </select>
@@ -33,7 +33,7 @@
 
         <!-- Password -->
         <div>
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('Password')" class="uppercase tracking-wider font-display" />
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
@@ -43,7 +43,7 @@
 
         <!-- Confirm Password -->
         <div>
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <x-input-label for="password_confirmation" :value="__('Confirm Password')" class="uppercase tracking-wider font-display" />
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                             type="password"
                             name="password_confirmation" required autocomplete="new-password" placeholder="••••••••" />
@@ -57,7 +57,7 @@
         </div>
 
         <div class="text-center pt-2">
-            <a class="text-xs font-semibold text-[#64748B] hover:text-[#0B1F33] transition" href="{{ route('login') }}">
+            <a class="text-xs font-semibold text-[#8fa89c] hover:text-[#10b981] transition" href="{{ route('login') }}">
                 {{ __('Already registered? Log in') }}
             </a>
         </div>

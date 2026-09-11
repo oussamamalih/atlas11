@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="mb-6 text-center">
-        <h2 class="text-xl font-extrabold text-[#0B1F33] tracking-tight">{{ __('Welcome Back') }}</h2>
-        <p class="text-xs text-[#64748B] mt-1">{{ __('Sign in to your Atlas11 scouting portal') }}</p>
+        <h2 class="text-3xl font-display uppercase tracking-wider text-white">{{ __('Welcome Back') }}</h2>
+        <p class="text-sm text-[#8fa89c] mt-2">{{ __('Sign in to your Atlas11 scouting portal') }}</p>
     </div>
 
     <!-- Session Status -->
@@ -12,7 +12,7 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label for="email" :value="__('Email')" class="uppercase tracking-wider font-display" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="name@example.com" />
             <x-input-error :messages="$errors->get('email')" class="mt-1" />
         </div>
@@ -20,9 +20,9 @@
         <!-- Password -->
         <div>
             <div class="flex items-center justify-between">
-                <x-input-label for="password" :value="__('Password')" />
+                <x-input-label for="password" :value="__('Password')" class="uppercase tracking-wider font-display" />
                 @if (Route::has('password.request'))
-                    <a class="text-xs font-semibold text-[#16A34A] hover:underline" href="{{ route('password.request') }}">
+                    <a class="text-xs font-semibold text-[#10b981] hover:text-[#a3e635] transition" href="{{ route('password.request') }}">
                         {{ __('Forgot password?') }}
                     </a>
                 @endif
@@ -39,8 +39,8 @@
         <!-- Remember Me -->
         <div class="flex items-center">
             <label for="remember_me" class="inline-flex items-center cursor-pointer">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-[#16A34A] shadow-sm focus:ring-[#16A34A]" name="remember">
-                <span class="ms-2 text-xs font-medium text-[#64748B]">{{ __('Remember me on this device') }}</span>
+                <input id="remember_me" type="checkbox" class="rounded border-[#1a4030] text-[#10b981] shadow-sm focus:ring-[#10b981]" name="remember">
+                <span class="ms-2 text-xs font-medium text-[#8fa89c]">{{ __('Remember me on this device') }}</span>
             </label>
         </div>
 
@@ -52,7 +52,7 @@
 
         @if (Route::has('register'))
             <div class="text-center pt-2">
-                <a class="text-xs font-semibold text-[#64748B] hover:text-[#0B1F33] transition" href="{{ route('register') }}">
+                <a class="text-xs font-semibold text-[#8fa89c] hover:text-[#10b981] transition" href="{{ route('register') }}">
                     {{ __('Don\'t have an account yet? Register') }}
                 </a>
             </div>

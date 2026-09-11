@@ -1,15 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center justify-between">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h2 class="font-extrabold text-2xl text-[#0B1F33] tracking-tight">
+                <h2 class="font-display text-3xl text-white uppercase tracking-wide">
                     {{ __('Edit User:') }} {{ $user->name }}
                 </h2>
-                <p class="text-xs text-[#64748B] mt-0.5">
+                <p class="text-xs text-[#8fa89c] mt-0.5">
                     {{ __('Modify account credentials and system role assignment') }}
                 </p>
             </div>
-            <a href="{{ route('admin.users.show', $user) }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-xs font-semibold text-[#0B1F33] uppercase tracking-wider rounded-lg shadow-sm hover:bg-gray-50 transition">
+            <a href="{{ route('admin.users.show', $user) }}" class="inline-flex items-center px-4 py-2 bg-[#133323] border border-[#1a4030] text-xs font-display text-white uppercase tracking-wider rounded hover:bg-[#1a4030] transition">
                 &larr; {{ __('Cancel & Return') }}
             </a>
         </div>
@@ -18,12 +18,12 @@
     <div class="py-8">
         <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             @if (session('error'))
-                <div class="mb-6 font-medium text-sm text-red-700 bg-red-50 p-4 rounded-xl border border-red-200">
+                <div class="mb-6 font-medium text-sm text-red-400 bg-[#1a1f14] p-4 rounded border border-red-500/40">
                     {{ session('error') }}
                 </div>
             @endif
 
-            <div class="bg-white rounded-xl border border-gray-200/80 shadow-sm p-6 sm:p-8">
+            <div class="bg-[#0d2919] rounded border border-[#1a4030] p-6 sm:p-8">
                 <form method="POST" action="{{ route('admin.users.update', $user) }}" class="space-y-6">
                     @csrf
                     @method('PUT')
@@ -45,7 +45,7 @@
                     <!-- Role -->
                     <div>
                         <x-input-label for="role" :value="__('User Role')" />
-                        <select id="role" name="role" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] text-sm">
+                        <select id="role" name="role" class="mt-1 block w-full rounded border-[#1a4030] bg-[#0a1f14] text-white shadow-sm focus:border-[#10b981] focus:ring-1 focus:ring-[#10b981] text-sm">
                             @foreach ($roles as $roleKey => $roleLabel)
                                 <option value="{{ $roleKey }}" @selected(old('role', $user->role) === $roleKey)>
                                     {{ $roleLabel }}
@@ -53,13 +53,13 @@
                             @endforeach
                         </select>
                         <x-input-error class="mt-2" :messages="$errors->get('role')" />
-                        <p class="text-xs text-[#64748B] mt-1.5">
+                        <p class="text-xs text-[#8fa89c] mt-1.5">
                             {{ __('Changing a user role alters their permissions and accessible interfaces across Atlas11.') }}
                         </p>
                     </div>
 
-                    <div class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-100">
-                        <a href="{{ route('admin.users.index') }}" class="text-xs font-semibold text-gray-500 hover:text-gray-800">
+                    <div class="flex items-center justify-end space-x-3 pt-4 border-t border-[#1a4030]">
+                        <a href="{{ route('admin.users.index') }}" class="text-xs font-semibold text-[#8fa89c] hover:text-white">
                             {{ __('Cancel') }}
                         </a>
                         <x-primary-button>

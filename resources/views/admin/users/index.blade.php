@@ -1,15 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center justify-between">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h2 class="font-extrabold text-2xl text-[#0B1F33] tracking-tight">
+                <h2 class="font-display text-3xl text-white uppercase tracking-wide">
                     {{ __('User Management') }}
                 </h2>
-                <p class="text-xs text-[#64748B] mt-0.5">
+                <p class="text-xs text-[#8fa89c] mt-0.5">
                     {{ __('Platform user directory, authorization roles, and account controls') }}
                 </p>
             </div>
-            <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-xs font-semibold text-[#0B1F33] uppercase tracking-wider rounded-lg shadow-sm hover:bg-gray-50 transition">
+            <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-4 py-2 bg-[#133323] border border-[#1a4030] text-xs font-display text-white uppercase tracking-wider rounded hover:bg-[#1a4030] transition">
                 &larr; {{ __('Back to Dashboard') }}
             </a>
         </div>
@@ -18,8 +18,8 @@
     <div class="py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             @if (session('status'))
-                <div class="font-medium text-sm text-[#15803D] bg-emerald-50 p-4 rounded-xl border border-emerald-200 flex items-center">
-                    <svg class="w-5 h-5 me-2 text-[#16A34A] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="font-medium text-sm text-emerald-300 bg-[#0d2919] p-4 rounded border border-emerald-500/40 flex items-center">
+                    <svg class="w-5 h-5 me-2 text-[#10b981] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     {{ session('status') }}
@@ -27,22 +27,22 @@
             @endif
 
             @if (session('error'))
-                <div class="font-medium text-sm text-red-700 bg-red-50 p-4 rounded-xl border border-red-200">
+                <div class="font-medium text-sm text-red-400 bg-[#1a1f14] p-4 rounded border border-red-500/40">
                     {{ session('error') }}
                 </div>
             @endif
 
             <!-- Search & Filters -->
-            <div class="bg-white rounded-xl border border-gray-200/80 shadow-sm p-6">
+            <div class="bg-[#0d2919] rounded border border-[#1a4030] p-6">
                 <form method="GET" action="{{ route('admin.users.index') }}" class="grid grid-cols-1 sm:grid-cols-12 gap-4">
                     <div class="sm:col-span-6">
-                        <label for="search" class="block text-xs font-bold text-[#0B1F33] uppercase tracking-wider mb-1.5">{{ __('Search User') }}</label>
-                        <input type="text" name="search" id="search" value="{{ $filters['search'] }}" placeholder="Search by name or email..." class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] text-sm placeholder:text-gray-400">
+                        <label for="search" class="block text-xs font-bold text-white uppercase tracking-wider mb-1.5">{{ __('Search User') }}</label>
+                        <input type="text" name="search" id="search" value="{{ $filters['search'] }}" placeholder="Search by name or email..." class="w-full rounded border-[#1a4030] bg-[#0a1f14] text-white placeholder:text-[#8fa89c] shadow-sm focus:border-[#10b981] focus:ring-1 focus:ring-[#10b981] text-sm">
                     </div>
 
                     <div class="sm:col-span-4">
-                        <label for="role" class="block text-xs font-bold text-[#0B1F33] uppercase tracking-wider mb-1.5">{{ __('Filter by Role') }}</label>
-                        <select name="role" id="role" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#16A34A] focus:ring-1 focus:ring-[#16A34A] text-sm">
+                        <label for="role" class="block text-xs font-bold text-white uppercase tracking-wider mb-1.5">{{ __('Filter by Role') }}</label>
+                        <select name="role" id="role" class="w-full rounded border-[#1a4030] bg-[#0a1f14] text-white shadow-sm focus:border-[#10b981] focus:ring-1 focus:ring-[#10b981] text-sm">
                             <option value="">{{ __('All Roles') }}</option>
                             @foreach ($roles as $roleKey => $roleLabel)
                                 <option value="{{ $roleKey }}" @selected($filters['role'] === $roleKey)>{{ $roleLabel }}</option>
@@ -51,11 +51,11 @@
                     </div>
 
                     <div class="sm:col-span-2 flex items-end space-x-2">
-                        <button type="submit" class="w-full inline-flex justify-center items-center px-4 py-2.5 bg-[#16A34A] hover:bg-[#15803D] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-sm transition">
+                        <button type="submit" class="w-full inline-flex justify-center items-center px-4 py-2.5 bg-[#10b981] hover:bg-[#0d9488] text-white text-xs font-display uppercase tracking-wider rounded transition">
                             {{ __('Filter') }}
                         </button>
                         @if ($filters['search'] || $filters['role'])
-                            <a href="{{ route('admin.users.index') }}" class="inline-flex justify-center items-center px-3 py-2.5 bg-white border border-gray-300 hover:bg-gray-50 text-[#0B1F33] rounded-lg text-xs font-semibold uppercase tracking-wider transition">
+                            <a href="{{ route('admin.users.index') }}" class="inline-flex justify-center items-center px-3 py-2.5 bg-[#133323] border border-[#1a4030] hover:bg-[#1a4030] text-white rounded text-xs font-display uppercase tracking-wider transition">
                                 {{ __('Reset') }}
                             </a>
                         @endif
@@ -64,27 +64,27 @@
             </div>
 
             <!-- Users Table -->
-            <div class="bg-white rounded-xl border border-gray-200/80 shadow-sm overflow-hidden">
-                <div class="p-6 border-b border-gray-100 flex items-center justify-between">
-                    <h3 class="text-base font-bold text-[#0B1F33]">
-                        {{ __('Registered Users') }} <span class="text-xs font-normal text-[#64748B] ms-1">({{ $users->total() }})</span>
+            <div class="bg-[#0d2919] rounded border border-[#1a4030] overflow-hidden">
+                <div class="p-6 border-b border-[#1a4030] flex items-center justify-between">
+                    <h3 class="font-display text-xl text-white uppercase tracking-wide">
+                        {{ __('Registered Users') }} <span class="text-xs font-normal text-[#8fa89c] ms-1">({{ $users->total() }})</span>
                     </h3>
                 </div>
 
                 @if ($users->isEmpty())
                     <div class="p-12 text-center">
-                        <div class="mx-auto w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 mb-3 border border-gray-200">
+                        <div class="mx-auto w-12 h-12 bg-[#133323] rounded-full flex items-center justify-center text-[#a3e635] mb-3 border border-[#1a4030]">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
                         </div>
-                        <h4 class="text-base font-bold text-[#0B1F33]">{{ __('No users found') }}</h4>
-                        <p class="text-xs text-[#64748B] mt-1">{{ __('Try adjusting your search criteria or role filters.') }}</p>
+                        <h4 class="font-display text-xl text-white uppercase tracking-wide">{{ __('No users found') }}</h4>
+                        <p class="text-xs text-[#8fa89c] mt-1">{{ __('Try adjusting your search criteria or role filters.') }}</p>
                     </div>
                 @else
                     <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200 text-left text-sm">
-                            <thead class="bg-[#F8FAFC] text-[11px] uppercase font-bold text-[#64748B] tracking-wider">
+                        <table class="min-w-full divide-y divide-[#1a4030] text-left text-sm">
+                            <thead class="bg-[#133323] text-[11px] uppercase font-bold text-[#8fa89c] tracking-wider">
                                 <tr>
                                     <th class="px-6 py-3.5">{{ __('User') }}</th>
                                     <th class="px-6 py-3.5">{{ __('Role') }}</th>
@@ -93,24 +93,24 @@
                                     <th class="px-6 py-3.5 text-right">{{ __('Actions') }}</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-100 bg-white">
+                            <tbody class="divide-y divide-[#1a4030] bg-[#0d2919]">
                                 @foreach ($users as $user)
-                                    <tr class="hover:bg-gray-50/70 transition">
+                                    <tr class="hover:bg-[#133323]/70 transition">
                                         <td class="px-6 py-4">
-                                            <div class="font-bold text-[#0B1F33]">{{ $user->name }}</div>
-                                            <div class="text-xs text-[#64748B]">{{ $user->email }}</div>
+                                            <div class="font-bold text-white">{{ $user->name }}</div>
+                                            <div class="text-xs text-[#8fa89c]">{{ $user->email }}</div>
                                         </td>
                                         <td class="px-6 py-4">
                                             @if ($user->isAdmin())
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#0B1F33] text-white">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-950 text-purple-400">
                                                     {{ __('Admin') }}
                                                 </span>
                                             @elseif ($user->isScout())
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#0B1F33] text-[#A3E635]">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#133323] text-[#a3e635]">
                                                     {{ __('Scout') }}
                                                 </span>
                                             @else
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-[#16A34A] border border-emerald-200">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#133323] text-[#10b981] border border-[#10b981]/40">
                                                     {{ __('Player') }}
                                                 </span>
                                             @endif
@@ -118,39 +118,39 @@
                                         <td class="px-6 py-4">
                                             @if ($user->isPlayer())
                                                 @if ($user->playerProfile)
-                                                    <span class="text-xs font-bold text-[#16A34A] bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                                                    <span class="text-xs font-bold text-[#10b981] bg-[#133323] px-2 py-0.5 rounded border border-[#10b981]/40">
                                                         {{ $user->playerProfile->position }} &bull; {{ $user->playerProfile->location }}
                                                     </span>
                                                 @else
-                                                    <span class="text-xs text-gray-400 italic">{{ __('Profile not created') }}</span>
+                                                    <span class="text-xs text-[#8fa89c] italic">{{ __('Profile not created') }}</span>
                                                 @endif
                                             @elseif ($user->isScout())
                                                 @if ($user->scoutProfile)
-                                                    <span class="text-xs font-bold text-[#0B1F33] bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
+                                                    <span class="text-xs font-bold text-[#a3e635] bg-[#133323] px-2 py-0.5 rounded border border-[#1a4030]">
                                                         {{ $user->scoutProfile->organization }}
                                                     </span>
                                                 @else
-                                                    <span class="text-xs text-gray-400 italic">{{ __('Profile not created') }}</span>
+                                                    <span class="text-xs text-[#8fa89c] italic">{{ __('Profile not created') }}</span>
                                                 @endif
                                             @else
-                                                <span class="text-xs text-purple-700 font-semibold">{{ __('System Administrator') }}</span>
+                                                <span class="text-xs text-purple-400 font-semibold">{{ __('System Administrator') }}</span>
                                             @endif
                                         </td>
-                                        <td class="px-6 py-4 text-xs text-[#64748B]">
+                                        <td class="px-6 py-4 text-xs text-[#8fa89c]">
                                             {{ $user->created_at->format('M d, Y') }}
                                         </td>
                                         <td class="px-6 py-4 text-right space-x-2 whitespace-nowrap">
-                                            <a href="{{ route('admin.users.show', $user) }}" class="inline-flex items-center px-2.5 py-1 text-xs font-bold text-[#0B1F33] bg-[#F8FAFC] hover:bg-gray-100 rounded-lg border border-gray-200 transition">
+                                            <a href="{{ route('admin.users.show', $user) }}" class="inline-flex items-center px-2.5 py-1 text-xs font-bold text-white bg-[#133323] hover:bg-[#1a4030] rounded border border-[#1a4030] transition">
                                                 {{ __('View') }}
                                             </a>
-                                            <a href="{{ route('admin.users.edit', $user) }}" class="inline-flex items-center px-2.5 py-1 text-xs font-bold text-white bg-[#0B1F33] hover:bg-[#102A43] rounded-lg transition">
+                                            <a href="{{ route('admin.users.edit', $user) }}" class="inline-flex items-center px-2.5 py-1 text-xs font-bold text-white bg-[#10b981] hover:bg-[#0d9488] rounded transition">
                                                 {{ __('Edit') }}
                                             </a>
                                             @if (Auth::id() !== $user->id)
                                                 <form method="POST" action="{{ route('admin.users.destroy', $user) }}" class="inline" onsubmit="return confirm('Are you sure you want to delete this user? This action cannot be undone.');">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="inline-flex items-center px-2.5 py-1 text-xs font-bold text-[#DC2626] bg-red-50 hover:bg-red-100 rounded-lg border border-red-200 transition">
+                                                    <button type="submit" class="inline-flex items-center px-2.5 py-1 text-xs font-bold text-red-400 bg-red-950 hover:bg-red-900 rounded border border-red-500/40 transition">
                                                         {{ __('Delete') }}
                                                     </button>
                                                 </form>
@@ -162,7 +162,7 @@
                         </table>
                     </div>
 
-                    <div class="p-6 border-t border-gray-100">
+                    <div class="p-6 border-t border-[#1a4030]">
                         {{ $users->links() }}
                     </div>
                 @endif
