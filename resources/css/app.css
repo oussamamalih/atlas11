@@ -253,6 +253,72 @@ a.bg-\[\#0B1F33\]:hover, button.bg-\[\#0B1F33\]:hover {
 }
 
 /* ================================================================
+   NAVBAR AUTH CTA BUTTONS — Strong football/sports presence
+   ================================================================ */
+.atlas-nav-auth-login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 1.5rem;
+    background-color: transparent;
+    color: var(--atlas-text);
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 2px solid var(--atlas-border-light);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    text-decoration: none;
+}
+.atlas-nav-auth-login:hover {
+    border-color: var(--atlas-green);
+    color: var(--atlas-green);
+    background-color: rgba(16, 185, 129, 0.06);
+}
+
+.atlas-nav-auth-signup {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 1.75rem;
+    background-color: var(--atlas-green);
+    color: #0a1f14;
+    font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 2px solid var(--atlas-green);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    text-decoration: none;
+}
+.atlas-nav-auth-signup:hover {
+    background-color: #34d399;
+    border-color: #34d399;
+    color: #0a1f14;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+}
+
+@media (max-width: 640px) {
+    .atlas-nav-auth-login,
+    .atlas-nav-auth-signup {
+        height: 40px;
+        padding: 0 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* ================================================================
    FORMS
    ================================================================ */
 input, select, textarea {
