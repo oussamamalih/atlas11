@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/players/{playerProfile}/express-interest', [ScoutingInterestController::class, 'store'])->name('scouting.interests.store');
     Route::get('/scouting/interests/{scoutingInterest}', [ScoutingInterestController::class, 'show'])->name('scouting.interests.show');
     Route::patch('/scouting/interests/{scoutingInterest}', [ScoutingInterestController::class, 'update'])->name('scouting.interests.update');
+    Route::post('/scouting/interests/{scoutingInterest}/cancel', [ScoutingInterestController::class, 'cancel'])->name('scouting.interests.cancel');
 
     // Notifications
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');

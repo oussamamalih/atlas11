@@ -5,6 +5,17 @@
                 {{ $role === 'scout' ? 'My Sent Scouting Interests' : 'Scouting Interests Received' }}
             </h1>
 
+            <div class="mb-6 flex flex-wrap items-center gap-2">
+                <a href="{{ route('scouting.interests.index') }}" class="px-3 py-1.5 rounded-full text-xs font-display uppercase tracking-wider border transition-colors {{ is_null($selectedStatus) ? 'bg-[#10b981] text-[#0a1f14] border-[#10b981]' : 'bg-[#0d2919] text-[#8fa89c] border-[#1a4030] hover:text-white hover:border-[#10b981]' }}">
+                    All
+                </a>
+                @foreach (\App\Models\ScoutingInterest::statuses() as $status)
+                    <a href="{{ route('scouting.interests.index', ['status' => $status]) }}" class="px-3 py-1.5 rounded-full text-xs font-display uppercase tracking-wider border transition-colors {{ $selectedStatus === $status ? 'bg-[#10b981] text-[#0a1f14] border-[#10b981]' : 'bg-[#0d2919] text-[#8fa89c] border-[#1a4030] hover:text-white hover:border-[#10b981]' }}">
+                        {{ $status }}
+                    </a>
+                @endforeach
+            </div>
+
             @if($interests->count())
                 <div class="bg-[#0d2919] border border-[#1a4030] rounded overflow-hidden mb-8">
                     <table class="w-full">
@@ -26,7 +37,15 @@
                                 <tr class="hover:bg-[#133323]/50 transition-colors">
                                     <td class="px-6 py-4 text-white">
                                         @if($role === 'scout')
-                                            <div>{{ $interest->playerProfile?->user?->name ?? 'N/A' }}</div>
+                                            <div>
+                                                @if($interest->playerProfile)
+                                                    <a href="{{ route('player.profile.show', $interest->playerProfile) }}" class="text-white hover:text-[#10b981] transition-colors">
+                                                        {{ $interest->playerProfile->user->name ?? 'N/A' }}
+                                                    </a>
+                                                @else
+                                                    {{ $interest->playerProfile?->user?->name ?? 'N/A' }}
+                                                @endif
+                                            </div>
                                         @else
                                             <div>{{ $interest->scout?->name ?? 'N/A' }}</div>
                                             @if($interest->scout?->scoutProfile?->organization)
@@ -43,6 +62,8 @@
                                     <td class="px-6 py-4">
                                         @if($interest->status === 'pending')
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-amber-500/20 text-amber-400 border border-amber-500/30 font-display uppercase">Pending</span>
+                                        @elseif($interest->status === 'viewed')
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-sky-500/20 text-sky-400 border border-sky-500/30 font-display uppercase">Viewed</span>
                                         @elseif($interest->status === 'contacted')
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-[#10b981]/20 text-[#10b981] border border-[#10b981]/30 font-display uppercase">Contacted</span>
                                         @else
@@ -53,6 +74,14 @@
                                         <a href="{{ route('scouting.interests.show', $interest) }}" class="font-display uppercase tracking-wider text-sm text-[#10b981] hover:text-white transition-colors">
                                             View
                                         </a>
+                                        @if($role === 'scout' && $interest->isCancellable())
+                                            <form method="POST" action="{{ route('scouting.interests.cancel', $interest) }}" class="inline-block" onsubmit="return confirm('Cancel this scouting interest?');">
+                                                @csrf
+                                                <button type="submit" class="font-display uppercase tracking-wider text-sm text-[#8fa89c] hover:text-red-400 transition-colors ml-4">
+                                                    Cancel
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -65,7 +94,7 @@
                 </div>
             @else
                 <div class="bg-[#0d2919] border border-[#1a4030] rounded p-12 text-center">
-                    <p class="text-[#8fa89c] text-lg mb-4">No scouting interests found.</p>
+                    <p class="text-[#8fa89c] text-lg mb-4">{{ $selectedStatus ? 'No '.$selectedStatus.' scouting interests found.' : 'No scouting interests found.' }}</p>
                     <a href="{{ route('scout.search') }}" class="font-display uppercase tracking-wider px-6 py-2.5 rounded bg-[#10b981] text-[#0a1f14] hover:bg-[#059669] transition-colors inline-block">
                         Search Players
                     </a>

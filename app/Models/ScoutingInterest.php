@@ -18,6 +18,32 @@ class ScoutingInterest extends Model
     public const STATUS_CLOSED = 'closed';
 
     /**
+     * Get all valid scouting interest statuses.
+     *
+     * @return list<string>
+     */
+    public static function statuses(): array
+    {
+        return [
+            self::STATUS_PENDING,
+            self::STATUS_VIEWED,
+            self::STATUS_CONTACTED,
+            self::STATUS_CLOSED,
+        ];
+    }
+
+    /**
+     * Determine whether the interest can still be cancelled by its scout.
+     */
+    public function isCancellable(): bool
+    {
+        return in_array($this->status, [
+            self::STATUS_PENDING,
+            self::STATUS_VIEWED,
+        ], true);
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>

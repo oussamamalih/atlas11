@@ -302,4 +302,224 @@ class ScoutingInterestTest extends TestCase
         $responseUpdate->assertSessionHas('status');
         $this->assertEquals(ScoutingInterest::STATUS_CLOSED, $interest->fresh()->status);
     }
+
+    public function test_scout_can_filter_sent_interests_by_status(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $pendingPlayer = User::factory()->player()->create(['name' => 'Pending Player']);
+        $pendingProfile = PlayerProfile::factory()->create(['user_id' => $pendingPlayer->id]);
+        $contactedPlayer = User::factory()->player()->create(['name' => 'Contacted Player']);
+        $contactedProfile = PlayerProfile::factory()->create(['user_id' => $contactedPlayer->id]);
+
+        ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $pendingProfile->id,
+        ]);
+        ScoutingInterest::factory()->contacted()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $contactedProfile->id,
+        ]);
+
+        $response = $this->actingAs($scout)->get(route('scouting.interests.index', [
+            'status' => ScoutingInterest::STATUS_CONTACTED,
+        ]));
+
+        $response->assertStatus(200);
+        $response->assertSee('Contacted Player');
+        $response->assertDontSee('Pending Player');
+    }
+
+    public function test_player_can_filter_received_interests_by_status(): void
+    {
+        $scoutPending = User::factory()->scout()->create(['name' => 'Pending Scout']);
+        $scoutContacted = User::factory()->scout()->create(['name' => 'Contacted Scout']);
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+
+        ScoutingInterest::factory()->create([
+            'scout_id' => $scoutPending->id,
+            'player_profile_id' => $playerProfile->id,
+        ]);
+        ScoutingInterest::factory()->contacted()->create([
+            'scout_id' => $scoutContacted->id,
+            'player_profile_id' => $playerProfile->id,
+        ]);
+
+        $response = $this->actingAs($player)->get(route('scouting.interests.index', [
+            'status' => ScoutingInterest::STATUS_PENDING,
+        ]));
+
+        $response->assertStatus(200);
+        $response->assertSee('Pending Scout');
+        $response->assertDontSee('Contacted Scout');
+    }
+
+    public function test_invalid_status_filter_is_ignored(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create(['name' => 'Any Player']);
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+
+        ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+        ]);
+
+        $response = $this->actingAs($scout)->get(route('scouting.interests.index', [
+            'status' => 'nonsense',
+        ]));
+
+        $response->assertStatus(200);
+        $response->assertSee('Any Player');
+    }
+
+    public function test_scout_can_cancel_own_pending_interest(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+        $interest = ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+            'status' => ScoutingInterest::STATUS_PENDING,
+        ]);
+
+        $response = $this->actingAs($scout)->post(route('scouting.interests.cancel', $interest));
+
+        $response->assertSessionHas('status');
+        $this->assertDatabaseHas('scouting_interests', [
+            'id' => $interest->id,
+            'status' => ScoutingInterest::STATUS_CLOSED,
+        ]);
+    }
+
+    public function test_scout_can_cancel_own_viewed_interest(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+        $interest = ScoutingInterest::factory()->viewed()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+        ]);
+
+        $response = $this->actingAs($scout)->post(route('scouting.interests.cancel', $interest));
+
+        $response->assertSessionHas('status');
+        $this->assertDatabaseHas('scouting_interests', [
+            'id' => $interest->id,
+            'status' => ScoutingInterest::STATUS_CLOSED,
+        ]);
+    }
+
+    public function test_scout_cannot_cancel_contacted_or_closed_interest(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+        $otherPlayer = User::factory()->player()->create();
+        $otherPlayerProfile = PlayerProfile::factory()->create(['user_id' => $otherPlayer->id]);
+        $contacted = ScoutingInterest::factory()->contacted()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+        ]);
+        $closed = ScoutingInterest::factory()->closed()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $otherPlayerProfile->id,
+        ]);
+
+        $responseContacted = $this->actingAs($scout)->post(route('scouting.interests.cancel', $contacted));
+        $responseContacted->assertSessionHas('error');
+        $this->assertEquals(ScoutingInterest::STATUS_CONTACTED, $contacted->fresh()->status);
+
+        $responseClosed = $this->actingAs($scout)->post(route('scouting.interests.cancel', $closed));
+        $responseClosed->assertSessionHas('error');
+        $this->assertEquals(ScoutingInterest::STATUS_CLOSED, $closed->fresh()->status);
+    }
+
+    public function test_player_cannot_cancel_scouting_interest(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+        $interest = ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+        ]);
+
+        $response = $this->actingAs($player)->post(route('scouting.interests.cancel', $interest));
+
+        $response->assertStatus(403);
+        $this->assertEquals(ScoutingInterest::STATUS_PENDING, $interest->fresh()->status);
+    }
+
+    public function test_unrelated_scout_cannot_cancel_scouting_interest(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $otherScout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+        $interest = ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+        ]);
+
+        $response = $this->actingAs($otherScout)->post(route('scouting.interests.cancel', $interest));
+
+        $response->assertStatus(403);
+        $this->assertEquals(ScoutingInterest::STATUS_PENDING, $interest->fresh()->status);
+    }
+
+    public function test_guest_cannot_cancel_scouting_interest(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+        $interest = ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+        ]);
+
+        $this->post(route('scouting.interests.cancel', $interest))->assertRedirect('/login');
+    }
+
+    public function test_scout_index_shows_cancel_and_profile_links_for_cancellable_interests(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create(['name' => 'Yassine Bounou']);
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+        $interest = ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+        ]);
+
+        $response = $this->actingAs($scout)->get(route('scouting.interests.index'));
+
+        $response->assertStatus(200);
+        $response->assertSee(route('scouting.interests.cancel', $interest));
+        $response->assertSee(route('player.profile.show', $playerProfile));
+    }
+
+    public function test_scout_index_hides_cancel_for_terminal_statuses(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+        $otherPlayer = User::factory()->player()->create();
+        $otherPlayerProfile = PlayerProfile::factory()->create(['user_id' => $otherPlayer->id]);
+        $contacted = ScoutingInterest::factory()->contacted()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+        ]);
+        $closed = ScoutingInterest::factory()->closed()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $otherPlayerProfile->id,
+        ]);
+
+        $response = $this->actingAs($scout)->get(route('scouting.interests.index'));
+
+        $response->assertStatus(200);
+        $response->assertDontSee(route('scouting.interests.cancel', $contacted));
+        $response->assertDontSee(route('scouting.interests.cancel', $closed));
+    }
 }

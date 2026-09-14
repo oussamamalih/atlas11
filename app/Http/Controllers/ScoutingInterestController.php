@@ -19,15 +19,20 @@ class ScoutingInterestController extends Controller
     {
         $user = $request->user();
 
+        $statusFilter = $request->query('status');
+        $selectedStatus = in_array($statusFilter, ScoutingInterest::statuses(), true) ? $statusFilter : null;
+
         if ($user->isScout()) {
             $interests = $user->sentScoutingInterests()
                 ->with(['playerProfile.user'])
+                ->when($selectedStatus, fn ($query) => $query->where('status', $selectedStatus))
                 ->latest()
                 ->paginate(10);
 
             return view('scouting.index', [
                 'interests' => $interests,
                 'role' => 'scout',
+                'selectedStatus' => $selectedStatus,
             ]);
         }
 
@@ -41,12 +46,14 @@ class ScoutingInterestController extends Controller
 
             $interests = $playerProfile->scoutingInterests()
                 ->with(['scout.scoutProfile'])
+                ->when($selectedStatus, fn ($query) => $query->where('status', $selectedStatus))
                 ->latest()
                 ->paginate(10);
 
             return view('scouting.index', [
                 'interests' => $interests,
                 'role' => 'player',
+                'selectedStatus' => $selectedStatus,
             ]);
         }
 
@@ -134,17 +141,32 @@ class ScoutingInterestController extends Controller
             'status' => [
                 'required',
                 'string',
-                Rule::in([
-                    ScoutingInterest::STATUS_PENDING,
-                    ScoutingInterest::STATUS_VIEWED,
-                    ScoutingInterest::STATUS_CONTACTED,
-                    ScoutingInterest::STATUS_CLOSED,
-                ]),
+                Rule::in(ScoutingInterest::statuses()),
             ],
         ]);
 
         $scoutingInterest->update(['status' => $validated['status']]);
 
         return redirect()->back()->with('status', 'Scouting interest status updated successfully.');
+    }
+
+    /**
+     * Cancel a scouting interest sent by the scout.
+     */
+    public function cancel(Request $request, ScoutingInterest $scoutingInterest): RedirectResponse
+    {
+        $user = $request->user();
+
+        if (! $user->isScout() || $user->id !== $scoutingInterest->scout_id) {
+            abort(403, 'You are not authorized to cancel this scouting interest.');
+        }
+
+        if (! $scoutingInterest->isCancellable()) {
+            return redirect()->back()->with('error', 'This scouting interest can no longer be cancelled.');
+        }
+
+        $scoutingInterest->update(['status' => ScoutingInterest::STATUS_CLOSED]);
+
+        return redirect()->back()->with('status', 'Scouting interest cancelled successfully.');
     }
 }
