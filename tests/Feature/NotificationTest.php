@@ -117,6 +117,34 @@ class NotificationTest extends TestCase
         $response->assertSee('New');
     }
 
+    public function test_player_sees_view_link_pointing_to_interest_from_notification(): void
+    {
+        $scout = User::factory()->scout()->create(['name' => 'Houcine Ammouta']);
+        ScoutProfile::factory()->create(['user_id' => $scout->id, 'organization' => 'Wydad AC']);
+
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+
+        $interest = ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+            'message' => 'Calling you for a trial.',
+        ]);
+
+        $player->notify(new ScoutingInterestReceived($interest));
+
+        $response = $this->actingAs($player)->get(route('notifications.index'));
+
+        $response->assertStatus(200);
+        $response->assertSee('View');
+        $response->assertSee(route('scouting.interests.show', $interest));
+
+        $destination = $this->actingAs($player)->get(route('scouting.interests.show', $interest));
+
+        $destination->assertStatus(200);
+        $this->assertEquals(ScoutingInterest::STATUS_VIEWED, $interest->fresh()->status);
+    }
+
     public function test_user_can_mark_single_notification_as_read(): void
     {
         $scout = User::factory()->scout()->create();

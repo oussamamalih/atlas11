@@ -70,8 +70,8 @@
                                 </div>
 
                                 <div class="flex-shrink-0 flex items-center gap-2">
-                                    @if($notification->route ?? $notification->data['route'] ?? null)
-                                        <a href="{{ $notification->route ?? $notification->data['route'] }}" class="inline-flex items-center px-3 py-1.5 rounded text-xs font-semibold bg-[#10b981] text-[#0a1f14] font-display uppercase hover:bg-[#10b981]/90 transition-colors duration-200">
+                                    @if($notification->url ?? $notification->data['url'] ?? null)
+                                        <a href="{{ $notification->url ?? $notification->data['url'] }}" class="inline-flex items-center px-3 py-1.5 rounded text-xs font-semibold bg-[#10b981] text-[#0a1f14] font-display uppercase hover:bg-[#10b981]/90 transition-colors duration-200">
                                             View
                                         </a>
                                     @endif
