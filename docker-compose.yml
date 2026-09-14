@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: atlas11-app
+    container_name: talentx11-app
     restart: unless-stopped
     working_dir: /var/www
     ports:
@@ -19,7 +19,7 @@ services:
     # To change credentials: docker compose down -v, update MYSQL_* vars below, then
     # docker compose up -d  (WARNING: destroys all data in the volume).
     environment:
-      APP_NAME: Atlas11
+      APP_NAME: TalentX11
       APP_ENV: local
       APP_DEBUG: "true"
       APP_URL: http://localhost:8000
@@ -36,7 +36,7 @@ services:
 
   mysql:
     image: mysql:8.4
-    container_name: atlas11-mysql
+    container_name: talentx11-mysql
     restart: unless-stopped
     # NOTE: MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE are only applied on FIRST
     # volume initialisation. If the mysql_data volume already exists, these are

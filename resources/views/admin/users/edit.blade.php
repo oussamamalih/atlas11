@@ -54,7 +54,7 @@
                         </select>
                         <x-input-error class="mt-2" :messages="$errors->get('role')" />
                         <p class="text-xs text-[#8fa89c] mt-1.5">
-                            {{ __('Changing a user role alters their permissions and accessible interfaces across Atlas11.') }}
+                            {{ __('Changing a user role alters their permissions and accessible interfaces across TalentX11.') }}
                         </p>
                     </div>
 

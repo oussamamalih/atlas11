@@ -12,7 +12,7 @@
                     @endif
                 </h2>
                 <p class="text-xs text-[#8fa89c] mt-1 tracking-wide">
-                    {{ __('Atlas11 Football Scouting Management Portal') }}
+                    {{ __('TalentX11 Football Scouting Management Portal') }}
                 </p>
             </div>
 
@@ -80,7 +80,7 @@
                             @elseif ($user->isScout())
                                 {{ __('Discover Moroccan football talent, connect with promising players, and manage your scouting shortlist.') }}
                             @else
-                                {{ __('Atlas11 Administrator Portal: Overview of users, scouting activity, and platform metrics.') }}
+                                {{ __('TalentX11 Administrator Portal: Overview of users, scouting activity, and platform metrics.') }}
                             @endif
                         </p>
                     </div>

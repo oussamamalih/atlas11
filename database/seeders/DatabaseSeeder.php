@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         // 1.1 System Administrator
         $admin = User::create([
             'name' => 'Atlas Administrator',
-            'email' => 'admin@atlas11.com',
+            'email' => 'admin@talentx11.com',
             'password' => 'password',
             'role' => User::ROLE_ADMIN,
             'email_verified_at' => now(),
@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         // 1.2 Lead Scout Account
         $leadScoutUser = User::create([
             'name' => 'Karim Benjelloun',
-            'email' => 'scout@atlas11.com',
+            'email' => 'scout@talentx11.com',
             'password' => 'password',
             'role' => User::ROLE_SCOUT,
             'email_verified_at' => now(),
@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
         // 1.3 Featured Player Account (Matches hero/brand persona)
         $featuredPlayerUser = User::create([
             'name' => 'Yassine El Idrissi',
-            'email' => 'player@atlas11.com',
+            'email' => 'player@talentx11.com',
             'password' => 'password',
             'role' => User::ROLE_PLAYER,
             'email_verified_at' => now(),
@@ -90,7 +90,7 @@ class DatabaseSeeder extends Seeder
         $showcasePlayersData = [
             [
                 'name' => 'Omar Hamdaoui',
-                'email' => 'omar.hamdaoui@atlas11.com',
+                'email' => 'omar.hamdaoui@talentx11.com',
                 'position' => 'Forward',
                 'dob' => '2007-06-12',
                 'location' => 'Rabat',
@@ -104,7 +104,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Soufiane Zekri',
-                'email' => 'soufiane.zekri@atlas11.com',
+                'email' => 'soufiane.zekri@talentx11.com',
                 'position' => 'Defender',
                 'dob' => '2005-09-24',
                 'location' => 'Tangier',
@@ -118,7 +118,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Karim Benchekroun',
-                'email' => 'karim.benchekroun@atlas11.com',
+                'email' => 'karim.benchekroun@talentx11.com',
                 'position' => 'Midfielder',
                 'dob' => '2006-11-05',
                 'location' => 'Marrakech',
@@ -166,7 +166,7 @@ class DatabaseSeeder extends Seeder
         $scoutsData = [
             [
                 'name' => 'Tariq Sektioui',
-                'email' => 'tariq.fus@atlas11.com',
+                'email' => 'tariq.fus@talentx11.com',
                 'organization' => 'FUS Rabat Academy',
                 'role_title' => 'Academy Technical Director',
                 'location' => 'Rabat',
@@ -177,7 +177,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Mehdi Lahlou',
-                'email' => 'mehdi.wydad@atlas11.com',
+                'email' => 'mehdi.wydad@talentx11.com',
                 'organization' => 'Wydad Athletic Club',
                 'role_title' => 'Chief Scout (First Team & Reserves)',
                 'location' => 'Casablanca',
@@ -188,7 +188,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Hicham Dmiai',
-                'email' => 'hicham.asfar@atlas11.com',
+                'email' => 'hicham.asfar@talentx11.com',
                 'organization' => 'AS FAR Football Club',
                 'role_title' => 'Senior Recruitment Coordinator',
                 'location' => 'Rabat',
@@ -199,7 +199,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Mourad Batna',
-                'email' => 'mourad.berkane@atlas11.com',
+                'email' => 'mourad.berkane@talentx11.com',
                 'organization' => 'RS Berkane Academy',
                 'role_title' => 'Eastern Region Head Scout',
                 'location' => 'Berkane',
@@ -210,7 +210,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Julien Marc',
-                'email' => 'julien.marc@atlas11.com',
+                'email' => 'julien.marc@talentx11.com',
                 'organization' => 'Atlas Stars Talent Agency',
                 'role_title' => 'European Pathways Intermediary',
                 'location' => 'Casablanca',
@@ -221,7 +221,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Carlos Mendez',
-                'email' => 'carlos.mendez@atlas11.com',
+                'email' => 'carlos.mendez@talentx11.com',
                 'organization' => 'La Liga Talent Network (MENA)',
                 'role_title' => 'North Africa Regional Scout',
                 'location' => 'Tangier',
@@ -264,7 +264,7 @@ class DatabaseSeeder extends Seeder
             // Goalkeepers
             [
                 'name' => 'Taha Mourid',
-                'email' => 'taha.mourid@atlas11.com',
+                'email' => 'taha.mourid@talentx11.com',
                 'position' => 'Goalkeeper',
                 'dob' => '2005-03-14',
                 'location' => 'Casablanca',
@@ -277,7 +277,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Ayoub Bouhaddouz',
-                'email' => 'ayoub.bouhaddouz@atlas11.com',
+                'email' => 'ayoub.bouhaddouz@talentx11.com',
                 'position' => 'Goalkeeper',
                 'dob' => '2006-08-22',
                 'location' => 'Fes',
@@ -290,7 +290,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Bilal Soufiani',
-                'email' => 'bilal.soufiani@atlas11.com',
+                'email' => 'bilal.soufiani@talentx11.com',
                 'position' => 'Goalkeeper',
                 'dob' => '2007-01-19',
                 'location' => 'Agadir',
@@ -305,7 +305,7 @@ class DatabaseSeeder extends Seeder
             // Defenders
             [
                 'name' => 'Mehdi Benabid',
-                'email' => 'mehdi.benabid@atlas11.com',
+                'email' => 'mehdi.benabid@talentx11.com',
                 'position' => 'Defender',
                 'dob' => '2005-05-30',
                 'location' => 'Rabat',
@@ -318,7 +318,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Hamza Mendyl',
-                'email' => 'hamza.mendyl@atlas11.com',
+                'email' => 'hamza.mendyl@talentx11.com',
                 'position' => 'Defender',
                 'dob' => '2006-02-11',
                 'location' => 'Kenitra',
@@ -331,7 +331,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Walid El Wafi',
-                'email' => 'walid.elwafi@atlas11.com',
+                'email' => 'walid.elwafi@talentx11.com',
                 'position' => 'Defender',
                 'dob' => '2005-12-03',
                 'location' => 'Tetouan',
@@ -344,7 +344,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Chadi Amrani',
-                'email' => 'chadi.amrani@atlas11.com',
+                'email' => 'chadi.amrani@talentx11.com',
                 'position' => 'Defender',
                 'dob' => '2007-04-09',
                 'location' => 'Casablanca',
@@ -357,7 +357,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Nassim Chadli',
-                'email' => 'nassim.chadli@atlas11.com',
+                'email' => 'nassim.chadli@talentx11.com',
                 'position' => 'Defender',
                 'dob' => '2006-07-28',
                 'location' => 'Safi',
@@ -370,7 +370,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Marouane Sahraoui',
-                'email' => 'marouane.sahraoui@atlas11.com',
+                'email' => 'marouane.sahraoui@talentx11.com',
                 'position' => 'Defender',
                 'dob' => '2005-10-17',
                 'location' => 'Laayoune',
@@ -385,7 +385,7 @@ class DatabaseSeeder extends Seeder
             // Midfielders
             [
                 'name' => 'Anas Zniti',
-                'email' => 'anas.zniti@atlas11.com',
+                'email' => 'anas.zniti@talentx11.com',
                 'position' => 'Midfielder',
                 'dob' => '2006-03-25',
                 'location' => 'Fes',
@@ -398,7 +398,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Zakaria Ouchen',
-                'email' => 'zakaria.ouchen@atlas11.com',
+                'email' => 'zakaria.ouchen@talentx11.com',
                 'position' => 'Midfielder',
                 'dob' => '2007-09-14',
                 'location' => 'Oujda',
@@ -411,7 +411,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Amine Bassi',
-                'email' => 'amine.bassi@atlas11.com',
+                'email' => 'amine.bassi@talentx11.com',
                 'position' => 'Midfielder',
                 'dob' => '2005-08-01',
                 'location' => 'Rabat',
@@ -424,7 +424,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Oussama El Karkouri',
-                'email' => 'oussama.karkouri@atlas11.com',
+                'email' => 'oussama.karkouri@talentx11.com',
                 'position' => 'Midfielder',
                 'dob' => '2006-12-20',
                 'location' => 'Berkane',
@@ -437,7 +437,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Ismail Moutaraji',
-                'email' => 'ismail.moutaraji@atlas11.com',
+                'email' => 'ismail.moutaraji@talentx11.com',
                 'position' => 'Midfielder',
                 'dob' => '2007-02-18',
                 'location' => 'Casablanca',
@@ -450,7 +450,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Youssef Belammari',
-                'email' => 'youssef.belammari@atlas11.com',
+                'email' => 'youssef.belammari@talentx11.com',
                 'position' => 'Midfielder',
                 'dob' => '2005-11-12',
                 'location' => 'Meknes',
@@ -465,7 +465,7 @@ class DatabaseSeeder extends Seeder
             // Forwards
             [
                 'name' => 'Ilyas Chouiar',
-                'email' => 'ilyas.chouiar@atlas11.com',
+                'email' => 'ilyas.chouiar@talentx11.com',
                 'position' => 'Forward',
                 'dob' => '2006-05-17',
                 'location' => 'Casablanca',
@@ -478,7 +478,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Hamza Igamane',
-                'email' => 'hamza.igamane@atlas11.com',
+                'email' => 'hamza.igamane@talentx11.com',
                 'position' => 'Forward',
                 'dob' => '2005-01-29',
                 'location' => 'Rabat',
@@ -491,7 +491,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Moncef Bakkali',
-                'email' => 'moncef.bakkali@atlas11.com',
+                'email' => 'moncef.bakkali@talentx11.com',
                 'position' => 'Forward',
                 'dob' => '2007-08-10',
                 'location' => 'Tangier',
@@ -504,7 +504,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Ayoub Nanah',
-                'email' => 'ayoub.nanah@atlas11.com',
+                'email' => 'ayoub.nanah@talentx11.com',
                 'position' => 'Forward',
                 'dob' => '2006-10-04',
                 'location' => 'Marrakech',
@@ -517,7 +517,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Salaheddine Benyoussef',
-                'email' => 'salaheddine.benyoussef@atlas11.com',
+                'email' => 'salaheddine.benyoussef@talentx11.com',
                 'position' => 'Forward',
                 'dob' => '2005-06-15',
                 'location' => 'Agadir',
@@ -530,7 +530,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Rayan Raveloson',
-                'email' => 'rayan.raveloson@atlas11.com',
+                'email' => 'rayan.raveloson@talentx11.com',
                 'position' => 'Forward',
                 'dob' => '2007-03-08',
                 'location' => 'Mohammedia',
@@ -543,7 +543,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Adam Aznou',
-                'email' => 'adam.aznou@atlas11.com',
+                'email' => 'adam.aznou@talentx11.com',
                 'position' => 'Defender',
                 'dob' => '2006-06-02',
                 'location' => 'Casablanca',
@@ -556,7 +556,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Eliesse Ben Seghir',
-                'email' => 'eliesse.benseghir@atlas11.com',
+                'email' => 'eliesse.benseghir@talentx11.com',
                 'position' => 'Midfielder',
                 'dob' => '2005-02-16',
                 'location' => 'Rabat',
@@ -569,7 +569,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Reda Slimane',
-                'email' => 'reda.slimane@atlas11.com',
+                'email' => 'reda.slimane@talentx11.com',
                 'position' => 'Forward',
                 'dob' => '2006-09-09',
                 'location' => 'Nador',
@@ -614,52 +614,52 @@ class DatabaseSeeder extends Seeder
         $scoutingInquiries = [
             // Inquiries directed to our featured demo player (Yassine El Idrissi)
             [
-                'scout_email' => 'scout@atlas11.com',
+                'scout_email' => 'scout@talentx11.com',
                 'player_profile' => $featuredPlayerProfile,
                 'status' => ScoutingInterest::STATUS_CONTACTED,
                 'message' => 'Outstanding performance during the U-19 regional tournament in Casablanca. Your passing vision and agility between lines fit the technical profile we are assembling for the national youth pool. We would like to invite you to an official assessment camp in Maâmoura next month.',
                 'created_at' => now()->subDays(2),
             ],
             [
-                'scout_email' => 'tariq.fus@atlas11.com',
+                'scout_email' => 'tariq.fus@talentx11.com',
                 'player_profile' => $featuredPlayerProfile,
                 'status' => ScoutingInterest::STATUS_VIEWED,
                 'message' => 'Our technical staff at FUS Rabat Academy has followed your match footage over the last 6 fixtures. We are impressed by your tactical discipline and set-piece quality. We will have a scout attending your upcoming match against MAS Youth.',
                 'created_at' => now()->subDays(5),
             ],
             [
-                'scout_email' => 'carlos.mendez@atlas11.com',
+                'scout_email' => 'carlos.mendez@talentx11.com',
                 'player_profile' => $featuredPlayerProfile,
                 'status' => ScoutingInterest::STATUS_PENDING,
                 'message' => 'Monitoring attacking midfielders across the Moroccan Botola Youth for Spanish partner academy trials. Your ball carrying and transition numbers match our recruitment criteria. Please keep your contact details updated.',
                 'created_at' => now()->subHours(18),
             ],
 
-            // Inquiries sent by Lead Scout Karim Benjelloun (scout@atlas11.com) to other prospects
+            // Inquiries sent by Lead Scout Karim Benjelloun (scout@talentx11.com) to other prospects
             [
-                'scout_email' => 'scout@atlas11.com',
-                'player_profile' => $playerProfiles->firstWhere('user.email', 'omar.hamdaoui@atlas11.com'),
+                'scout_email' => 'scout@talentx11.com',
+                'player_profile' => $playerProfiles->firstWhere('user.email', 'omar.hamdaoui@talentx11.com'),
                 'status' => ScoutingInterest::STATUS_CONTACTED,
                 'message' => 'Your scoring efficiency on the left wing for FUS Youth has caught our recruitment staff attention. We are considering you for the upcoming North African Youth Championship squad.',
                 'created_at' => now()->subDays(3),
             ],
             [
-                'scout_email' => 'scout@atlas11.com',
-                'player_profile' => $playerProfiles->firstWhere('user.email', 'soufiane.zekri@atlas11.com'),
+                'scout_email' => 'scout@talentx11.com',
+                'player_profile' => $playerProfiles->firstWhere('user.email', 'soufiane.zekri@talentx11.com'),
                 'status' => ScoutingInterest::STATUS_VIEWED,
                 'message' => 'Very solid defensive positioning in aerial duels. We will continue tracking your progress in the Botola 2 reserve division.',
                 'created_at' => now()->subDays(7),
             ],
             [
-                'scout_email' => 'scout@atlas11.com',
-                'player_profile' => $playerProfiles->firstWhere('user.email', 'taha.mourid@atlas11.com'),
+                'scout_email' => 'scout@talentx11.com',
+                'player_profile' => $playerProfiles->firstWhere('user.email', 'taha.mourid@talentx11.com'),
                 'status' => ScoutingInterest::STATUS_PENDING,
                 'message' => 'Evaluating U-20 goalkeepers with modern sweeping capabilities for the national youth pool. Excellent reflexes shown in the derby.',
                 'created_at' => now()->subDays(1),
             ],
             [
-                'scout_email' => 'scout@atlas11.com',
-                'player_profile' => $playerProfiles->firstWhere('user.email', 'hamza.igamane@atlas11.com'),
+                'scout_email' => 'scout@talentx11.com',
+                'player_profile' => $playerProfiles->firstWhere('user.email', 'hamza.igamane@talentx11.com'),
                 'status' => ScoutingInterest::STATUS_CONTACTED,
                 'message' => 'Powerful physical display against Raja U-21. Our coaching staff would like to discuss official trial availability with your current representation.',
                 'created_at' => now()->subDays(4),
@@ -667,43 +667,43 @@ class DatabaseSeeder extends Seeder
 
             // Inquiries by other scouts across different players
             [
-                'scout_email' => 'mehdi.wydad@atlas11.com',
-                'player_profile' => $playerProfiles->firstWhere('user.email', 'karim.benchekroun@atlas11.com'),
+                'scout_email' => 'mehdi.wydad@talentx11.com',
+                'player_profile' => $playerProfiles->firstWhere('user.email', 'karim.benchekroun@talentx11.com'),
                 'status' => ScoutingInterest::STATUS_CONTACTED,
                 'message' => 'Wydad Athletic Club is actively scouting dynamic box-to-box midfielders for our reserves setup. We would like to initiate contact regarding a trial session.',
                 'created_at' => now()->subDays(6),
             ],
             [
-                'scout_email' => 'hicham.asfar@atlas11.com',
-                'player_profile' => $playerProfiles->firstWhere('user.email', 'mehdi.benabid@atlas11.com'),
+                'scout_email' => 'hicham.asfar@talentx11.com',
+                'player_profile' => $playerProfiles->firstWhere('user.email', 'mehdi.benabid@talentx11.com'),
                 'status' => ScoutingInterest::STATUS_VIEWED,
                 'message' => 'AS FAR recruitment is reviewing your defensive metrics. Exceptional recovery pace and aerial presence.',
                 'created_at' => now()->subDays(8),
             ],
             [
-                'scout_email' => 'mourad.berkane@atlas11.com',
-                'player_profile' => $playerProfiles->firstWhere('user.email', 'zakaria.ouchen@atlas11.com'),
+                'scout_email' => 'mourad.berkane@talentx11.com',
+                'player_profile' => $playerProfiles->firstWhere('user.email', 'zakaria.ouchen@talentx11.com'),
                 'status' => ScoutingInterest::STATUS_PENDING,
                 'message' => 'RS Berkane is closely monitoring talent from the Oriental region. Your playmaking displays in Oujda have been noted.',
                 'created_at' => now()->subDays(2),
             ],
             [
-                'scout_email' => 'julien.marc@atlas11.com',
-                'player_profile' => $playerProfiles->firstWhere('user.email', 'moncef.bakkali@atlas11.com'),
+                'scout_email' => 'julien.marc@talentx11.com',
+                'player_profile' => $playerProfiles->firstWhere('user.email', 'moncef.bakkali@talentx11.com'),
                 'status' => ScoutingInterest::STATUS_CONTACTED,
                 'message' => 'Atlas Stars Agency represents elite Moroccan youth in European transitions. Your 1v1 speed makes you a strong candidate for Belgian and French youth showcase matches.',
                 'created_at' => now()->subDays(4),
             ],
             [
-                'scout_email' => 'carlos.mendez@atlas11.com',
-                'player_profile' => $playerProfiles->firstWhere('user.email', 'adam.aznou@atlas11.com'),
+                'scout_email' => 'carlos.mendez@talentx11.com',
+                'player_profile' => $playerProfiles->firstWhere('user.email', 'adam.aznou@talentx11.com'),
                 'status' => ScoutingInterest::STATUS_CONTACTED,
                 'message' => 'La Liga Talent Network assessment: elite profile for modern left full-back position. We would like to schedule a virtual meeting with your academy director.',
                 'created_at' => now()->subDays(3),
             ],
             [
-                'scout_email' => 'tariq.fus@atlas11.com',
-                'player_profile' => $playerProfiles->firstWhere('user.email', 'ilyas.chouiar@atlas11.com'),
+                'scout_email' => 'tariq.fus@talentx11.com',
+                'player_profile' => $playerProfiles->firstWhere('user.email', 'ilyas.chouiar@talentx11.com'),
                 'status' => ScoutingInterest::STATUS_CLOSED,
                 'message' => 'Assessment concluded following the youth cup fixtures. Candidate profile archived for future intake windows.',
                 'created_at' => now()->subDays(12),
@@ -748,11 +748,11 @@ class DatabaseSeeder extends Seeder
         // -------------------------------------------------------------
         // The lead scout bookmarks several players for demo purposes
         $favoritesData = [
-            $playerProfiles->firstWhere('user.email', 'omar.hamdaoui@atlas11.com'),
-            $playerProfiles->firstWhere('user.email', 'soufiane.zekri@atlas11.com'),
-            $playerProfiles->firstWhere('user.email', 'karim.benchekroun@atlas11.com'),
-            $playerProfiles->firstWhere('user.email', 'ilyas.chouiar@atlas11.com'),
-            $playerProfiles->firstWhere('user.email', 'adam.aznou@atlas11.com'),
+            $playerProfiles->firstWhere('user.email', 'omar.hamdaoui@talentx11.com'),
+            $playerProfiles->firstWhere('user.email', 'soufiane.zekri@talentx11.com'),
+            $playerProfiles->firstWhere('user.email', 'karim.benchekroun@talentx11.com'),
+            $playerProfiles->firstWhere('user.email', 'ilyas.chouiar@talentx11.com'),
+            $playerProfiles->firstWhere('user.email', 'adam.aznou@talentx11.com'),
         ];
 
         foreach ($favoritesData as $playerProfile) {
@@ -771,7 +771,7 @@ class DatabaseSeeder extends Seeder
         // Additional scouts bookmark a few players for realistic data
         $secondaryScout1 = $scoutUsers->get(1);
         if ($secondaryScout1) {
-            foreach (['taha.mourid@atlas11.com', 'hamza.igamane@atlas11.com'] as $email) {
+            foreach (['taha.mourid@talentx11.com', 'hamza.igamane@talentx11.com'] as $email) {
                 $profile = $playerProfiles->firstWhere('user.email', $email);
                 if ($profile) {
                     DB::table('favorites')->insert([
@@ -786,7 +786,7 @@ class DatabaseSeeder extends Seeder
 
         $secondaryScout2 = $scoutUsers->get(2);
         if ($secondaryScout2) {
-            $profile = $playerProfiles->firstWhere('user.email', 'mehdi.benabid@atlas11.com');
+            $profile = $playerProfiles->firstWhere('user.email', 'mehdi.benabid@talentx11.com');
             if ($profile) {
                 DB::table('favorites')->insert([
                     'scout_id' => $secondaryScout2->id,

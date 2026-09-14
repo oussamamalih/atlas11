@@ -1,6 +1,6 @@
-# Atlas11 ⚽
+# TalentX11 ⚽
 
-**Atlas11** is a Moroccan football talent scouting platform that connects players and scouts. Players create detailed profiles showcasing their skills, while scouts can search, filter, and express scouting interest. The platform features role-based dashboards and an admin panel for platform management.
+**TalentX11** is a Moroccan football talent scouting platform that connects players and scouts. Players create detailed profiles showcasing their skills, while scouts can search, filter, and express scouting interest. The platform features role-based dashboards and an admin panel for platform management.
 
 ---
 
@@ -54,8 +54,8 @@
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/oussamamalih/atlas11.git
-cd atlas11
+git clone https://github.com/oussamamalih/talentx11.git
+cd talentx11
 
 # 2. Copy the environment file and generate an application key
 cp .env.example .env
@@ -85,8 +85,8 @@ Visit [http://localhost:8000](http://localhost:8000).
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/oussamamalih/atlas11.git
-cd atlas11
+git clone https://github.com/oussamamalih/talentx11.git
+cd talentx11
 
 # 2. Copy the environment file
 cp .env.example .env
@@ -132,8 +132,8 @@ The `.env.example` file contains commented blocks for both SQLite and MySQL conf
 
 | Service | Container | Host Port |
 |---|---|---|
-| Laravel app | `atlas11-app` | `8000` |
-| MySQL 8.4 | `atlas11-mysql` | `3308` |
+| Laravel app | `talentx11-app` | `8000` |
+| MySQL 8.4 | `talentx11-mysql` | `3308` |
 
 Connect to MySQL from your host machine at `127.0.0.1:3308` (user `laravel`, password `password`, root password `root`).
 
@@ -214,7 +214,7 @@ docker compose exec app php artisan test
 ## Project Structure
 
 ```
-atlas11/
+talentx11/
 ├── app/
 │   ├── Http/
 │   │   ├── Controllers/          # Feature controllers

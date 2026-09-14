@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Atlas11') }} — Moroccan Football Talent Scouting</title>
-        <meta name="description" content="Atlas11 — Morocco's professional football talent scouting platform connecting players, scouts, and clubs.">
+        <title>{{ config('app.name', 'TalentX11') }} — Moroccan Football Talent Scouting</title>
+        <meta name="description" content="TalentX11 — Morocco's professional football talent scouting platform connecting players, scouts, and clubs.">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,16 +34,16 @@
                 {{ $slot }}
             </main>
 
-            <!-- Atlas11 Footer -->
+            <!-- TalentX11 Footer -->
             <footer class="atlas-footer border-t border-[#1a4030] py-6 mt-auto">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs gap-3">
                     <div class="flex items-center space-x-3">
-                        <span class="font-display text-lg tracking-wider text-white">ATLAS<span class="text-[#10b981]">11</span></span>
+                        <span class="font-display text-lg tracking-wider text-white">TALENTX<span class="text-[#10b981]">11</span></span>
                         <span class="text-[#1a4030]">&bull;</span>
                         <span class="text-[#8fa89c]">Morocco Football Talent Scouting Network</span>
                     </div>
                     <div class="text-[#8fa89c]">
-                        &copy; {{ date('Y') }} Atlas11. Professional Scouting Platform.
+                        &copy; {{ date('Y') }} TalentX11. Professional Scouting Platform.
                     </div>
                 </div>
             </footer>

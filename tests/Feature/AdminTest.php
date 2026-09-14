@@ -249,12 +249,12 @@ class AdminTest extends TestCase
     {
         $admin = User::factory()->admin()->create([
             'name' => 'Admin User',
-            'email' => 'admin@atlas11.ma',
+            'email' => 'admin@talentx11.ma',
         ]);
 
         $response = $this->actingAs($admin)->put(route('admin.users.update', $admin), [
             'name' => 'Admin User',
-            'email' => 'admin@atlas11.ma',
+            'email' => 'admin@talentx11.ma',
             'role' => User::ROLE_PLAYER,
         ]);
 

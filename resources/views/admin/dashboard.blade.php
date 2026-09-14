@@ -6,7 +6,7 @@
                     {{ __('Admin Dashboard') }}
                 </h2>
                 <p class="text-xs text-[#8fa89c] mt-0.5">
-                    {{ __('Atlas11 Executive Overview & Platform Operations') }}
+                    {{ __('TalentX11 Executive Overview & Platform Operations') }}
                 </p>
             </div>
             <div class="flex items-center space-x-2">

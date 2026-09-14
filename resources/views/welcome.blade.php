@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Atlas11 — Discover Morocco's Football Talent</title>
+        <title>TalentX11 — Discover Morocco's Football Talent</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,7 +58,7 @@
         <section id="atlas-hero" class="atlas-hero-section relative w-full overflow-hidden flex items-center" style="min-height: calc(100vh - 80px) !important; min-height: 650px !important;">
 
             <!-- Oversized background word -->
-            <span class="atlas-bg-text" style="top: 18%; left: -2%;">ATLAS11</span>
+            <span class="atlas-bg-text" style="top: 18%; left: -2%;">TALENTX11</span>
 
             <!-- Hero Image Layer -->
             <div class="atlas-hero-bg absolute inset-0 bg-cover bg-no-repeat"
@@ -90,7 +90,7 @@
 
                     <!-- Description -->
                     <p class="atlas-hero-desc text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-xl mb-9" style="color: #8fa89c !important;">
-                        {{ __('Discover, analyse and track football talent with Atlas11.') }}
+                        {{ __('Discover, analyse and track football talent with TalentX11.') }}
                     </p>
 
                     <!-- Action CTAs -->
@@ -153,7 +153,7 @@
                         {{ __('Revolutionizing Football Scouting Across Morocco') }}
                     </h2>
                     <p class="text-sm text-[#8fa89c] mt-4">
-                        {{ __('From regional amateur divisions to top-tier academies, Atlas11 provides direct transparent visibility without middlemen.') }}
+                        {{ __('From regional amateur divisions to top-tier academies, TalentX11 provides direct transparent visibility without middlemen.') }}
                     </p>
                 </div>
 
@@ -378,7 +378,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="text-center max-w-2xl mx-auto mb-14">
                     <h2 class="text-xs font-bold text-[#10b981] uppercase tracking-widest">{{ __('Step-by-Step Pathway') }}</h2>
-                    <p class="text-4xl sm:text-5xl font-display uppercase tracking-wider text-white mt-2">{{ __('How Atlas11 Works') }}</p>
+                    <p class="text-4xl sm:text-5xl font-display uppercase tracking-wider text-white mt-2">{{ __('How TalentX11 Works') }}</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
@@ -421,7 +421,7 @@
         <!-- High-Impact Call to Action Banner -->
         <section class="relative py-24 bg-[#0d2919] overflow-hidden">
             <div class="atlas-plus-pattern"></div>
-            <span class="atlas-bg-text" style="top: 50%; left: -4%;">ATLAS11</span>
+            <span class="atlas-bg-text" style="top: 50%; left: -4%;">TALENTX11</span>
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
                 <span class="inline-block px-3 py-1 rounded text-xs font-display font-extrabold text-[#0a1f14] bg-[#a3e635] uppercase tracking-wider mb-6">
                     {{ __('Ready For Discovery?') }}
@@ -430,7 +430,7 @@
                     {{ __('Join the Moroccan Football Talent Scouting Network Today') }}
                 </h2>
                 <p class="text-base text-[#8fa89c] max-w-2xl mx-auto mt-4 leading-relaxed">
-                    {{ __('Whether you are an aspiring player seeking exposure or a scout looking for the next star, Atlas11 is your official scouting platform.') }}
+                    {{ __('Whether you are an aspiring player seeking exposure or a scout looking for the next star, TalentX11 is your official scouting platform.') }}
                 </p>
 
                 <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
@@ -455,7 +455,7 @@
                 </div>
 
                 <div class="flex items-center space-x-6 text-xs text-[#8fa89c]">
-                    <span>&copy; {{ date('Y') }} Atlas11. {{ __('All rights reserved.') }}</span>
+                    <span>&copy; {{ date('Y') }} TalentX11. {{ __('All rights reserved.') }}</span>
                     <span>{{ __('Built for Moroccan Football') }}</span>
                 </div>
             </div>

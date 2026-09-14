@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="mb-6 text-center">
         <h2 class="text-3xl font-display uppercase tracking-wider text-white">{{ __('Set New Password') }}</h2>
-        <p class="mt-2 text-sm text-[#8fa89c]">{{ __('Please choose a strong password to secure your Atlas11 account.') }}</p>
+        <p class="mt-2 text-sm text-[#8fa89c]">{{ __('Please choose a strong password to secure your TalentX11 account.') }}</p>
     </div>
 
     <form method="POST" action="{{ route('password.store') }}" class="space-y-4">

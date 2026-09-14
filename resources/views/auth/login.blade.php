@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="mb-6 text-center">
         <h2 class="text-3xl font-display uppercase tracking-wider text-white">{{ __('Welcome Back') }}</h2>
-        <p class="text-sm text-[#8fa89c] mt-2">{{ __('Sign in to your Atlas11 scouting portal') }}</p>
+        <p class="text-sm text-[#8fa89c] mt-2">{{ __('Sign in to your TalentX11 scouting portal') }}</p>
     </div>
 
     <!-- Session Status -->

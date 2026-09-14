@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Atlas11') }} — Moroccan Football Talent Scouting</title>
-        <meta name="description" content="Atlas11 — Morocco's professional football talent scouting platform.">
+        <title>{{ config('app.name', 'TalentX11') }} — Moroccan Football Talent Scouting</title>
+        <meta name="description" content="TalentX11 — Morocco's professional football talent scouting platform.">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +40,7 @@
             <!-- Footer Link -->
             <div class="mt-8 text-center">
                 <a href="/" class="text-xs font-display uppercase tracking-wider text-[#8fa89c] hover:text-[#10b981] transition-colors">
-                    &larr; {{ __('Back to Atlas11') }}
+                    &larr; {{ __('Back to TalentX11') }}
                 </a>
             </div>
         </div>
