@@ -18,10 +18,6 @@ class FavoriteController extends Controller
     {
         $user = $request->user();
 
-        if (! $user->isScout()) {
-            abort(403, 'Only scouts can access bookmarked talent shortlists.');
-        }
-
         $favorites = $user->favorites()
             ->with(['playerProfile.user'])
             ->latest()
@@ -38,10 +34,6 @@ class FavoriteController extends Controller
     public function store(Request $request, PlayerProfile $playerProfile): RedirectResponse|JsonResponse
     {
         $user = $request->user();
-
-        if (! $user->isScout()) {
-            abort(403, 'Only scouts can bookmark player profiles.');
-        }
 
         $favorite = Favorite::firstOrCreate([
             'scout_id' => $user->id,
@@ -70,10 +62,6 @@ class FavoriteController extends Controller
     public function destroy(Request $request, PlayerProfile $playerProfile): RedirectResponse|JsonResponse
     {
         $user = $request->user();
-
-        if (! $user->isScout()) {
-            abort(403, 'Only scouts can manage bookmarked player profiles.');
-        }
 
         Favorite::where('scout_id', $user->id)
             ->where('player_profile_id', $playerProfile->id)

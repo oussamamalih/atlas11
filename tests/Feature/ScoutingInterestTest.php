@@ -522,4 +522,22 @@ class ScoutingInterestTest extends TestCase
         $response->assertDontSee(route('scouting.interests.cancel', $contacted));
         $response->assertDontSee(route('scouting.interests.cancel', $closed));
     }
+
+    public function test_admin_cannot_cancel_scouting_interest(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+        $interest = ScoutingInterest::factory()->create([
+            'scout_id' => $scout->id,
+            'player_profile_id' => $playerProfile->id,
+            'status' => ScoutingInterest::STATUS_PENDING,
+        ]);
+
+        $response = $this->actingAs($admin)->post(route('scouting.interests.cancel', $interest));
+
+        $response->assertStatus(403);
+        $this->assertEquals(ScoutingInterest::STATUS_PENDING, $interest->fresh()->status);
+    }
 }

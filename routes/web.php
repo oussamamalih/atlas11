@@ -53,9 +53,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/scout/search', [PlayerSearchController::class, 'index'])->name('scout.search');
 
     // Favorites / Bookmarks (Scouts)
-    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
-    Route::post('/players/{playerProfile}/favorite', [FavoriteController::class, 'store'])->name('favorites.store');
-    Route::delete('/players/{playerProfile}/favorite', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index')->middleware('scout');
+    Route::post('/players/{playerProfile}/favorite', [FavoriteController::class, 'store'])->name('favorites.store')->middleware('scout');
+    Route::delete('/players/{playerProfile}/favorite', [FavoriteController::class, 'destroy'])->name('favorites.destroy')->middleware('scout');
 
     // Scouting Interests (Scouts & Players)
     Route::get('/scouting/interests', [ScoutingInterestController::class, 'index'])->name('scouting.interests.index');

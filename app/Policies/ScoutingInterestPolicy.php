@@ -44,6 +44,14 @@ class ScoutingInterestPolicy
     }
 
     /**
+     * Determine whether the scout can cancel their own interest.
+     */
+    public function cancel(User $user, ScoutingInterest $scoutingInterest): bool
+    {
+        return $user->isScout() && $user->id === $scoutingInterest->scout_id;
+    }
+
+    /**
      * Determine whether the user can delete the model.
      */
     public function delete(User $user, ScoutingInterest $scoutingInterest): bool

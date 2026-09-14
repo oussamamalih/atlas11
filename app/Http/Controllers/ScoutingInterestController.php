@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PlayerProfile;
 use App\Models\ScoutingInterest;
 use App\Notifications\ScoutingInterestReceived;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -12,6 +13,7 @@ use Illuminate\View\View;
 
 class ScoutingInterestController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of scouting interests for the authenticated user.
      */
@@ -65,9 +67,7 @@ class ScoutingInterestController extends Controller
      */
     public function store(Request $request, PlayerProfile $playerProfile): RedirectResponse
     {
-        if (! $request->user()->isScout()) {
-            abort(403, 'Only scouts can express scouting interest.');
-        }
+        $this->authorize('create', ScoutingInterest::class);
 
         $validated = $request->validate([
             'message' => ['nullable', 'string', 'max:1000'],
@@ -106,12 +106,7 @@ class ScoutingInterestController extends Controller
 
         $user = $request->user();
 
-        // Authorization: only scout, player, or admin
-        if ($user->id !== $scoutingInterest->scout_id
-            && $user->id !== $scoutingInterest->playerProfile->user_id
-            && ! $user->isAdmin()) {
-            abort(403, 'You are not authorized to view this scouting interest.');
-        }
+        $this->authorize('view', $scoutingInterest);
 
         // When player views pending interest, mark as viewed
         if ($user->id === $scoutingInterest->playerProfile->user_id
@@ -129,13 +124,7 @@ class ScoutingInterestController extends Controller
      */
     public function update(Request $request, ScoutingInterest $scoutingInterest): RedirectResponse
     {
-        $user = $request->user();
-
-        if ($user->id !== $scoutingInterest->scout_id
-            && $user->id !== $scoutingInterest->playerProfile->user_id
-            && ! $user->isAdmin()) {
-            abort(403, 'You are not authorized to update this scouting interest.');
-        }
+        $this->authorize('update', $scoutingInterest);
 
         $validated = $request->validate([
             'status' => [
@@ -155,11 +144,7 @@ class ScoutingInterestController extends Controller
      */
     public function cancel(Request $request, ScoutingInterest $scoutingInterest): RedirectResponse
     {
-        $user = $request->user();
-
-        if (! $user->isScout() || $user->id !== $scoutingInterest->scout_id) {
-            abort(403, 'You are not authorized to cancel this scouting interest.');
-        }
+        $this->authorize('cancel', $scoutingInterest);
 
         if (! $scoutingInterest->isCancellable()) {
             return redirect()->back()->with('error', 'This scouting interest can no longer be cancelled.');

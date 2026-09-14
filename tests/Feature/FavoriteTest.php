@@ -201,4 +201,13 @@ class FavoriteTest extends TestCase
         $this->actingAs($scout)->get(route('scout.search'))
             ->assertSee('successfully added to your shortlisted favorites');
     }
+
+    public function test_admin_cannot_access_favorites(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        $response = $this->actingAs($admin)->get('/favorites');
+
+        $response->assertStatus(403);
+    }
 }
