@@ -3,7 +3,7 @@
         <div class="max-w-3xl mx-auto">
             <h1 class="font-display text-4xl uppercase tracking-wider text-white mb-8">Edit Scout Profile</h1>
 
-            <form method="POST" action="{{ route('scout.update', $profile) }}" class="space-y-6">
+            <form method="POST" action="{{ route('scout.profile.update') }}" class="space-y-6">
                 @csrf
                 @method('PUT')
 
@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="flex justify-end space-x-4">
-                    <a href="{{ route('scout.show', $profile) }}" class="font-display uppercase tracking-wider px-6 py-2.5 rounded border border-[#1a4030] text-[#8fa89c] hover:bg-[#0d2919] transition-colors">
+                    <a href="{{ route('scout.profile.show', $profile) }}" class="font-display uppercase tracking-wider px-6 py-2.5 rounded border border-[#1a4030] text-[#8fa89c] hover:bg-[#0d2919] transition-colors">
                         Cancel
                     </a>
                     <button type="submit" class="font-display uppercase tracking-wider px-6 py-2.5 rounded bg-[#10b981] text-[#0a1f14] hover:bg-[#059669] transition-colors">

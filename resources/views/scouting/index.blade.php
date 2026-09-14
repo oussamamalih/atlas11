@@ -2,7 +2,7 @@
     <div class="min-h-screen bg-[#0a1f14] py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-5xl mx-auto">
             <h1 class="font-display text-4xl uppercase tracking-wider text-white mb-8">
-                {{ $role === 'scout' ? 'Scouting Interests' : 'Scouting Requests' }}
+                {{ $role === 'scout' ? 'My Sent Scouting Interests' : 'Scouting Interests Received' }}
             </h1>
 
             @if($interests->count())
@@ -11,7 +11,7 @@
                         <thead>
                             <tr class="border-b border-[#1a4030]">
                                 <th class="text-left px-6 py-3 text-xs uppercase font-display tracking-wider text-[#8fa89c]">
-                                    {{ $role === 'scout' ? 'Player' : 'Organization' }}
+                                    {{ $role === 'scout' ? 'Player' : 'Scout / Organization' }}
                                 </th>
                                 <th class="text-left px-6 py-3 text-xs uppercase font-display tracking-wider text-[#8fa89c]">
                                     {{ $role === 'scout' ? 'Position' : 'Role' }}
@@ -25,10 +25,17 @@
                             @foreach($interests as $interest)
                                 <tr class="hover:bg-[#133323]/50 transition-colors">
                                     <td class="px-6 py-4 text-white">
-                                        {{ $role === 'scout' ? ($interest->player->name ?? 'N/A') : ($interest->scout->organization ?? 'N/A') }}
+                                        @if($role === 'scout')
+                                            <div>{{ $interest->playerProfile?->user?->name ?? 'N/A' }}</div>
+                                        @else
+                                            <div>{{ $interest->scout?->name ?? 'N/A' }}</div>
+                                            @if($interest->scout?->scoutProfile?->organization)
+                                                <div class="text-xs text-[#8fa89c]">{{ $interest->scout->scoutProfile->organization }}</div>
+                                            @endif
+                                        @endif
                                     </td>
                                     <td class="px-6 py-4 text-[#8fa89c]">
-                                        {{ $role === 'scout' ? ($interest->player->position ?? 'N/A') : ($interest->scout->role_title ?? 'N/A') }}
+                                        {{ $role === 'scout' ? ($interest->playerProfile?->position ?? 'N/A') : ($interest->scout?->scoutProfile?->role_title ?? 'Scout') }}
                                     </td>
                                     <td class="px-6 py-4 text-[#8fa89c] text-sm">
                                         {{ $interest->created_at->format('M d, Y') }}
@@ -43,7 +50,7 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 text-right">
-                                        <a href="{{ route('scouting.show', $interest) }}" class="font-display uppercase tracking-wider text-sm text-[#10b981] hover:text-white transition-colors">
+                                        <a href="{{ route('scouting.interests.show', $interest) }}" class="font-display uppercase tracking-wider text-sm text-[#10b981] hover:text-white transition-colors">
                                             View
                                         </a>
                                     </td>

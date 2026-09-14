@@ -4,14 +4,14 @@
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
                 <div class="flex items-center gap-4">
                     <h1 class="font-display text-3xl sm:text-4xl uppercase tracking-wider text-white">Notifications</h1>
-                    @if($unreadCount ?? 0 > 0)
+                    @if(($unreadCount ?? 0) > 0)
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-[#10b981]/20 text-[#10b981] border border-[#10b981]/30 font-display uppercase">
                             {{ $unreadCount }}
                         </span>
                     @endif
                 </div>
-                @if($unreadCount ?? 0 > 0)
-                    <form action="{{ route('notifications.markAllRead') }}" method="POST">
+                @if(($unreadCount ?? 0) > 0)
+                    <form action="{{ route('notifications.markAllAsRead') }}" method="POST">
                         @csrf
                         <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 rounded bg-[#10b981] text-[#0a1f14] font-display uppercase text-sm font-semibold hover:bg-[#10b981]/90 transition-colors duration-200">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -77,8 +77,9 @@
                                     @endif
 
                                     @if($isUnread)
-                                        <form action="{{ route('notifications.markRead', $notification->id) }}" method="POST" class="inline">
+                                        <form action="{{ route('notifications.read', $notification->id) }}" method="POST" class="inline">
                                             @csrf
+                                            @method('PATCH')
                                             <button type="submit" class="inline-flex items-center px-3 py-1.5 rounded text-xs font-semibold bg-[#1a4030] text-[#8fa89c] font-display uppercase hover:bg-[#1a4030]/80 transition-colors duration-200 border border-[#1a4030]">
                                                 Mark Read
                                             </button>

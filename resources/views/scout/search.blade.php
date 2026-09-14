@@ -6,8 +6,8 @@
             <form method="GET" action="{{ route('scout.search') }}" class="bg-[#0d2919] border border-[#1a4030] rounded p-6 mb-8">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                        <label for="keyword" class="block text-xs uppercase font-display tracking-wider text-[#8fa89c] mb-1">Keyword</label>
-                        <input id="keyword" name="keyword" type="text" value="{{ request('keyword') }}" placeholder="Name or skill..."
+                        <label for="keyword" class="block text-xs uppercase font-display tracking-wider text-[#8fa89c] mb-1">Player Name or Keyword</label>
+                        <input id="keyword" name="keyword" type="text" value="{{ request('keyword') }}" placeholder="Player Name or Keyword..."
                             class="w-full bg-[#0a1f14] border border-[#1a4030] text-white rounded px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#10b981] focus:border-transparent" />
                     </div>
                     <div>
@@ -40,9 +40,9 @@
                         <select id="preferred_foot" name="preferred_foot"
                             class="w-full bg-[#0a1f14] border border-[#1a4030] text-white rounded px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#10b981] focus:border-transparent">
                             <option value="">Any</option>
-                            <option value="left" {{ request('preferred_foot') === 'left' ? 'selected' : '' }}>Left</option>
-                            <option value="right" {{ request('preferred_foot') === 'right' ? 'selected' : '' }}>Right</option>
-                            <option value="both" {{ request('preferred_foot') === 'both' ? 'selected' : '' }}>Both</option>
+                            <option value="Left" {{ request('preferred_foot') === 'Left' ? 'selected' : '' }}>Left</option>
+                            <option value="Right" {{ request('preferred_foot') === 'Right' ? 'selected' : '' }}>Right</option>
+                            <option value="Both" {{ request('preferred_foot') === 'Both' ? 'selected' : '' }}>Both</option>
                         </select>
                     </div>
                 </div>
@@ -64,10 +64,10 @@
                         <div class="bg-[#0d2919] border border-[#1a4030] rounded p-6 hover:border-[#10b981]/40 transition-colors">
                             <div class="flex items-center space-x-4 mb-4">
                                 <div class="w-12 h-12 rounded-full bg-[#133323] border border-[#1a4030] flex items-center justify-center flex-shrink-0">
-                                    <span class="font-display text-lg uppercase text-[#10b981]">{{ strtoupper(substr($player->name, 0, 1)) }}</span>
+                                    <span class="font-display text-lg uppercase text-[#10b981]">{{ strtoupper(substr($player->user?->name ?? 'P', 0, 1)) }}</span>
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <h3 class="text-white font-medium truncate">{{ $player->name }}</h3>
+                                    <h3 class="text-white font-medium truncate">{{ $player->user?->name ?? 'Unknown' }}</h3>
                                     <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#a3e635]/15 text-[#a3e635] border border-[#a3e635]/20 font-display uppercase">
                                         {{ $player->position ?? 'N/A' }}
                                     </span>
@@ -97,7 +97,7 @@
                                 <p class="text-sm text-[#8fa89c] line-clamp-2 mb-4">{{ $player->bio }}</p>
                             @endif
 
-                            <a href="{{ route('player.show', $player) }}" class="block text-center font-display uppercase tracking-wider text-sm px-4 py-2 rounded bg-[#133323] border border-[#1a4030] text-[#10b981] hover:bg-[#1a4030] transition-colors">
+                            <a href="{{ route('player.profile.show', $player) }}" class="block text-center font-display uppercase tracking-wider text-sm px-4 py-2 rounded bg-[#133323] border border-[#1a4030] text-[#10b981] hover:bg-[#1a4030] transition-colors">
                                 View Profile
                             </a>
                         </div>
@@ -109,7 +109,8 @@
                 </div>
             @else
                 <div class="bg-[#0d2919] border border-[#1a4030] rounded p-12 text-center">
-                    <p class="text-[#8fa89c] text-lg mb-4">No players match your search criteria.</p>
+                    <h3 class="font-display text-xl uppercase tracking-wider text-white mb-2">No players found</h3>
+                    <p class="text-[#8fa89c] text-sm mb-4">No players match your search criteria.</p>
                     <a href="{{ route('scout.search') }}" class="font-display uppercase tracking-wider px-6 py-2.5 rounded bg-[#10b981] text-[#0a1f14] hover:bg-[#059669] transition-colors inline-block">
                         Reset Filters
                     </a>

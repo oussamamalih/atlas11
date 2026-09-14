@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/scouts/{scoutProfile}', [ScoutProfileController::class, 'show'])->name('scout.profile.show');
 
-    // Player Search (Scouts)
+    // Player Search (Scouts & Admins)
     Route::get('/scout/search', [PlayerSearchController::class, 'index'])->name('scout.search');
 
     // Favorites / Bookmarks (Scouts)
@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/players/{playerProfile}/favorite', [FavoriteController::class, 'store'])->name('favorites.store');
     Route::delete('/players/{playerProfile}/favorite', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
 
-    // Scouting Interests
+    // Scouting Interests (Scouts & Players)
     Route::get('/scouting/interests', [ScoutingInterestController::class, 'index'])->name('scouting.interests.index');
     Route::post('/players/{playerProfile}/express-interest', [ScoutingInterestController::class, 'store'])->name('scouting.interests.store');
     Route::get('/scouting/interests/{scoutingInterest}', [ScoutingInterestController::class, 'show'])->name('scouting.interests.show');

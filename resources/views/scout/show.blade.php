@@ -51,7 +51,7 @@
             @endif
 
             <div class="flex justify-end space-x-4">
-                <a href="{{ route('scout.edit', $profile) }}" class="font-display uppercase tracking-wider px-6 py-2.5 rounded bg-[#133323] border border-[#1a4030] text-white hover:bg-[#1a4030] transition-colors">
+                <a href="{{ route('scout.profile.edit', $profile) }}" class="font-display uppercase tracking-wider px-6 py-2.5 rounded bg-[#133323] border border-[#1a4030] text-white hover:bg-[#1a4030] transition-colors">
                     Edit Profile
                 </a>
             </div>

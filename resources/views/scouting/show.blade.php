@@ -17,20 +17,20 @@
                 <div class="bg-[#0d2919] border border-[#1a4030] rounded p-6">
                     <h2 class="font-display text-lg uppercase tracking-wider text-[#10b981] mb-4">Scout</h2>
                     <div class="space-y-2">
-                        <p class="text-white">{{ $interest->scout->user->name ?? 'N/A' }}</p>
-                        <p class="text-[#8fa89c] text-sm">{{ $interest->scout->organization ?? 'N/A' }}</p>
-                        <p class="text-[#8fa89c] text-sm">{{ $interest->scout->role_title ?? 'N/A' }}</p>
-                        <p class="text-[#8fa89c] text-sm">{{ $interest->scout->location ?? 'N/A' }}</p>
+                        <p class="text-white font-medium">{{ $interest->scout?->name ?? 'N/A' }}</p>
+                        <p class="text-[#8fa89c] text-sm">{{ $interest->scout?->scoutProfile?->organization ?? 'Independent' }}</p>
+                        <p class="text-[#8fa89c] text-sm">{{ $interest->scout?->scoutProfile?->role_title ?? 'Scout' }}</p>
+                        <p class="text-[#8fa89c] text-sm">{{ $interest->scout?->scoutProfile?->location ?? '-' }}</p>
                     </div>
                 </div>
 
                 <div class="bg-[#0d2919] border border-[#1a4030] rounded p-6">
                     <h2 class="font-display text-lg uppercase tracking-wider text-[#a3e635] mb-4">Player</h2>
                     <div class="space-y-2">
-                        <p class="text-white">{{ $interest->player->name ?? 'N/A' }}</p>
-                        <p class="text-[#8fa89c] text-sm">{{ $interest->player->position ?? 'N/A' }}</p>
-                        <p class="text-[#8fa89c] text-sm">{{ $interest->player->current_club ?? 'N/A' }}</p>
-                        <p class="text-[#8fa89c] text-sm">{{ $interest->player->location ?? 'N/A' }}</p>
+                        <p class="text-white font-medium">{{ $interest->playerProfile?->user?->name ?? 'N/A' }}</p>
+                        <p class="text-[#8fa89c] text-sm">{{ $interest->playerProfile?->position ?? 'N/A' }}</p>
+                        <p class="text-[#8fa89c] text-sm">{{ $interest->playerProfile?->current_club ?? '-' }}</p>
+                        <p class="text-[#8fa89c] text-sm">{{ $interest->playerProfile?->location ?? '-' }}</p>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
 
             <div class="bg-[#0d2919] border border-[#1a4030] rounded p-6">
                 <h2 class="font-display text-lg uppercase tracking-wider text-white mb-4">Update Status</h2>
-                <form method="POST" action="{{ route('scouting.update', $interest) }}">
+                <form method="POST" action="{{ route('scouting.interests.update', $interest) }}">
                     @csrf
                     @method('PATCH')
 
@@ -69,7 +69,7 @@
             </div>
 
             <div class="flex justify-end mt-8">
-                <a href="{{ route('scouting.index') }}" class="font-display uppercase tracking-wider px-6 py-2.5 rounded border border-[#1a4030] text-[#8fa89c] hover:bg-[#0d2919] transition-colors">
+                <a href="{{ route('scouting.interests.index') }}" class="font-display uppercase tracking-wider px-6 py-2.5 rounded border border-[#1a4030] text-[#8fa89c] hover:bg-[#0d2919] transition-colors">
                     Back to List
                 </a>
             </div>

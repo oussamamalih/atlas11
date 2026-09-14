@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+COPY docker/opcache.ini /usr/local/etc/php/conf.d/zz-atlas11-opcache.ini
+
 COPY . .
 
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev

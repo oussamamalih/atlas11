@@ -97,9 +97,7 @@ class FavoriteTest extends TestCase
         $player1Profile = PlayerProfile::factory()->create(['user_id' => $player1->id]);
         $player2Profile = PlayerProfile::factory()->create(['user_id' => $player2->id]);
 
-        $scout = User::factory()->scout()->create();
-
-        $response = $this->actingAs($scout)
+        $response = $this->actingAs($player1)
             ->post('/players/' . $player2Profile->id . '/favorite');
 
         $response->assertStatus(403);
@@ -124,10 +122,11 @@ class FavoriteTest extends TestCase
     public function test_scout_cannot_access_favorite_endpoints_without_role(): void
     {
         $player = User::factory()->player()->create();
+        $playerProfile = PlayerProfile::factory()->create();
 
         // Try to favorite a player as a player
         $response = $this->actingAs($player)
-            ->post('/players/1/favorite');
+            ->post('/players/' . $playerProfile->id . '/favorite');
 
         $response->assertStatus(403);
     }

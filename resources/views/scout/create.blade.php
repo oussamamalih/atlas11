@@ -3,7 +3,7 @@
         <div class="max-w-3xl mx-auto">
             <h1 class="font-display text-4xl uppercase tracking-wider text-white mb-8">Create Scout Profile</h1>
 
-            <form method="POST" action="{{ route('scout.store') }}" class="space-y-6">
+            <form method="POST" action="{{ route('scout.profile.store') }}" class="space-y-6">
                 @csrf
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="flex justify-end space-x-4">
-                    <a href="{{ route('scout.index') }}" class="font-display uppercase tracking-wider px-6 py-2.5 rounded border border-[#1a4030] text-[#8fa89c] hover:bg-[#0d2919] transition-colors">
+                    <a href="{{ route('scout.profile.index') }}" class="font-display uppercase tracking-wider px-6 py-2.5 rounded border border-[#1a4030] text-[#8fa89c] hover:bg-[#0d2919] transition-colors">
                         Cancel
                     </a>
                     <button type="submit" class="font-display uppercase tracking-wider px-6 py-2.5 rounded bg-[#10b981] text-[#0a1f14] hover:bg-[#059669] transition-colors">

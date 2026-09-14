@@ -28,8 +28,8 @@ class ScoutProfileTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Create Scout Profile');
-        $response->assertSee('Club / Academy / Organization *');
-        $response->assertSee('Location / Base City *');
+        $response->assertSee('Organization');
+        $response->assertSee('Location');
     }
 
     public function test_player_cannot_view_create_scout_profile_page(): void

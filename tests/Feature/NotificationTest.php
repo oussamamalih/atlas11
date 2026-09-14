@@ -37,7 +37,8 @@ class NotificationTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertViewIs('notifications.index');
-        $response->assertSee('No notifications yet');
+        $response->assertSee('No Notifications');
+        $response->assertSee('all caught up');
     }
 
     public function test_scout_expressing_interest_dispatches_notification_to_player(): void

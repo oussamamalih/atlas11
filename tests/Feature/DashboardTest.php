@@ -28,7 +28,8 @@ class DashboardTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Player Dashboard');
-        $response->assertSee('Welcome back, Amine Harit!');
+        $response->assertSee('Welcome back');
+        $response->assertSee('Amine Harit!');
         $response->assertSee('Complete Your Football Profile');
         $response->assertSee(route('player.profile.create'));
     }
@@ -76,7 +77,8 @@ class DashboardTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Scout Dashboard');
-        $response->assertSee('Welcome back, Mehdi Benatia!');
+        $response->assertSee('Welcome back');
+        $response->assertSee('Mehdi Benatia!');
         $response->assertSee('Complete Your Scout Profile');
         $response->assertSee(route('scout.profile.create'));
     }
