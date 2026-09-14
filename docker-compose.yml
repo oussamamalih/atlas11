@@ -13,6 +13,11 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+    # NOTE: These environment variables override the .env file inside the container.
+    # DB credentials here MUST match what the MySQL volume was initialised with.
+    # The current volume was initialised with: laravel / laravel / password / root=root.
+    # To change credentials: docker compose down -v, update MYSQL_* vars below, then
+    # docker compose up -d  (WARNING: destroys all data in the volume).
     environment:
       APP_NAME: Atlas11
       APP_ENV: local
@@ -21,9 +26,9 @@ services:
       DB_CONNECTION: mysql
       DB_HOST: mysql
       DB_PORT: 3306
-      DB_DATABASE: atlas11
-      DB_USERNAME: atlas11
-      DB_PASSWORD: secret
+      DB_DATABASE: laravel
+      DB_USERNAME: laravel
+      DB_PASSWORD: password
       SESSION_DRIVER: database
       CACHE_STORE: database
       QUEUE_CONNECTION: database
@@ -33,17 +38,21 @@ services:
     image: mysql:8.4
     container_name: atlas11-mysql
     restart: unless-stopped
+    # NOTE: MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE are only applied on FIRST
+    # volume initialisation. If the mysql_data volume already exists, these are
+    # ignored. To re-initialise: docker compose down -v && docker compose up -d.
+    # Current volume credentials: root=root, user=laravel, password=password, db=laravel.
     environment:
-      MYSQL_DATABASE: atlas11
-      MYSQL_ROOT_PASSWORD: root_secret
-      MYSQL_USER: atlas11
-      MYSQL_PASSWORD: secret
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: password
     ports:
       - "3308:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_secret"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
       interval: 5s
       timeout: 5s
       retries: 10

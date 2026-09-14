@@ -118,9 +118,9 @@ Key variables to configure in `.env`:
 | `APP_DEBUG` | Enable debug mode | `true` |
 | `DB_CONNECTION` | Database driver (`sqlite` / `mysql`) | `sqlite` |
 | `DB_HOST` | MySQL host (Docker: `mysql`) | — |
-| `DB_DATABASE` | Database name | `atlas11` |
-| `DB_USERNAME` | Database user | `atlas11` |
-| `DB_PASSWORD` | Database password | `secret` |
+| `DB_DATABASE` | Database name | `laravel` |
+| `DB_USERNAME` | Database user | `laravel` |
+| `DB_PASSWORD` | Database password | `password` |
 | `SESSION_DRIVER` | Session storage driver | `database` |
 | `QUEUE_CONNECTION` | Queue driver | `database` |
 
@@ -135,7 +135,7 @@ The `.env.example` file contains commented blocks for both SQLite and MySQL conf
 | Laravel app | `atlas11-app` | `8000` |
 | MySQL 8.4 | `atlas11-mysql` | `3308` |
 
-Connect to MySQL from your host machine at `127.0.0.1:3308` (user `atlas11`, password `secret`).
+Connect to MySQL from your host machine at `127.0.0.1:3308` (user `laravel`, password `password`, root password `root`).
 
 ### Useful Docker commands
 
