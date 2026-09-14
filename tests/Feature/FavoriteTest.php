@@ -130,4 +130,75 @@ class FavoriteTest extends TestCase
 
         $response->assertStatus(403);
     }
+
+    public function test_scout_sees_save_button_on_search_card(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create(['name' => 'Youssef En-Nesyri']);
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+
+        $response = $this->actingAs($scout)->get(route('scout.search'));
+
+        $response->assertOk();
+        $response->assertSee('Youssef En-Nesyri');
+        $response->assertSee('+ Save to Shortlist');
+    }
+
+    public function test_scout_sees_saved_state_on_search_card(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create(['name' => 'Youssef En-Nesyri']);
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+
+        $scout->favorites()->create(['player_profile_id' => $playerProfile->id]);
+
+        $response = $this->actingAs($scout)->get(route('scout.search'));
+
+        $response->assertOk();
+        $response->assertSee('Youssef En-Nesyri');
+        $response->assertSee('Saved - Remove from Shortlist');
+        $response->assertDontSee('+ Save to Shortlist');
+    }
+
+    public function test_scout_sees_favorite_toggle_on_player_profile(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create(['name' => 'Youssef En-Nesyri']);
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+
+        $response = $this->actingAs($scout)->get(route('player.profile.show', $playerProfile));
+
+        $response->assertOk();
+        $response->assertSee('Shortlist This Talent');
+        $response->assertSee('Add to Shortlist');
+    }
+
+    public function test_non_scout_does_not_see_favorite_toggle(): void
+    {
+        $player = User::factory()->player()->create(['name' => 'Youssef En-Nesyri']);
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+
+        $response = $this->actingAs($player)->get(route('player.profile.show', $playerProfile));
+
+        $response->assertOk();
+        $response->assertDontSee('Add to Shortlist');
+        $response->assertDontSee('Remove from Shortlist');
+    }
+
+    public function test_search_shows_status_flash_after_favoriting(): void
+    {
+        $scout = User::factory()->scout()->create();
+        $player = User::factory()->player()->create(['name' => 'Youssef En-Nesyri']);
+        $playerProfile = PlayerProfile::factory()->create(['user_id' => $player->id]);
+
+        $response = $this->actingAs($scout)
+            ->from(route('scout.search'))
+            ->post('/players/' . $playerProfile->id . '/favorite');
+
+        $response->assertRedirect(route('scout.search'));
+        $response->assertSessionHas('status');
+
+        $this->actingAs($scout)->get(route('scout.search'))
+            ->assertSee('successfully added to your shortlisted favorites');
+    }
 }

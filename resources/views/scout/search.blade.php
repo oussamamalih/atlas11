@@ -56,6 +56,15 @@
                 </div>
             </form>
 
+            @if (session('status'))
+                <div class="font-medium text-sm text-[#10b981] bg-[#0d2919] border border-[#1a4030] border-l-4 border-l-[#10b981] p-4 rounded flex items-center mb-6">
+                    <svg class="w-5 h-5 me-2 text-[#10b981] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {{ session('status') }}
+                </div>
+            @endif
+
             <p class="text-[#8fa89c] text-sm mb-6">{{ $players->total() }} player{{ $players->total() !== 1 ? 's' : '' }} found</p>
 
             @if($players->count())
@@ -95,6 +104,23 @@
 
                             @if($player->bio)
                                 <p class="text-sm text-[#8fa89c] line-clamp-2 mb-4">{{ $player->bio }}</p>
+                            @endif
+
+                            @if ($player->isFavoritedBy(auth()->user()))
+                                <form action="{{ route('favorites.destroy', $player) }}" method="POST" class="mb-3">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="w-full font-display uppercase tracking-wider text-xs px-4 py-2 rounded bg-[#133323] border border-[#10b981]/40 text-[#10b981] hover:bg-[#1a4030] transition-colors">
+                                        Saved - Remove from Shortlist
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('favorites.store', $player) }}" method="POST" class="mb-3">
+                                    @csrf
+                                    <button type="submit" class="w-full font-display uppercase tracking-wider text-xs px-4 py-2 rounded bg-[#0a1f14] border border-[#1a4030] text-[#8fa89c] hover:text-[#10b981] hover:border-[#10b981]/40 transition-colors">
+                                        + Save to Shortlist
+                                    </button>
+                                </form>
                             @endif
 
                             <a href="{{ route('player.profile.show', $player) }}" class="block text-center font-display uppercase tracking-wider text-sm px-4 py-2 rounded bg-[#133323] border border-[#1a4030] text-[#10b981] hover:bg-[#1a4030] transition-colors">

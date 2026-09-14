@@ -104,6 +104,43 @@
                         </form>
                     </div>
                 @endif
+
+                @if ($profile->isFavoritedBy(Auth::user()))
+                    <div class="relative overflow-hidden bg-[#0d2919] border border-[#1a4030] border-l-4 border-l-[#f59e0b] p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded">
+                        <div class="atlas-plus-pattern"></div>
+                        <div class="relative flex items-center space-x-3">
+                            <span class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#f59e0b]/15 text-[#f59e0b] font-display font-black text-sm">&#9733;</span>
+                            <div>
+                                <h4 class="font-display text-lg uppercase tracking-wide">{{ __('Saved to Shortlist') }}</h4>
+                                <p class="text-xs text-[#8fa89c]">{{ __('This talent is bookmarked in your saved talents.') }}</p>
+                            </div>
+                        </div>
+                        <form action="{{ route('favorites.destroy', $profile) }}" method="POST" class="relative">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-[#133323] hover:bg-[#1a4030] text-[#10b981] text-xs font-display font-semibold uppercase tracking-[0.08em] rounded transition border border-[#10b981]/40">
+                                {{ __('Remove from Shortlist') }}
+                            </button>
+                        </form>
+                    </div>
+                @else
+                    <div class="relative overflow-hidden bg-[#0d2919] border border-[#1a4030] border-l-4 border-l-[#f59e0b] p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded">
+                        <div class="atlas-plus-pattern"></div>
+                        <div class="relative flex items-center space-x-3">
+                            <span class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#f59e0b]/15 text-[#f59e0b] font-display font-black text-sm">&#9733;</span>
+                            <div>
+                                <h4 class="font-display text-lg uppercase tracking-wide">{{ __('Shortlist This Talent') }}</h4>
+                                <p class="text-xs text-[#8fa89c]">{{ __('Bookmark this player to revisit them later.') }}</p>
+                            </div>
+                        </div>
+                        <form action="{{ route('favorites.store', $profile) }}" method="POST" class="relative">
+                            @csrf
+                            <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-[#f59e0b] hover:bg-[#fbbf24] text-[#0a1f14] text-xs font-display font-semibold uppercase tracking-[0.08em] rounded transition">
+                                {{ __('Add to Shortlist') }}
+                            </button>
+                        </form>
+                    </div>
+                @endif
             @endif
 
             <!-- Main Dossier Header Card -->
