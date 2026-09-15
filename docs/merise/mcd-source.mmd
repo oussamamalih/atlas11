@@ -1,0 +1,69 @@
+%%{init: {"theme": "base", "er": {"layoutDirection": "LR", "entityPadding": 14}}}%%
+erDiagram
+    UTILISATEUR {
+        bigint id PK "identifiant"
+        string name "nom complet"
+        string email "UNIQUE - connexion"
+        datetime email_verified_at
+        string password
+        string role "player / scout / admin"
+        string remember_token
+    }
+
+    PROFIL_JOUEUR {
+        bigint id PK
+        bigint user_id FK "UNIQUE -> UTILISATEUR"
+        string position "GK / DEF / MID / FWD"
+        date date_of_birth
+        string location
+        string preferred_foot
+        int height "cm (nullable)"
+        int weight "kg (nullable)"
+        string current_club
+        text football_experience
+        text bio
+        string phone
+    }
+
+    PROFIL_SCOUT {
+        bigint id PK
+        bigint user_id FK "UNIQUE -> UTILISATEUR"
+        string organization
+        string role_title
+        string location
+        int experience_years
+        string phone
+        string license_number
+        text bio
+    }
+
+    INTERET_DE_SCOUT {
+        bigint id PK "entité-association riche"
+        bigint scout_id FK "-> UTILISATEUR"
+        bigint player_profile_id FK "-> PROFIL_JOUEUR"
+        string status "pending / viewed / contacted / closed"
+        text message
+    }
+
+    FAVORI {
+        bigint id PK "entité-association simple"
+        bigint scout_id FK "-> UTILISATEUR"
+        bigint player_profile_id FK "-> PROFIL_JOUEUR"
+    }
+
+    NOTIFICATION {
+        string id PK "UUID"
+        string type "classe PHP de notification"
+        string notifiable_type "discriminateur polymorphique"
+        bigint notifiable_id "POLYMORPHIQUE -> UTILISATEUR (PAS DE FK)"
+        text data "payload JSON"
+        datetime read_at
+    }
+
+    UTILISATEUR ||--o| PROFIL_JOUEUR : "R1 possède un profil joueur | (0,1) --> (1,1)"
+    UTILISATEUR ||--o| PROFIL_SCOUT : "R2 possède un profil scout | (0,1) --> (1,1)"
+    UTILISATEUR ||--o{ INTERET_DE_SCOUT : "R3 émet un intérêt | (0,N) --> (1,1)"
+    PROFIL_JOUEUR ||--o{ INTERET_DE_SCOUT : "R4 est concerné par | (0,N) --> (1,1)"
+    UTILISATEUR ||--o{ FAVORI : "R5 ajoute un favori | (0,N) --> (1,1)"
+    PROFIL_JOUEUR ||--o{ FAVORI : "R6 est mis en favori par | (0,N) --> (1,1)"
+    UTILISATEUR ||--o{ NOTIFICATION : "R7 reçoit | POLYMORPHIQUE (0,N) --> (1,1) - aucune FK en base"

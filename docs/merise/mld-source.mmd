@@ -1,0 +1,81 @@
+%%{init: {"theme": "base", "er": {"layoutDirection": "LR", "entityPadding": 14}}}%%
+erDiagram
+    users {
+        bigint id PK
+        string name
+        string email "UNIQUE"
+        datetime email_verified_at
+        string password
+        string role "player / scout / admin"
+        string remember_token
+        datetime created_at
+        datetime updated_at
+    }
+
+    player_profiles {
+        bigint id PK
+        bigint user_id FK "UNIQUE -> users.id"
+        string position
+        date date_of_birth
+        string location
+        string preferred_foot
+        int height
+        int weight
+        string current_club
+        text football_experience
+        text bio
+        string phone
+        datetime created_at
+        datetime updated_at
+    }
+
+    scout_profiles {
+        bigint id PK
+        bigint user_id FK "UNIQUE -> users.id"
+        string organization
+        string role_title
+        string location
+        int experience_years
+        string phone
+        string license_number
+        text bio
+        datetime created_at
+        datetime updated_at
+    }
+
+    scouting_interests {
+        bigint id PK
+        bigint scout_id FK "-> users.id"
+        bigint player_profile_id FK "-> player_profiles.id"
+        string status "pending / viewed / contacted / closed"
+        text message
+        datetime created_at
+        datetime updated_at
+    }
+
+    favorites {
+        bigint id PK
+        bigint scout_id FK "-> users.id"
+        bigint player_profile_id FK "-> player_profiles.id"
+        datetime created_at
+        datetime updated_at
+    }
+
+    notifications {
+        string id PK "UUID"
+        string type
+        string notifiable_type "polymorphic"
+        bigint notifiable_id "POLYMORPHIQUE -> users.id (PAS DE FK)"
+        text data
+        datetime read_at
+        datetime created_at
+        datetime updated_at
+    }
+
+    users ||--o| player_profiles : "possède un profil joueur (1:1)"
+    users ||--o| scout_profiles : "possède un profil scout (1:1)"
+    users ||--o{ scouting_interests : "émet (1:N)"
+    player_profiles ||--o{ scouting_interests : "reçoit (1:N)"
+    users ||--o{ favorites : "ajoute (1:N)"
+    player_profiles ||--o{ favorites : "est favorisé (1:N)"
+    users ||--o{ notifications : "reçoit - POLYMORPHIQUE (aucune FK en base)"
