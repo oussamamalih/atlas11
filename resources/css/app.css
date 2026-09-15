@@ -4,21 +4,98 @@
 
 /* ================================================================
    TALENTX11 — FOOTBALL SCOUTING PLATFORM
-   Dark emerald design system with athletic typography
+   Light + Dark design system with athletic typography
+   Brand: #006199  |  Semantic: emerald=success, amber=pending, red=danger
    ================================================================ */
 
+/* ----------------------------------------------------------------
+   THEME TOKENS (Dark = default + fallback)
+   ---------------------------------------------------------------- */
 :root {
-    --atlas-dark: #0a1f14;
-    --atlas-surface: #0d2919;
-    --atlas-surface-light: #133323;
-    --atlas-surface-lighter: #1a4030;
+    color-scheme: dark;
+
+    /* Semantic --tx-* tokens */
+    --tx-bg: #050d1a;
+    --tx-bg-alt: #0a1626;
+    --tx-surface: #0d1d33;
+    --tx-surface-2: #12233c;
+    --tx-surface-hover: #16294a;
+    --tx-text: #f3f7fb;
+    --tx-muted: #93a7bd;
+    --tx-border: #1e3552;
+    --tx-border-strong: #2a4a72;
+    --tx-brand: #006199;
+    --tx-brand-strong: #38a3e0;
+    --tx-brand-deep: #004d7d;
+    --tx-brand-contrast: #ffffff;
+    --tx-brand-soft: rgba(0, 97, 153, 0.16);
+    --tx-on-brand: #ffffff;
+
+    /* Functional status colors (kept semantic) */
+    --tx-success: #10b981;
+    --tx-warning: #f59e0b;
+    --tx-danger: #ef4444;
+
+    /* Theme chrome */
+    --tx-nav-bg: rgba(5, 13, 26, 0.9);
+
+    /* Hero artwork — dedicated dark asset (no dark overlay on the light art) */
+    --tx-hero-bg: #021d3b;
+    --tx-hero-image: url('/images/hero-player-dark.png');
+    --tx-hero-overlay: linear-gradient(90deg, #050d1a 0%, rgba(5, 13, 26, 0.96) 28%, rgba(5, 13, 26, 0.82) 46%, rgba(5, 13, 26, 0.3) 64%, transparent 80%);
+    --tx-hero-overlay-mobile: linear-gradient(180deg, rgba(5, 13, 26, 0.9) 0%, rgba(5, 13, 26, 0.78) 45%, rgba(5, 13, 26, 0.45) 78%, #050d1a 100%);
+    --tx-hero-fade: linear-gradient(to top, #050d1a 0%, transparent 100%);
+
+    /* Legacy --atlas-* variables — preserved, re-pointed per theme */
+    --atlas-dark: var(--tx-bg);
+    --atlas-surface: var(--tx-surface);
+    --atlas-surface-light: var(--tx-surface-2);
+    --atlas-surface-lighter: var(--tx-surface-hover);
     --atlas-green: #10b981;
     --atlas-green-dark: #059669;
-    --atlas-lime: #a3e635;
-    --atlas-text: #ffffff;
-    --atlas-text-muted: #8fa89c;
-    --atlas-border: #1a4030;
-    --atlas-border-light: #1f4d38;
+    --atlas-lime: var(--tx-brand-strong);
+    --atlas-text: var(--tx-text);
+    --atlas-text-muted: var(--tx-muted);
+    --atlas-border: var(--tx-border);
+    --atlas-border-light: var(--tx-border-strong);
+    --atlas-brand: var(--tx-brand);
+    --atlas-brand-strong: var(--tx-brand-strong);
+    --atlas-brand-deep: var(--tx-brand-deep);
+}
+
+/* ----------------------------------------------------------------
+   LIGHT THEME TOKENS
+   ---------------------------------------------------------------- */
+html[data-theme="light"] {
+    color-scheme: light;
+
+    --tx-bg: #f7fafc;
+    --tx-bg-alt: #eef4f9;
+    --tx-surface: #ffffff;
+    --tx-surface-2: #f1f5f9;
+    --tx-surface-hover: #e6eef5;
+    --tx-text: #0b1c2e;
+    --tx-muted: #55677a;
+    --tx-border: #d3dde7;
+    --tx-border-strong: #b9c7d6;
+    --tx-brand: #006199;
+    --tx-brand-strong: #004d7d;
+    --tx-brand-deep: #004d7d;
+    --tx-brand-contrast: #ffffff;
+    --tx-brand-soft: rgba(0, 97, 153, 0.1);
+    --tx-on-brand: #ffffff;
+
+    --tx-success: #059669;
+    --tx-warning: #b45309;
+    --tx-danger: #dc2626;
+
+    --tx-nav-bg: rgba(247, 250, 252, 0.92);
+
+    --tx-hero-bg: #f5f6f8;
+    --tx-hero-image: url('/images/hero-player.png');
+    --tx-hero-overlay: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.96) 28%, rgba(255, 255, 255, 0.78) 48%, rgba(255, 255, 255, 0.18) 66%, transparent 82%);
+    --tx-hero-overlay-mobile: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.82) 45%, rgba(255, 255, 255, 0.35) 78%, #f7fafc 100%);
+    --tx-hero-fade: linear-gradient(to top, #f7fafc 0%, transparent 100%);
 }
 
 html { background: var(--atlas-dark); }
@@ -30,7 +107,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-::selection { background: rgba(16, 185, 129, .4); color: #fff; }
+::selection { background: var(--atlas-brand-soft); color: var(--atlas-text); }
 
 /* ================================================================
    DECORATIVE: Subtle noise texture overlay
@@ -59,18 +136,21 @@ body > * { position: relative; z-index: 1; }
 
 h1, h2, h3, h4, h5, h6 {
     letter-spacing: -0.02em;
-    color: #fff !important;
+    color: var(--atlas-text) !important;
 }
 
 /* ================================================================
    NAVIGATION
    ================================================================ */
 .atlas-nav {
-    background: rgba(10, 31, 20, 0.95) !important;
+    background: var(--tx-nav-bg) !important;
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
     border-bottom: 1px solid var(--atlas-border) !important;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3) !important;
+}
+html[data-theme="light"] .atlas-nav {
+    box-shadow: 0 4px 30px rgba(11, 28, 46, 0.08) !important;
 }
 .atlas-nav-inner { max-width: 1440px !important; }
 
@@ -86,10 +166,10 @@ h1, h2, h3, h4, h5, h6 {
     padding-inline: 0.9rem !important;
     transition: color 0.2s ease !important;
 }
-.atlas-nav .atlas-nav-link:hover { color: #fff !important; }
+.atlas-nav .atlas-nav-link:hover { color: var(--atlas-text) !important; }
 .atlas-nav .atlas-nav-link[aria-current="page"],
 .atlas-nav .atlas-nav-link.active {
-    color: #fff !important;
+    color: var(--atlas-text) !important;
 }
 .atlas-nav .atlas-nav-link[aria-current="page"]::after,
 .atlas-nav .atlas-nav-link.active::after {
@@ -99,7 +179,7 @@ h1, h2, h3, h4, h5, h6 {
     right: 0.9rem;
     bottom: -2px;
     height: 2px;
-    background: var(--atlas-green);
+    background: var(--atlas-brand);
 }
 
 /* ================================================================
@@ -133,7 +213,7 @@ h1, h2, h3, h4, h5, h6 {
 .atlas-stat {
     background: var(--atlas-surface) !important;
     border: 1px solid var(--atlas-border) !important;
-    border-left: 3px solid var(--atlas-green) !important;
+    border-left: 3px solid var(--atlas-brand) !important;
     border-radius: 4px !important;
     padding: 1.25rem 1.5rem;
 }
@@ -147,8 +227,8 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     gap: 0.5rem;
     padding: 0.6rem 1.5rem;
-    background-color: var(--atlas-green);
-    color: #0a1f14;
+    background-color: var(--atlas-brand);
+    color: var(--tx-on-brand);
     font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
     font-weight: 600;
     font-size: 0.95rem;
@@ -160,10 +240,10 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.15s ease;
 }
 .atlas-btn-primary:hover {
-    background-color: #34d399;
-    color: #0a1f14;
+    background-color: var(--atlas-brand-strong);
+    color: var(--tx-on-brand);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    box-shadow: 0 4px 12px rgba(0, 97, 153, 0.35);
 }
 
 .atlas-btn-secondary {
@@ -185,9 +265,9 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.15s ease;
 }
 .atlas-btn-secondary:hover {
-    border-color: var(--atlas-green);
-    color: var(--atlas-green);
-    background-color: rgba(16, 185, 129, 0.05);
+    border-color: var(--atlas-brand);
+    color: var(--atlas-brand);
+    background-color: var(--atlas-brand-soft);
 }
 
 .atlas-btn-danger {
@@ -197,7 +277,7 @@ h1, h2, h3, h4, h5, h6 {
     gap: 0.5rem;
     padding: 0.6rem 1.5rem;
     background-color: transparent;
-    color: #ef4444;
+    color: var(--tx-danger);
     font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
     font-weight: 600;
     font-size: 0.95rem;
@@ -210,14 +290,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 .atlas-btn-danger:hover {
     background-color: rgba(239, 68, 68, 0.1);
-    border-color: #ef4444;
+    border-color: var(--tx-danger);
 }
 
 /* Override Laravel Breeze button classes */
 a.bg-\[\#16A34A\], button.bg-\[\#16A34A\],
 input[type="submit"].bg-\[\#16A34A\] {
-    background-color: var(--atlas-green) !important;
-    color: #0a1f14 !important;
+    background-color: var(--atlas-brand) !important;
+    color: var(--tx-on-brand) !important;
     border-radius: 3px !important;
     font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif !important;
     font-weight: 600 !important;
@@ -230,15 +310,15 @@ input[type="submit"].bg-\[\#16A34A\] {
 }
 a.bg-\[\#16A34A\]:hover, button.bg-\[\#16A34A\]:hover,
 input[type="submit"].bg-\[\#16A34A\]:hover {
-    background-color: #34d399 !important;
+    background-color: var(--atlas-brand-strong) !important;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25) !important;
+    box-shadow: 0 4px 12px rgba(0, 97, 153, 0.35) !important;
 }
 
 a.bg-\[\#0B1F33\], button.bg-\[\#0B1F33\] {
     background-color: var(--atlas-surface-lighter) !important;
     border: 1px solid var(--atlas-border-light) !important;
-    color: #fff !important;
+    color: var(--atlas-text) !important;
     border-radius: 3px !important;
     font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif !important;
     font-weight: 600 !important;
@@ -249,7 +329,7 @@ a.bg-\[\#0B1F33\], button.bg-\[\#0B1F33\] {
 }
 a.bg-\[\#0B1F33\]:hover, button.bg-\[\#0B1F33\]:hover {
     background-color: var(--atlas-surface-light) !important;
-    border-color: var(--atlas-green) !important;
+    border-color: var(--atlas-brand) !important;
 }
 
 /* ================================================================
@@ -276,9 +356,9 @@ a.bg-\[\#0B1F33\]:hover, button.bg-\[\#0B1F33\]:hover {
     text-decoration: none;
 }
 .atlas-nav-auth-login:hover {
-    border-color: var(--atlas-green);
-    color: var(--atlas-green);
-    background-color: rgba(16, 185, 129, 0.06);
+    border-color: var(--atlas-brand);
+    color: var(--atlas-brand);
+    background-color: var(--atlas-brand-soft);
 }
 
 .atlas-nav-auth-signup {
@@ -287,14 +367,14 @@ a.bg-\[\#0B1F33\]:hover, button.bg-\[\#0B1F33\]:hover {
     justify-content: center;
     height: 44px;
     padding: 0 1.75rem;
-    background-color: var(--atlas-green);
-    color: #0a1f14;
+    background-color: var(--atlas-brand);
+    color: var(--tx-on-brand);
     font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
     font-weight: 600;
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    border: 2px solid var(--atlas-green);
+    border: 2px solid var(--atlas-brand);
     border-radius: 3px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -302,11 +382,11 @@ a.bg-\[\#0B1F33\]:hover, button.bg-\[\#0B1F33\]:hover {
     text-decoration: none;
 }
 .atlas-nav-auth-signup:hover {
-    background-color: #34d399;
-    border-color: #34d399;
-    color: #0a1f14;
+    background-color: var(--atlas-brand-strong);
+    border-color: var(--atlas-brand-strong);
+    color: var(--tx-on-brand);
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 97, 153, 0.4);
 }
 
 @media (max-width: 640px) {
@@ -329,17 +409,17 @@ input, select, textarea {
     box-shadow: none !important;
 }
 input:focus, select:focus, textarea:focus {
-    border-color: var(--atlas-green) !important;
-    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15) !important;
+    border-color: var(--atlas-brand) !important;
+    box-shadow: 0 0 0 2px var(--atlas-brand-soft) !important;
     background-color: var(--atlas-surface-lighter) !important;
-    color: #fff !important;
+    color: var(--atlas-text) !important;
 }
 input::placeholder, textarea::placeholder {
     color: var(--atlas-text-muted) !important;
     opacity: 0.7;
 }
 select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%238fa89c'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2393a7bd'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E") !important;
     background-repeat: no-repeat !important;
     background-position: right 0.75rem center !important;
     background-size: 1.25rem !important;
@@ -384,14 +464,14 @@ tbody td {
 .rounded-full { border-radius: 999px !important; }
 
 /* ================================================================
-   HERO SECTION
+   HERO SECTION — theme-aware artwork + overlays
    ================================================================ */
 .atlas-hero-section {
     position: relative !important;
     width: 100% !important;
-    min-height: calc(100vh - 80px) !important;
     min-height: 650px !important;
-    background-color: var(--atlas-dark) !important;
+    min-height: max(650px, calc(100vh - 80px)) !important;
+    background-color: var(--tx-hero-bg) !important;
     display: flex !important;
     align-items: center !important;
     overflow: hidden !important;
@@ -402,7 +482,8 @@ tbody td {
     inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    background-size: cover !important;
+    background-image: var(--tx-hero-image) !important;
+    background-size: auto 100% !important;
     background-repeat: no-repeat !important;
     background-position: right center !important;
     z-index: 1 !important;
@@ -411,7 +492,7 @@ tbody td {
 .atlas-hero-overlay-desktop {
     position: absolute !important;
     inset: 0 !important;
-    background: linear-gradient(90deg, #0a1f14 0%, rgba(10,31,20,0.96) 28%, rgba(10,31,20,0.82) 46%, rgba(10,31,20,0.25) 64%, rgba(10,31,20,0.0) 78%, transparent 100%) !important;
+    background: var(--tx-hero-overlay) !important;
     z-index: 2 !important;
     pointer-events: none !important;
 }
@@ -419,7 +500,7 @@ tbody td {
 .atlas-hero-overlay-mobile {
     position: absolute !important;
     inset: 0 !important;
-    background: linear-gradient(180deg, rgba(10,31,20,0.88) 0%, rgba(10,31,20,0.76) 45%, rgba(10,31,20,0.45) 75%, #0a1f14 100%) !important;
+    background: var(--tx-hero-overlay-mobile) !important;
     z-index: 2 !important;
     pointer-events: none !important;
 }
@@ -430,7 +511,7 @@ tbody td {
     right: 0 !important;
     bottom: 0 !important;
     height: 70px !important;
-    background: linear-gradient(to top, #0a1f14 0%, transparent 100%) !important;
+    background: var(--tx-hero-fade) !important;
     z-index: 3 !important;
     pointer-events: none !important;
 }
@@ -439,14 +520,14 @@ tbody td {
     position: relative !important;
     z-index: 10 !important;
     width: 100% !important;
-    min-height: calc(100vh - 80px) !important;
     min-height: 650px !important;
+    min-height: max(650px, calc(100vh - 80px)) !important;
     display: flex !important;
     align-items: center !important;
 }
 
 .atlas-hero-heading {
-    color: #ffffff !important;
+    color: var(--atlas-text) !important;
     font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif !important;
     letter-spacing: -0.02em !important;
     line-height: 0.95 !important;
@@ -454,7 +535,10 @@ tbody td {
 }
 
 .atlas-hero-emerald {
-    color: var(--atlas-green) !important;
+    color: var(--atlas-brand-strong) !important;
+    font-style: italic !important;
+    font-synthesis: style;
+    font-weight: 700 !important;
 }
 
 .atlas-hero-desc {
@@ -465,28 +549,31 @@ tbody td {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    background-color: var(--atlas-green) !important;
-    color: #0a1f14 !important;
+    background-color: var(--atlas-brand) !important;
+    color: var(--tx-on-brand) !important;
     font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif !important;
     font-weight: 600 !important;
     font-size: 1rem !important;
     text-transform: uppercase !important;
     letter-spacing: 0.08em !important;
     border-radius: 3px !important;
+    border: none !important;
     transition: background-color 0.15s ease, transform 0.1s ease !important;
 }
 .atlas-btn-player:hover {
-    background-color: #34d399 !important;
-    color: #0a1f14 !important;
+    background-color: var(--atlas-brand-strong) !important;
+    color: var(--tx-on-brand) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0, 97, 153, 0.35) !important;
 }
 
 .atlas-btn-scout {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    background-color: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: #ffffff !important;
+    background-color: transparent !important;
+    border: 1px solid var(--atlas-border-strong) !important;
+    color: var(--atlas-text) !important;
     font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif !important;
     font-weight: 600 !important;
     font-size: 1rem !important;
@@ -496,13 +583,13 @@ tbody td {
     transition: border-color 0.15s ease, background-color 0.15s ease !important;
 }
 .atlas-btn-scout:hover {
-    border-color: rgba(255, 255, 255, 0.5) !important;
-    background-color: rgba(255, 255, 255, 0.08) !important;
-    color: #ffffff !important;
+    border-color: var(--atlas-brand) !important;
+    background-color: var(--atlas-brand-soft) !important;
+    color: var(--atlas-brand) !important;
 }
 
 .atlas-stat-val {
-    color: #ffffff !important;
+    color: var(--atlas-text) !important;
     font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif !important;
     font-weight: 600 !important;
     letter-spacing: 0.02em !important;
@@ -520,6 +607,9 @@ tbody td {
     border-radius: 4px !important;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4) !important;
 }
+html[data-theme="light"] .atlas-auth-card {
+    box-shadow: 0 20px 60px rgba(11, 28, 46, 0.12) !important;
+}
 
 /* ================================================================
    SECTION BACKGROUNDS
@@ -536,7 +626,7 @@ tbody td {
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--atlas-dark); }
 ::-webkit-scrollbar-thumb { background: var(--atlas-surface-lighter); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--atlas-green); }
+::-webkit-scrollbar-thumb:hover { background: var(--atlas-brand); }
 
 /* ================================================================
    RESPONSIVE
@@ -558,9 +648,6 @@ tbody td {
     .atlas-hero-inner {
         min-height: auto !important;
     }
-    .atlas-hero-bg {
-        background-position: 72% center !important;
-    }
 }
 
 @media (max-width: 640px) {
@@ -568,9 +655,6 @@ tbody td {
         min-height: calc(100vh - 80px) !important;
         padding-top: 2.5rem !important;
         padding-bottom: 2.5rem !important;
-    }
-    .atlas-hero-bg {
-        background-position: 75% 20% !important;
     }
 }
 
@@ -582,7 +666,7 @@ tbody td {
     width: 100%;
     height: 100%;
     opacity: 0.04;
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 8v24M8 20h24' stroke='%2310b981' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 8v24M8 20h24' stroke='%23006199' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
     background-size: 40px 40px;
     pointer-events: none;
 }
@@ -591,7 +675,7 @@ tbody td {
     position: absolute;
     width: 200%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.08), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 97, 153, 0.12), transparent);
     transform: rotate(-12deg);
     pointer-events: none;
 }
@@ -604,7 +688,8 @@ tbody td {
     font-family: 'Teko', 'Bebas Neue', system-ui, sans-serif;
     font-weight: 700;
     text-transform: uppercase;
-    color: rgba(16, 185, 129, 0.04);
+    color: var(--atlas-brand);
+    opacity: 0.06;
     font-size: clamp(4rem, 10vw, 10rem);
     line-height: 0.9;
     pointer-events: none;
@@ -641,30 +726,33 @@ nav[role="navigation"] span {
 }
 nav[role="navigation"] a:hover {
     background-color: var(--atlas-surface-lighter) !important;
-    border-color: var(--atlas-green) !important;
-    color: #fff !important;
+    border-color: var(--atlas-brand) !important;
+    color: var(--atlas-text) !important;
 }
 nav[role="navigation"] span[aria-current="page"] {
-    background-color: var(--atlas-green) !important;
-    color: #0a1f14 !important;
-    border-color: var(--atlas-green) !important;
+    background-color: var(--atlas-brand) !important;
+    color: var(--tx-on-brand) !important;
+    border-color: var(--atlas-brand) !important;
 }
 
 /* ================================================================
-   UTILITY: High contrast text on green
+   UTILITY: Brand + semantic color helpers
    ================================================================ */
 .text-atlas-green { color: var(--atlas-green) !important; }
 .bg-atlas-green { background-color: var(--atlas-green) !important; }
 .border-atlas-green { border-color: var(--atlas-green) !important; }
+.text-atlas-brand { color: var(--atlas-brand) !important; }
+.bg-atlas-brand { background-color: var(--atlas-brand) !important; }
+.border-atlas-brand { border-color: var(--atlas-brand) !important; }
 
 /* Override the old navy/pitch color classes */
-.text-\[\#0B1F33\], .text-navy-900 { color: #fff !important; }
+.text-\[\#0B1F33\], .text-navy-900 { color: var(--atlas-text-muted) !important; }
 .bg-\[\#0B1F33\], .bg-navy-900 { background-color: var(--atlas-surface-lighter) !important; }
-.text-\[\#16A34A\], .text-pitch-600 { color: var(--atlas-green) !important; }
-.bg-\[\#16A34A\], .bg-pitch-600 { background-color: var(--atlas-green) !important; }
-.border-\[\#16A34A\], .border-pitch-600 { border-color: var(--atlas-green) !important; }
+.text-\[\#16A34A\], .text-pitch-600 { color: var(--atlas-brand) !important; }
+.bg-\[\#16A34A\], .bg-pitch-600 { background-color: var(--atlas-brand) !important; }
+.border-\[\#16A34A\], .border-pitch-600 { border-color: var(--atlas-brand) !important; }
 
-/* Status text overrides for dark theme */
+/* Status text overrides */
 .text-\[\#64748B\] { color: var(--atlas-text-muted) !important; }
 .text-gray-500, .text-gray-400, .text-gray-300 { color: var(--atlas-text-muted) !important; }
 .text-slate-500, .text-slate-400, .text-slate-300 { color: var(--atlas-text-muted) !important; }
@@ -677,34 +765,37 @@ nav[role="navigation"] span[aria-current="page"] {
     border-color: var(--atlas-border) !important;
 }
 
-/* Status badges - keep functional colors */
+/* Status badges - keep functional colors (emerald/amber/red) */
 .text-amber-600, .text-amber-800, .bg-amber-50, .border-amber-200 {
-    color: #f59e0b !important;
+    color: var(--tx-warning) !important;
     background-color: rgba(245, 158, 11, 0.1) !important;
     border-color: rgba(245, 158, 11, 0.2) !important;
 }
 .bg-emerald-50, .text-emerald-800, .border-emerald-200 {
     background-color: rgba(16, 185, 129, 0.1) !important;
-    color: var(--atlas-green) !important;
+    color: #10b981 !important;
     border-color: rgba(16, 185, 129, 0.2) !important;
 }
 .bg-red-50, .text-red-700, .text-red-600, .border-red-200 {
     background-color: rgba(239, 68, 68, 0.1) !important;
-    color: #ef4444 !important;
+    color: var(--tx-danger) !important;
     border-color: rgba(239, 68, 68, 0.2) !important;
 }
 
 /* Alert/flash message overrides */
 .font-medium.text-sm.text-\[\#15803D\] {
-    color: var(--atlas-green) !important;
+    color: #10b981 !important;
     background-color: rgba(16, 185, 129, 0.1) !important;
     border-color: rgba(16, 185, 129, 0.2) !important;
 }
 
-/* Shadow overrides - subtle on dark */
+/* Shadow overrides */
 .shadow, .shadow-sm { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important; }
 .shadow-md { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important; }
 .shadow-lg { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important; }
+html[data-theme="light"] .shadow { box-shadow: 0 1px 3px rgba(11, 28, 46, 0.06) !important; }
+html[data-theme="light"] .shadow-md { box-shadow: 0 4px 12px rgba(11, 28, 46, 0.08) !important; }
+html[data-theme="light"] .shadow-lg { box-shadow: 0 10px 30px rgba(11, 28, 46, 0.1) !important; }
 
 /* Checkbox overrides */
 input[type="checkbox"] {
@@ -712,9 +803,17 @@ input[type="checkbox"] {
     border-color: var(--atlas-border) !important;
 }
 input[type="checkbox"]:checked {
-    background-color: var(--atlas-green) !important;
-    border-color: var(--atlas-green) !important;
+    background-color: var(--atlas-brand) !important;
+    border-color: var(--atlas-brand) !important;
 }
+
+/* Alpine x-cloak */
+[x-cloak] { display: none !important; }
+
+/* Theme-aware wordmark logos — dedicated light/dark PNGs, CSS-only swap */
+.atlas-theme-logo-light { display: none !important; }
+html[data-theme="light"] .atlas-theme-logo-light { display: inline !important; }
+html[data-theme="light"] .atlas-theme-logo-dark { display: none !important; }
 
 /* Link transitions */
 a { transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease; }
@@ -724,8 +823,114 @@ a { transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15
 .space-y-5 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.25rem !important; }
 .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem !important; }
 
-/* Dropdown overrides for dark theme */
+/* Dropdown overrides */
 [x-show] .bg-white, [x-ref="panel"] {
     background-color: var(--atlas-surface) !important;
     border-color: var(--atlas-border) !important;
 }
+
+/* ================================================================
+   THEME SHIM — legacy hard-coded hex utilities → tokens
+   Maps every legacy pitch/green hex used in Blade to theme tokens
+   so existing pages render correctly in BOTH light and dark modes.
+   ================================================================ */
+
+/* --- Surfaces --- */
+.bg-\[\#0a1f14\] { background-color: var(--atlas-dark) !important; }
+.bg-\[\#0d2919\] { background-color: var(--atlas-surface) !important; }
+.bg-\[\#133323\] { background-color: var(--atlas-surface-light) !important; }
+.bg-\[\#133323\]\/70 { background-color: var(--atlas-surface-light) !important; }
+.bg-\[\#1a4030\] { background-color: var(--atlas-surface-lighter) !important; }
+.bg-\[\#1a4030\]\/50, .bg-\[\#1a4030\]\/80 { background-color: var(--atlas-surface-lighter) !important; }
+.bg-\[\#1a1f14\] { background-color: var(--atlas-surface-light) !important; }
+
+.border-\[\#0a1f14\] { border-color: var(--atlas-dark) !important; }
+.border-\[\#133323\] { border-color: var(--atlas-surface-light) !important; }
+.border-\[\#1a4030\] { border-color: var(--atlas-border) !important; }
+.border-\[\#1f4d38\] { border-color: var(--atlas-border-light) !important; }
+
+/* --- Brand (green/lime → TalentX11 blue) --- */
+.bg-\[\#10b981\] { background-color: var(--atlas-brand) !important; }
+.bg-\[\#10b981\]\/5, .bg-\[\#10b981\]\/10, .bg-\[\#10b981\]\/20 { background-color: var(--atlas-brand-soft) !important; }
+.bg-\[\#10b981\]\/90 { background-color: var(--atlas-brand) !important; }
+.bg-\[\#34d399\] { background-color: var(--atlas-brand-strong) !important; }
+.bg-\[\#059669\] { background-color: var(--atlas-brand-deep) !important; }
+.bg-\[\#0d9488\] { background-color: var(--atlas-brand-deep) !important; }
+.bg-\[\#a3e635\] { background-color: var(--atlas-brand) !important; }
+.bg-\[\#a3e635\]\/15 { background-color: var(--atlas-brand-soft) !important; }
+.bg-\[rgba\(16\,185\,129\,0\.1\)\], .bg-\[rgba\(163\,230\,53\,0\.1\)\] { background-color: var(--atlas-brand-soft) !important; }
+
+.text-\[\#10b981\] { color: var(--atlas-brand) !important; }
+.text-\[\#34d399\] { color: var(--atlas-brand-strong) !important; }
+.text-\[\#059669\] { color: var(--atlas-brand-deep) !important; }
+.text-\[\#0d9488\] { color: var(--atlas-brand-deep) !important; }
+.text-\[\#a3e635\] { color: var(--atlas-brand) !important; }
+
+.border-\[\#10b981\] { border-color: var(--atlas-brand) !important; }
+.border-\[\#10b981\]\/20, .border-\[\#10b981\]\/30, .border-\[\#10b981\]\/40 { border-color: var(--atlas-brand-soft) !important; }
+.border-\[\#a3e635\]\/20, .border-\[\#a3e635\]\/40 { border-color: var(--atlas-brand-soft) !important; }
+.border-\[rgba\(16\,185\,129\,0\.25\)\], .border-\[rgba\(163\,230\,53\,0\.25\)\] { border-color: var(--atlas-brand-soft) !important; }
+.border-l-\[\#10b981\] { border-left-color: var(--atlas-brand) !important; }
+.border-l-\[\#10b981\]\/40 { border-left-color: var(--atlas-brand-soft) !important; }
+
+/* --- White-on-brand: keep white (light mode flips .text-white below) --- */
+html[data-theme="light"] .bg-\[\#10b981\].text-white,
+html[data-theme="light"] .bg-\[\#10b981\]\/90.text-white,
+html[data-theme="light"] .bg-\[\#34d399\].text-white,
+html[data-theme="light"] .bg-\[\#0d9488\].text-white,
+html[data-theme="light"] .bg-\[\#059669\].text-white,
+html[data-theme="light"] .bg-\[\#16A34A\].text-white { color: var(--tx-on-brand) !important; }
+
+/* --- Dark navy text → white on brand, dark on amber (semantic) --- */
+.text-\[\#0a1f14\] { color: var(--tx-on-brand) !important; }
+.bg-\[\#f59e0b\] .text-\[\#0a1f14\],
+.bg-\[\#fbbf24\] .text-\[\#0a1f14\],
+.bg-\[\#f59e0b\].text-\[\#0a1f14\],
+.bg-\[\#fbbf24\].text-\[\#0a1f14\] { color: #0a1f14 !important; }
+
+/* --- Muted --- */
+.text-\[\#8fa89c\], .text-\[\#8fa89c\]\/60 { color: var(--atlas-text-muted) !important; }
+.placeholder\:text-\[\#8fa89c\]\/60::placeholder { color: var(--atlas-text-muted) !important; }
+
+/* --- Functional statuses stay amber/red --- */
+.text-\[\#f59e0b\], .text-\[\#fbbf24\] { color: var(--tx-warning) !important; }
+.bg-\[\#f59e0b\] { background-color: var(--tx-warning) !important; }
+.bg-\[\#f59e0b\]\/15 { background-color: rgba(245, 158, 11, 0.15) !important; }
+.bg-\[\#fbbf24\] { background-color: #fbbf24 !important; }
+.bg-\[rgba\(245\,158\,11\,0\.1\)\] { background-color: rgba(245, 158, 11, 0.1) !important; }
+.border-\[rgba\(245\,158\,11\,0\.25\)\] { border-color: rgba(245, 158, 11, 0.25) !important; }
+.text-\[\#ef4444\] { color: var(--tx-danger) !important; }
+.border-l-\[\#ef4444\] { border-left-color: var(--tx-danger) !important; }
+
+/* --- Hover variants --- */
+.hover\:bg-\[\#10b981\]\/5:hover { background-color: var(--atlas-brand-soft) !important; }
+.hover\:bg-\[\#10b981\]\/90:hover { background-color: var(--atlas-brand) !important; }
+.hover\:bg-\[\#34d399\]:hover { background-color: var(--atlas-brand-strong) !important; }
+.hover\:bg-\[\#059669\]:hover { background-color: var(--atlas-brand-deep) !important; }
+.hover\:bg-\[\#0d9488\]:hover { background-color: var(--atlas-brand-deep) !important; }
+.hover\:bg-\[\#a3e635\]:hover { background-color: var(--atlas-brand) !important; }
+.hover\:bg-\[\#133323\]:hover { background-color: var(--atlas-surface-light) !important; }
+.hover\:bg-\[\#133323\]\/50:hover { background-color: var(--atlas-surface-light) !important; }
+.hover\:bg-\[\#133323\]\/70:hover { background-color: var(--atlas-surface-light) !important; }
+.hover\:bg-\[\#1a4030\]:hover { background-color: var(--atlas-surface-lighter) !important; }
+.hover\:bg-\[\#1a4030\]\/80:hover { background-color: var(--atlas-surface-lighter) !important; }
+.hover\:bg-\[\#0d2919\]:hover { background-color: var(--atlas-surface) !important; }
+.hover\:text-\[\#10b981\]:hover { color: var(--atlas-brand) !important; }
+.hover\:text-\[\#34d399\]:hover { color: var(--atlas-brand-strong) !important; }
+.hover\:text-\[\#a3e635\]:hover { color: var(--atlas-brand) !important; }
+.hover\:border-\[\#10b981\]:hover { border-color: var(--atlas-brand) !important; }
+.hover\:border-\[\#10b981\]\/40:hover { border-color: var(--atlas-brand-soft) !important; }
+.hover\:border-\[\#1a4030\]:hover { border-color: var(--atlas-border) !important; }
+.hover\:border-\[\#1f4d38\]:hover { border-color: var(--atlas-border-light) !important; }
+.hover\:bg-\[\#fbbf24\]:hover { background-color: #fbbf24 !important; }
+
+/* --- Focus rings / offsets → brand --- */
+.focus\:ring-\[\#10b981\]\/50:focus { --tw-ring-color: var(--atlas-brand) !important; --tw-ring-opacity: 1; }
+.focus\:ring-\[\#10b981\]:focus { --tw-ring-color: var(--atlas-brand) !important; }
+.focus\:border-\[\#10b981\]:focus { border-color: var(--atlas-brand) !important; }
+.ring-offset-\[\#0a1f14\] { --tw-ring-offset-color: var(--atlas-dark); }
+
+/* --- Light-mode: flip white text to theme text (except on brand/badges) --- */
+html[data-theme="light"] .text-white { color: var(--atlas-text) !important; }
+html[data-theme="light"] .hover\:text-white:hover { color: var(--atlas-text) !important; }
+html[data-theme="light"] .border-l-white { border-left-color: var(--atlas-brand) !important; }

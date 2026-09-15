@@ -3,6 +3,8 @@ import forms from '@tailwindcss/forms';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: 'class',
+
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
@@ -46,6 +48,20 @@ export default {
                 lime: {
                     DEFAULT: '#a3e635',
                     accent: '#a3e635',
+                },
+                brand: {
+                    DEFAULT: '#006199',
+                    50: '#e6f1f8',
+                    100: '#c2e0f0',
+                    200: '#8fc9e3',
+                    300: '#55aed2',
+                    400: '#2a96c2',
+                    500: '#006199',
+                    600: '#00517f',
+                    700: '#004067',
+                    800: '#002f4d',
+                    900: '#001f33',
+                    950: '#001019',
                 },
                 surface: {
                     DEFAULT: '#0d2919',

@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="light dark">
 
         <title>TalentX11 — Discover Morocco's Football Talent</title>
 
@@ -10,6 +11,20 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <script>
+            (function () {
+                try {
+                    var stored = localStorage.getItem('tx11-theme');
+                    var theme = stored === 'light' || stored === 'dark' ? stored : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                    var el = document.documentElement;
+                    el.setAttribute('data-theme', theme);
+                    el.classList.toggle('dark', theme === 'dark');
+                } catch (e) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            })();
+        </script>
 
         <!-- Scripts & Styles -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -40,6 +55,7 @@
                                 {{ __('Dashboard') }}
                             </a>
                         @else
+                            <x-theme-toggle />
                             <a href="{{ route('login') }}" class="atlas-nav-auth-login">
                                 {{ __('Log in') }}
                             </a>
@@ -55,17 +71,16 @@
         </header>
 
         <!-- Hero Section -->
-        <section id="atlas-hero" class="atlas-hero-section relative w-full overflow-hidden flex items-center" style="min-height: calc(100vh - 80px) !important; min-height: 650px !important;">
+        <section id="atlas-hero" class="atlas-hero-section relative w-full overflow-hidden flex items-center">
 
             <!-- Oversized background word -->
             <span class="atlas-bg-text" style="top: 18%; left: -2%;">TALENTX11</span>
 
-            <!-- Hero Image Layer -->
-            <div class="atlas-hero-bg absolute inset-0 bg-cover bg-no-repeat"
-                 style="background-image: url('{{ asset('images/hero-player.png') }}'); background-position: right center; background-repeat: no-repeat; background-size: cover;">
+            <!-- Hero Image Layer: themed via --tx-hero-image (light/dark dedicated artwork) -->
+            <div class="atlas-hero-bg absolute inset-0 bg-cover bg-no-repeat">
             </div>
 
-            <!-- Desktop Directional Overlay: Solid dark on left for text legibility, transparent over player on right -->
+            <!-- Desktop Directional Overlay: themed for text legibility, transparent over player art -->
             <div class="atlas-hero-overlay-desktop absolute inset-0 pointer-events-none hidden lg:block">
             </div>
 
@@ -78,26 +93,25 @@
             </div>
 
             <!-- Content Container -->
-            <div class="atlas-hero-inner relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center" style="min-height: calc(100vh - 80px) !important; min-height: 650px !important;">
+            <div class="atlas-hero-inner relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center">
 
                 <div class="max-w-2xl text-left py-12 lg:py-0">
 
                     <!-- Main Headline -->
-                    <h1 class="atlas-hero-heading text-5xl sm:text-7xl lg:text-8xl font-display uppercase tracking-wider mb-6" style="color: #ffffff !important;">
+                    <h1 class="atlas-hero-heading text-5xl sm:text-7xl lg:text-8xl font-display uppercase tracking-wider mb-6">
                         Discover The<br>
                         <span class="atlas-hero-emerald">Next Generation</span>
                     </h1>
 
                     <!-- Description -->
-                    <p class="atlas-hero-desc text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-xl mb-9" style="color: #8fa89c !important;">
+                    <p class="atlas-hero-desc text-base sm:text-lg lg:text-xl font-normal leading-relaxed max-w-xl mb-9">
                         {{ __('Discover, analyse and track football talent with TalentX11.') }}
                     </p>
 
                     <!-- Action CTAs -->
                     <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12">
                         <a href="{{ route('register') }}"
-                           class="atlas-btn-player inline-flex items-center justify-center px-8 py-4 text-sm font-display uppercase tracking-wider rounded"
-                           style="background-color: #10b981 !important; color: #0a1f14 !important;">
+                           class="atlas-btn-player inline-flex items-center justify-center px-8 py-4 text-sm font-display uppercase tracking-wider rounded">
                             {{ __('Create Player Profile') }}
                             <svg class="w-4 h-4 ml-2.5 -mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -105,8 +119,7 @@
                         </a>
 
                         <a href="{{ route('register') }}?role=scout"
-                           class="atlas-btn-scout inline-flex items-center justify-center px-8 py-4 text-sm font-display uppercase tracking-wider rounded"
-                           style="color: #ffffff !important;">
+                           class="atlas-btn-scout inline-flex items-center justify-center px-8 py-4 text-sm font-display uppercase tracking-wider rounded">
                             {{ __('I\'m a Scout') }}
                         </a>
                     </div>
@@ -114,24 +127,24 @@
                     <!-- Subtle Stats Row -->
                     <div class="pt-8 border-t border-[#1a4030] flex flex-wrap items-center gap-6 sm:gap-10">
                         <div class="flex items-baseline gap-2.5">
-                            <span class="atlas-stat-val text-2xl sm:text-3xl font-display" style="color: #ffffff !important;">16+</span>
-                            <span class="text-xs font-semibold text-[#1a4030]">—</span>
+                            <span class="atlas-stat-val text-2xl sm:text-3xl font-display">16+</span>
+                            <span class="text-xs font-semibold text-[#8fa89c]">—</span>
                             <span class="text-[11px] sm:text-xs uppercase tracking-widest text-[#8fa89c] font-medium">{{ __('Regions') }}</span>
                         </div>
 
                         <div class="hidden sm:block h-5 w-px bg-[#1a4030]"></div>
 
                         <div class="flex items-baseline gap-2.5">
-                            <span class="atlas-stat-val text-2xl sm:text-3xl font-display" style="color: #ffffff !important;">100%</span>
-                            <span class="text-xs font-semibold text-[#1a4030]">—</span>
+                            <span class="atlas-stat-val text-2xl sm:text-3xl font-display">100%</span>
+                            <span class="text-xs font-semibold text-[#8fa89c]">—</span>
                             <span class="text-[11px] sm:text-xs uppercase tracking-widest text-[#8fa89c] font-medium">{{ __('Verified Profiles') }}</span>
                         </div>
 
                         <div class="hidden sm:block h-5 w-px bg-[#1a4030]"></div>
 
                         <div class="flex items-baseline gap-2.5">
-                            <span class="atlas-stat-val text-2xl sm:text-3xl font-display" style="color: #ffffff !important;">{{ __('Direct') }}</span>
-                            <span class="text-xs font-semibold text-[#1a4030]">—</span>
+                            <span class="atlas-stat-val text-2xl sm:text-3xl font-display">{{ __('Direct') }}</span>
+                            <span class="text-xs font-semibold text-[#8fa89c]">—</span>
                             <span class="text-[11px] sm:text-xs uppercase tracking-widest text-[#8fa89c] font-medium">{{ __('Connections') }}</span>
                         </div>
                     </div>

@@ -55,6 +55,9 @@
 
             <!-- Settings & Profile Area -->
             <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-3">
+                <!-- Theme Toggle -->
+                <x-theme-toggle />
+
                 <!-- Notifications Quick Bell -->
                 <a href="{{ route('notifications.index') }}" class="relative p-2 text-[#8fa89c] hover:text-white hover:bg-[#133323] rounded transition" title="{{ __('Notifications') }}">
                     <span class="sr-only">{{ __('View notifications') }}</span>
@@ -176,6 +179,11 @@
                     <div class="font-semibold text-sm text-white">{{ Auth::user()->name }}</div>
                     <div class="text-xs text-[#8fa89c]">{{ Auth::user()->email }} ({{ ucfirst(Auth::user()->role) }})</div>
                 </div>
+            </div>
+
+            <div class="mt-3 flex items-center justify-between">
+                <span class="text-sm font-semibold text-white">{{ __('Color Scheme') }}</span>
+                <x-theme-toggle />
             </div>
 
             <div class="mt-3 space-y-1">

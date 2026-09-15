@@ -196,7 +196,7 @@
                     <p class="atlas-stat-val font-display text-2xl mt-1">{{ $profile->position }}</p>
                 </div>
 
-                <div class="atlas-stat" style="border-left-color: #a3e635 !important;">
+                <div class="atlas-stat" style="border-left-color: var(--tx-brand-strong) !important;">
                     <span class="text-[11px] font-display uppercase tracking-[0.12em] text-[#8fa89c]">{{ __('Preferred Foot') }}</span>
                     <p class="atlas-stat-val font-display text-2xl text-[#a3e635] mt-1">{{ $profile->preferred_foot ?? '&#8212;' }}</p>
                 </div>

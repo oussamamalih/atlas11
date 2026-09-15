@@ -407,7 +407,7 @@
                         </a>
                     </div>
 
-                    <div class="atlas-stat" style="border-left-color: #a3e635 !important;">
+                    <div class="atlas-stat" style="border-left-color: var(--tx-brand-strong) !important;">
                         <p class="text-xs font-display uppercase tracking-[0.12em] text-[#8fa89c]">{{ __('Total Players') }}</p>
                         <p class="atlas-stat-val font-display text-5xl text-[#10b981] mt-2">{{ $adminStats['total_players'] }}</p>
                         <p class="text-xs text-[#8fa89c] mt-3">{{ $adminStats['total_player_profiles'] }} {{ __('profiles active') }}</p>
